@@ -1,5 +1,9 @@
 <p align="center"><a href="README.md">English</a> | 中文 | <a href="README.vi.md">Tiếng Việt</a></p>
 
+**rust-edt** 是一款用 Rust 编写的原生代码编辑器和智能体工作区，维护在 [ntm-dev/rust-edt](https://github.com/ntm-dev/rust-edt)。它是 [dstrml/wu](https://github.com/dstrml/wu) 的分支，发布版本、安装脚本和自动更新都来自这个仓库。本 README 其余部分沿用 Wu 的内容。
+
+---
+
 <div align="center">
   <img src="crates/wu/resources/app-icon.png" alt="Wu" width="128">
   <h1>Wu</h1>
@@ -7,10 +11,6 @@
   <p>用 Rust 编写，开箱即用。</p>
   <p><a href="#下载"><strong>下载</strong></a></p>
 </div>
-
----
-
-**rust-edt** 是一款用 Rust 编写的原生代码编辑器和智能体工作区，维护在 [ntm-dev/rust-edt](https://github.com/ntm-dev/rust-edt)。它是 [dstrml/wu](https://github.com/dstrml/wu) 的分支，发布版本、安装脚本和自动更新都来自这个仓库。本 README 其余部分沿用 Wu 的内容。
 
 ---
 

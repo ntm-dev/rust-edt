@@ -1,5 +1,9 @@
 <p align="center"><a href="README.md">English</a> | <a href="README.zh-CN.md">中文</a> | Tiếng Việt</p>
 
+**rust-edt** là trình soạn thảo mã nguồn gốc (native) và không gian làm việc cho agent, viết bằng Rust, được duy trì tại [ntm-dev/rust-edt](https://github.com/ntm-dev/rust-edt). Đây là bản fork của [dstrml/wu](https://github.com/dstrml/wu); bản phát hành, script cài đặt và tự động cập nhật đều lấy từ repo này. Phần còn lại của README này theo README của Wu.
+
+---
+
 <div align="center">
   <img src="crates/wu/resources/app-icon.png" alt="Wu" width="128">
   <h1>Wu</h1>
@@ -7,10 +11,6 @@
   <p>Viết bằng Rust. Đầy đủ tính năng.</p>
   <p><a href="#tải-về"><strong>Tải về</strong></a></p>
 </div>
-
----
-
-**rust-edt** là trình soạn thảo mã nguồn gốc (native) và không gian làm việc cho agent, viết bằng Rust, được duy trì tại [ntm-dev/rust-edt](https://github.com/ntm-dev/rust-edt). Đây là bản fork của [dstrml/wu](https://github.com/dstrml/wu); bản phát hành, script cài đặt và tự động cập nhật đều lấy từ repo này. Phần còn lại của README này theo README của Wu.
 
 ---
 

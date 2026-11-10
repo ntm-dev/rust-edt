@@ -1,5 +1,9 @@
 <p align="center">English | <a href="README.zh-CN.md">中文</a> | <a href="README.vi.md">Tiếng Việt</a></p>
 
+**rust-edt** is a native code editor and agent workspace written in Rust, maintained at [ntm-dev/rust-edt](https://github.com/ntm-dev/rust-edt). It is a fork of [dstrml/wu](https://github.com/dstrml/wu), and releases, the install script and auto-update all come from this repository. The rest of this README follows Wu's.
+
+---
+
 <div align="center">
   <img src="crates/wu/resources/app-icon.png" alt="Wu" width="128">
   <h1>Wu</h1>
@@ -7,10 +11,6 @@
   <p>Written in Rust. Batteries included.</p>
   <p><a href="#download"><strong>Download</strong></a></p>
 </div>
-
----
-
-**rust-edt** is a native code editor and agent workspace written in Rust, maintained at [ntm-dev/rust-edt](https://github.com/ntm-dev/rust-edt). It is a fork of [dstrml/wu](https://github.com/dstrml/wu), and releases, the install script and auto-update all come from this repository. The rest of this README follows Wu's.
 
 ---
 

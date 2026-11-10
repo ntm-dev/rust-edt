@@ -10,6 +10,10 @@
 
 ---
 
+**rust-edt** is a native code editor and agent workspace written in Rust, maintained at [ntm-dev/rust-edt](https://github.com/ntm-dev/rust-edt). It is a fork of [dstrml/wu](https://github.com/dstrml/wu), and releases, the install script and auto-update all come from this repository. The rest of this README follows Wu's.
+
+---
+
 Wu is a fast, native code editor written in Rust, with a clean, modern design and coding agents built in. The name comes from [wu wei](https://en.wikipedia.org/wiki/Wu_wei): effortless action. Wu is a fork of [Zed](https://github.com/zed-industries/zed) but diverges heavily from it.
 
 ## Features

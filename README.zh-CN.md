@@ -10,6 +10,10 @@
 
 ---
 
+**rust-edt** 是一款用 Rust 编写的原生代码编辑器和智能体工作区，维护在 [ntm-dev/rust-edt](https://github.com/ntm-dev/rust-edt)。它是 [dstrml/wu](https://github.com/dstrml/wu) 的分支，发布版本、安装脚本和自动更新都来自这个仓库。本 README 其余部分沿用 Wu 的内容。
+
+---
+
 Wu 是一款用 Rust 编写的快速原生代码编辑器，界面简洁现代，并内置了编程智能体。名字来自[无为](https://zh.wikipedia.org/wiki/无为)：不费力的行动。Wu 是 [Zed](https://github.com/zed-industries/zed) 的分支，但已经和它有了很大的不同。
 
 ## 功能

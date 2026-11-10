@@ -4,6 +4,8 @@ All notable user-facing changes to Wu are listed here, newest first.
 
 ## Unreleased
 
+## 1.2.2 - 2026-11-10
+
 - Install script, auto-update and download links now use the ntm-dev/rust-edt releases.
 
 ## 1.2.1 - 2026-11-09

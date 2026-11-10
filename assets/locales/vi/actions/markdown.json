@@ -1,0 +1,62 @@
+{
+  "markdown::CloseAndReturnToEditor": {
+    "name": "Đóng và quay lại trình soạn thảo",
+    "description": "Đóng bản xem trước Markdown và chuyển tiêu điểm về trình soạn thảo của tệp nguồn."
+  },
+  "markdown::Copy": {
+    "name": "Sao chép",
+    "description": "Sao chép văn bản đã chọn vào bộ nhớ tạm."
+  },
+  "markdown::CopyAsMarkdown": {
+    "name": "Sao chép dưới dạng Markdown",
+    "description": "Sao chép văn bản đã chọn vào bộ nhớ tạm theo định dạng Markdown."
+  },
+  "markdown::OpenFollowingPreview": {
+    "name": "Mở bản xem trước đồng bộ",
+    "description": "Mở bản xem trước Markdown đồng bộ theo trình soạn thảo."
+  },
+  "markdown::OpenPreview": {
+    "name": "Mở bản xem trước",
+    "description": "Mở bản xem trước Markdown của tệp hiện tại."
+  },
+  "markdown::OpenPreviewToTheSide": {
+    "name": "Mở bản xem trước bên cạnh",
+    "description": "Mở bản xem trước Markdown trong một ngăn chia đôi."
+  },
+  "markdown::ScrollDown": {
+    "name": "Cuộn xuống",
+    "description": "Cuộn xuống khoảng một dòng hiển thị."
+  },
+  "markdown::ScrollDownByItem": {
+    "name": "Cuộn xuống theo phần tử",
+    "description": "Cuộn xuống một phần tử Markdown trong bản xem trước Markdown."
+  },
+  "markdown::ScrollPageDown": {
+    "name": "Cuộn xuống một trang",
+    "description": "Cuộn xuống một trang trong bản xem trước Markdown."
+  },
+  "markdown::ScrollPageUp": {
+    "name": "Cuộn lên một trang",
+    "description": "Cuộn lên một trang trong bản xem trước Markdown."
+  },
+  "markdown::ScrollToBottom": {
+    "name": "Cuộn xuống cuối",
+    "description": "Cuộn xuống cuối bản xem trước Markdown."
+  },
+  "markdown::ScrollToTop": {
+    "name": "Cuộn lên đầu",
+    "description": "Cuộn lên đầu bản xem trước Markdown."
+  },
+  "markdown::ScrollUp": {
+    "name": "Cuộn lên",
+    "description": "Cuộn lên khoảng một dòng hiển thị."
+  },
+  "markdown::ScrollUpByItem": {
+    "name": "Cuộn lên theo phần tử",
+    "description": "Cuộn lên một phần tử Markdown trong bản xem trước Markdown."
+  },
+  "markdown::ToggleBlockQuote": {
+    "name": "Bật/tắt khối trích dẫn",
+    "description": "Trong tệp Markdown, thêm hoặc xóa tiền tố khối trích dẫn (`> `) cho các dòng đã chọn (hoặc dòng hiện tại)."
+  }
+}

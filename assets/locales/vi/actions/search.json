@@ -1,0 +1,62 @@
+{
+  "search::CycleMode": {
+    "name": "Đổi chế độ tìm kiếm",
+    "description": "Chuyển vòng qua các chế độ tìm kiếm."
+  },
+  "search::FocusSearch": {
+    "name": "Đặt tiêu điểm vào tìm kiếm",
+    "description": "Chuyển tiêu điểm đến ô nhập tìm kiếm."
+  },
+  "search::NextHistoryQuery": {
+    "name": "Mục lịch sử tìm kiếm tiếp theo",
+    "description": "Đi tới truy vấn tiếp theo trong lịch sử tìm kiếm."
+  },
+  "search::PreviousHistoryQuery": {
+    "name": "Mục lịch sử tìm kiếm trước đó",
+    "description": "Đi tới truy vấn trước đó trong lịch sử tìm kiếm."
+  },
+  "search::ReplaceAll": {
+    "name": "Thay thế tất cả",
+    "description": "Thay thế tất cả kết quả khớp."
+  },
+  "search::ReplaceNext": {
+    "name": "Thay thế kết quả tiếp theo",
+    "description": "Thay thế kết quả khớp tiếp theo."
+  },
+  "search::SelectAllMatches": {
+    "name": "Chọn tất cả kết quả khớp",
+    "description": "Chọn tất cả kết quả tìm kiếm khớp."
+  },
+  "search::SelectNextMatch": {
+    "name": "Chọn kết quả khớp tiếp theo",
+    "description": "Chọn kết quả tìm kiếm khớp tiếp theo."
+  },
+  "search::SelectPreviousMatch": {
+    "name": "Chọn kết quả khớp trước đó",
+    "description": "Chọn kết quả tìm kiếm khớp trước đó."
+  },
+  "search::ToggleCaseSensitive": {
+    "name": "Bật/tắt phân biệt hoa thường",
+    "description": "Bật/tắt tìm kiếm phân biệt hoa thường."
+  },
+  "search::ToggleIncludeIgnored": {
+    "name": "Bật/tắt bao gồm tệp bị bỏ qua",
+    "description": "Bật/tắt tìm kiếm trong các tệp bị bỏ qua."
+  },
+  "search::ToggleRegex": {
+    "name": "Bật/tắt biểu thức chính quy",
+    "description": "Bật/tắt chế độ biểu thức chính quy."
+  },
+  "search::ToggleReplace": {
+    "name": "Bật/tắt thay thế",
+    "description": "Bật/tắt giao diện thay thế."
+  },
+  "search::ToggleSelection": {
+    "name": "Bật/tắt tìm trong vùng chọn",
+    "description": "Bật/tắt chỉ tìm kiếm trong vùng chọn."
+  },
+  "search::ToggleWholeWord": {
+    "name": "Bật/tắt khớp toàn từ",
+    "description": "Bật/tắt khớp toàn từ."
+  }
+}

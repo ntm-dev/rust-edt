@@ -1,0 +1,18 @@
+{
+  "tab_switcher::CloseSelectedItem": {
+    "name": "Đóng mục đã chọn",
+    "description": "Đóng mục đã chọn trong bộ chuyển tab."
+  },
+  "tab_switcher::OpenInActivePane": {
+    "name": "Mở trong ngăn đang hoạt động",
+    "description": "Bật/tắt bộ chuyển tab hiển thị tất cả tab trong mọi ngăn, mỗi đường dẫn chỉ hiện một lần. Mở mục đã chọn trong ngăn đang hoạt động."
+  },
+  "tab_switcher::Toggle": {
+    "name": "Bật/tắt bộ chuyển tab",
+    "description": "Bật/tắt giao diện bộ chuyển tab."
+  },
+  "tab_switcher::ToggleAll": {
+    "name": "Bật/tắt tất cả tab",
+    "description": "Chuyển giữa hiển thị tất cả tab và chỉ hiển thị tab của ngăn hiện tại."
+  }
+}

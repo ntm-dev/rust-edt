@@ -1,0 +1,10 @@
+{
+  "worktree_picker::DeleteWorktree": {
+    "name": "Xóa worktree",
+    "description": "Xóa worktree Git đã chọn."
+  },
+  "worktree_picker::ForceDeleteWorktree": {
+    "name": "Buộc xóa worktree",
+    "description": "Buộc xóa worktree Git đã chọn."
+  }
+}

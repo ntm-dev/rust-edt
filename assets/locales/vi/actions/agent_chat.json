@@ -1,0 +1,70 @@
+{
+  "agent_chat::AcceptCommand": {
+    "name": "Chấp nhận lệnh",
+    "description": "Chọn lệnh đang được tô sáng trong menu lệnh gạch chéo."
+  },
+  "agent_chat::ContinueSavedChat": {
+    "name": "Tiếp tục cuộc trò chuyện đã lưu",
+    "description": "Tiếp tục cuộc trò chuyện đã bắt đầu trong Claude Code, Codex hoặc OpenCode."
+  },
+  "agent_chat::DismissCommands": {
+    "name": "Đóng menu lệnh",
+    "description": "Đóng menu lệnh gạch chéo."
+  },
+  "agent_chat::MoveChatToPanel": {
+    "name": "Chuyển cuộc trò chuyện sang bảng trò chuyện",
+    "description": "Chuyển cuộc trò chuyện từ tab sang bảng trò chuyện."
+  },
+  "agent_chat::MoveChatToTab": {
+    "name": "Chuyển cuộc trò chuyện về tab",
+    "description": "Chuyển cuộc trò chuyện từ bảng trò chuyện về tab."
+  },
+  "agent_chat::NewClaudeChat": {
+    "name": "Cuộc trò chuyện Claude mới",
+    "description": "Bắt đầu cuộc trò chuyện Claude Code mới."
+  },
+  "agent_chat::NewCodexChat": {
+    "name": "Cuộc trò chuyện Codex mới",
+    "description": "Bắt đầu cuộc trò chuyện Codex mới."
+  },
+  "agent_chat::NewOpencodeChat": {
+    "name": "Cuộc trò chuyện OpenCode mới",
+    "description": "Bắt đầu cuộc trò chuyện OpenCode mới."
+  },
+  "agent_chat::RenameChat": {
+    "name": "Đổi tên cuộc trò chuyện",
+    "description": "Đổi tên cuộc trò chuyện ngay trên tab."
+  },
+  "agent_chat::SelectNextCommand": {
+    "name": "Chọn lệnh tiếp theo",
+    "description": "Tô sáng lệnh tiếp theo trong menu lệnh gạch chéo."
+  },
+  "agent_chat::SelectPreviousCommand": {
+    "name": "Chọn lệnh trước đó",
+    "description": "Tô sáng lệnh trước đó trong menu lệnh gạch chéo."
+  },
+  "agent_chat::Send": {
+    "name": "Gửi",
+    "description": "Gửi tin nhắn trong ô nhập của cuộc trò chuyện."
+  },
+  "agent_chat::Stop": {
+    "name": "Dừng",
+    "description": "Dừng lượt phản hồi hiện tại của tác tử."
+  },
+  "agent_chat::SubmitAnswer": {
+    "name": "Gửi câu trả lời",
+    "description": "Trả lời câu hỏi của tác tử và chuyển sang câu hỏi tiếp theo, hoặc gửi luôn nếu là câu hỏi cuối."
+  },
+  "agent_chat::ToggleChatPanel": {
+    "name": "Bật/tắt bảng trò chuyện",
+    "description": "Hiện hoặc ẩn bảng trò chuyện."
+  },
+  "agent_chat::ToggleDictation": {
+    "name": "Bật/tắt nhập bằng giọng nói",
+    "description": "Bắt đầu hoặc dừng nhập bằng giọng nói trong ô nhập của cuộc trò chuyện."
+  },
+  "agent_chat::ToggleFocus": {
+    "name": "Bật/tắt tiêu điểm",
+    "description": "Chuyển tiêu điểm vào hoặc ra khỏi bảng tác tử."
+  }
+}

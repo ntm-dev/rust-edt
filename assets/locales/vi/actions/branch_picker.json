@@ -1,0 +1,30 @@
+{
+  "branch_picker::CycleBranchFilter": {
+    "name": "Đổi bộ lọc nhánh lần lượt",
+    "description": "Đổi lần lượt giữa các bộ lọc nhánh."
+  },
+  "branch_picker::DeleteBranch": {
+    "name": "Xóa nhánh",
+    "description": "Xóa nhánh Git hoặc kho lưu trữ từ xa đã chọn."
+  },
+  "branch_picker::ForceDeleteBranch": {
+    "name": "Buộc xóa nhánh",
+    "description": "Buộc xóa nhánh Git hoặc kho lưu trữ từ xa đã chọn."
+  },
+  "branch_picker::ShowAllBranches": {
+    "name": "Hiện tất cả nhánh",
+    "description": "Hiện tất cả nhánh."
+  },
+  "branch_picker::ShowLocalBranches": {
+    "name": "Hiện nhánh cục bộ",
+    "description": "Chỉ hiện nhánh cục bộ."
+  },
+  "branch_picker::ShowRemoteBranches": {
+    "name": "Hiện nhánh từ xa",
+    "description": "Chỉ hiện nhánh từ xa."
+  },
+  "branch_picker::ToggleFilterMenu": {
+    "name": "Bật/tắt menu bộ lọc",
+    "description": "Mở hoặc đóng menu bộ lọc nhánh."
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "projects::OpenFolderInWsl": {
+    "description": "Mở một thư mục trong WSL.",
+    "name": "Mở thư mục trong WSL"
+  },
+  "projects::OpenRecent": {
+    "description": "Mở danh sách dự án gần đây.",
+    "name": "Mở dự án gần đây"
+  },
+  "projects::OpenRemote": {
+    "description": "Mở một dự án từ xa.",
+    "name": "Mở dự án từ xa"
+  },
+  "projects::OpenWsl": {
+    "description": "Mở một bản phân phối WSL.",
+    "name": "Mở WSL"
+  }
+}

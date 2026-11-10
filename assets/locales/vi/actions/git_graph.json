@@ -1,0 +1,46 @@
+{
+  "git_graph::CopyCommitSha": {
+    "name": "Sao chép SHA của commit",
+    "description": "Sao chép SHA của commit đã chọn vào bộ nhớ tạm."
+  },
+  "git_graph::CopyCommitTag": {
+    "name": "Sao chép tag của commit",
+    "description": "Sao chép một tag của commit đã chọn vào bộ nhớ tạm."
+  },
+  "git_graph::FocusNextTabStop": {
+    "name": "Chuyển tiêu điểm đến điểm dừng tab tiếp theo",
+    "description": "Chuyển tiêu điểm đến điểm dừng tab tiếp theo trong biểu đồ Git."
+  },
+  "git_graph::FocusPreviousTabStop": {
+    "name": "Chuyển tiêu điểm đến điểm dừng tab trước đó",
+    "description": "Chuyển tiêu điểm đến điểm dừng tab trước đó trong biểu đồ Git."
+  },
+  "git_graph::FocusSearch": {
+    "name": "Chuyển tiêu điểm đến ô tìm kiếm",
+    "description": "Chuyển tiêu điểm đến ô tìm kiếm."
+  },
+  "git_graph::Open": {
+    "name": "Mở",
+    "description": "Mở tab biểu đồ Git."
+  },
+  "git_graph::OpenAtCommit": {
+    "name": "Mở tại commit",
+    "description": "Mở tab biểu đồ Git và chuyển đến commit được chỉ định."
+  },
+  "git_graph::OpenCommitView": {
+    "name": "Mở chế độ xem commit",
+    "description": "Mở chế độ xem commit của commit đã chọn."
+  },
+  "git_graph::ScrollDown": {
+    "name": "Cuộn xuống",
+    "description": "Chọn commit cách mục đang chọn nửa trang về phía dưới."
+  },
+  "git_graph::ScrollUp": {
+    "name": "Cuộn lên",
+    "description": "Chọn commit cách mục đang chọn nửa trang về phía trên."
+  },
+  "git_graph::ToggleChangedFilesView": {
+    "name": "Bật/tắt chế độ xem tệp đã thay đổi",
+    "description": "Chuyển các tệp đã thay đổi của commit đã chọn giữa dạng phẳng và dạng cây."
+  }
+}

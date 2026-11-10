@@ -1,0 +1,22 @@
+{
+  "buffer_search::Deploy": {
+    "name": "Mở tìm kiếm",
+    "description": "Mở giao diện tìm kiếm trong tệp với cấu hình chỉ định."
+  },
+  "buffer_search::DeployReplace": {
+    "name": "Mở thay thế",
+    "description": "Mở giao diện tìm kiếm và thay thế."
+  },
+  "buffer_search::Dismiss": {
+    "name": "Đóng",
+    "description": "Đóng thanh tìm kiếm."
+  },
+  "buffer_search::FocusEditor": {
+    "name": "Đưa tiêu điểm vào trình soạn thảo",
+    "description": "Đưa tiêu điểm trở lại trình soạn thảo."
+  },
+  "buffer_search::UseSelectionForFind": {
+    "name": "Dùng vùng chọn để tìm",
+    "description": "Dùng vùng chọn hoặc từ tại con trỏ làm nội dung tìm kiếm."
+  }
+}

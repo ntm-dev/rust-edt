@@ -1,0 +1,10 @@
+{
+  "cli::InstallCliBinary": {
+    "description": "Cài công cụ dòng lệnh của Wu vào PATH của hệ thống.",
+    "name": "Cài công cụ dòng lệnh"
+  },
+  "cli::RegisterWuScheme": {
+    "description": "Đăng ký trình xử lý cho liên kết wu://.",
+    "name": "Đăng ký liên kết wu://"
+  }
+}

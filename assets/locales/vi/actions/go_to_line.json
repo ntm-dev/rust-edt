@@ -1,0 +1,6 @@
+{
+  "go_to_line::Toggle": {
+    "name": "Bật/tắt đi tới dòng",
+    "description": "Bật/tắt hộp thoại đi tới dòng."
+  }
+}

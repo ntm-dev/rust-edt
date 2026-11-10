@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-# Checks that every translated string and command has its Simplified Chinese text.
+# Checks that every translated string and command has its text in every language
+# (Simplified Chinese and Vietnamese).
 # Usage: script/check-translations [--binary path/to/wu] [--strings-only]
 
 set -euo pipefail

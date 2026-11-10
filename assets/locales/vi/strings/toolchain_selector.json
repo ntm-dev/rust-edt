@@ -1,0 +1,19 @@
+{
+  "Add": "Thêm",
+  "Add Toolchain": "Thêm toolchain",
+  "Add {term}": "Thêm {term}",
+  "Available in all locations in your current project.": "Dùng được ở mọi vị trí trong dự án hiện tại.",
+  "Available in all of your projects on this machine.": "Dùng được trong mọi dự án của bạn trên máy này.",
+  "Available only in the subproject you're currently in.": "Chỉ dùng được trong dự án con bạn đang ở.",
+  "Global": "Toàn cục",
+  "Project": "Dự án",
+  "Scope": "Phạm vi",
+  "Select": "Chọn",
+  "Select Toolchain Path": "Chọn đường dẫn toolchain",
+  "Select a toolchain…": "Chọn toolchain…",
+  "Select a {term} for worktree root…": "Chọn {term} cho thư mục gốc worktree…",
+  "Select a {term} for {path}…": "Chọn {term} cho {path}…",
+  "Select {term}": "Chọn {term}",
+  "Subproject": "Dự án con",
+  "Toolchain": "Toolchain"
+}

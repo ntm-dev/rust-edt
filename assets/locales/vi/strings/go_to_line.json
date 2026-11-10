@@ -1,0 +1,15 @@
+{
+  "1 character": "1 ký tự",
+  "Current Line: {line} of {total} (column {column})": "Dòng hiện tại: {line}/{total} (cột {column})",
+  "Go to Line/Column": "Đi tới dòng/cột",
+  "Go to line {line}": "Đi tới dòng {line}",
+  "Go to line {line} ({offset} from current)": "Đi tới dòng {line} (cách dòng hiện tại {offset})",
+  "Go to line {line}, character {character}": "Đi tới dòng {line}, ký tự {character}",
+  "Line {line}, column {column}": "Dòng {line}, cột {column}",
+  "{count} c": "{count} ký tự",
+  "{count} characters": "{count} ký tự",
+  "{count} l": "{count} dòng",
+  "{count} lines": "{count} dòng",
+  "{count} s": "{count} vùng chọn",
+  "{count} selections": "{count} vùng chọn"
+}

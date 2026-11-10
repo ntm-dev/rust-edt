@@ -1,0 +1,14 @@
+{
+  "file_finder::OpenWithoutDismiss": {
+    "name": "Mở nhưng không đóng",
+    "description": "Mở tệp đã chọn trong trình soạn thảo mà không đóng trình tìm tệp, để tiếp tục mở thêm tệp."
+  },
+  "file_finder::SelectPrevious": {
+    "name": "Chọn mục trước đó",
+    "description": "Chọn mục trước đó trong trình tìm tệp."
+  },
+  "file_finder::Toggle": {
+    "name": "Bật/tắt trình tìm tệp",
+    "description": "Bật/tắt giao diện trình tìm tệp."
+  }
+}

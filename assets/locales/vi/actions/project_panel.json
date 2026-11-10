@@ -1,0 +1,190 @@
+{
+  "project_panel::CollapseAllEntries": {
+    "name": "Thu gọn tất cả",
+    "description": "Thu gọn tất cả các mục trong cây dự án."
+  },
+  "project_panel::CollapseSelectedEntry": {
+    "name": "Thu gọn mục đã chọn",
+    "description": "Thu gọn mục đã chọn trong cây dự án."
+  },
+  "project_panel::CollapseSelectedEntryAndChildren": {
+    "name": "Thu gọn mục đã chọn và mục con",
+    "description": "Thu gọn mục đã chọn và các mục con của nó trong cây dự án."
+  },
+  "project_panel::CompareMarkedFiles": {
+    "name": "So sánh các tệp đã đánh dấu",
+    "description": "Mở chế độ xem khác biệt để so sánh hai tệp đã đánh dấu."
+  },
+  "project_panel::Copy": {
+    "name": "Sao chép",
+    "description": "Sao chép tệp hoặc thư mục đã chọn."
+  },
+  "project_panel::Cut": {
+    "name": "Cắt",
+    "description": "Cắt tệp hoặc thư mục đã chọn."
+  },
+  "project_panel::Delete": {
+    "name": "Xóa",
+    "description": "Xóa vĩnh viễn tệp hoặc thư mục đã chọn."
+  },
+  "project_panel::DownloadFromRemote": {
+    "name": "Tải xuống từ máy chủ từ xa",
+    "description": "Tải xuống tệp từ xa đã chọn."
+  },
+  "project_panel::Duplicate": {
+    "name": "Nhân đôi",
+    "description": "Tạo bản sao của tệp hoặc thư mục đã chọn."
+  },
+  "project_panel::ExpandAllEntries": {
+    "name": "Mở rộng tất cả",
+    "description": "Mở rộng tất cả các mục trong cây dự án."
+  },
+  "project_panel::ExpandSelectedEntry": {
+    "name": "Mở rộng mục đã chọn",
+    "description": "Mở rộng mục đã chọn trong cây dự án."
+  },
+  "project_panel::ExpandSelectedEntryAndChildren": {
+    "name": "Mở rộng mục đã chọn và mục con",
+    "description": "Mở rộng mục đã chọn và các mục con của nó trong cây dự án."
+  },
+  "project_panel::FoldDirectory": {
+    "name": "Gộp thư mục",
+    "description": "Gộp thư mục đã chọn với thư mục con duy nhất bên trong để hiển thị trên một dòng."
+  },
+  "project_panel::GetInfo": {
+    "name": "Xem thông tin",
+    "description": "Hiển thị kích thước, ngày tháng và các chi tiết khác của mục đã chọn."
+  },
+  "project_panel::NewDirectory": {
+    "name": "Thư mục mới",
+    "description": "Tạo một thư mục mới."
+  },
+  "project_panel::NewFile": {
+    "name": "Tệp mới",
+    "description": "Tạo một tệp mới."
+  },
+  "project_panel::NewSearchInDirectory": {
+    "name": "Tìm kiếm trong thư mục",
+    "description": "Bắt đầu một tìm kiếm mới trong thư mục đã chọn."
+  },
+  "project_panel::Open": {
+    "name": "Mở",
+    "description": "Mở tệp đã chọn trong trình soạn thảo."
+  },
+  "project_panel::OpenContextMenu": {
+    "name": "Mở menu ngữ cảnh",
+    "description": "Mở menu ngữ cảnh của mục đã chọn."
+  },
+  "project_panel::OpenMarkdownPreview": {
+    "name": "Mở bản xem trước Markdown",
+    "description": "Mở bản xem trước Markdown của tệp đã chọn."
+  },
+  "project_panel::OpenPermanent": {
+    "name": "Mở trong tab cố định",
+    "description": "Mở tệp đã chọn trong tab cố định (không phải tab xem trước)."
+  },
+  "project_panel::OpenSplitHorizontal": {
+    "name": "Mở trong ngăn chia ngang",
+    "description": "Mở tệp đã chọn trong ngăn chia theo chiều ngang."
+  },
+  "project_panel::OpenSplitVertical": {
+    "name": "Mở trong ngăn chia dọc",
+    "description": "Mở tệp đã chọn trong ngăn chia theo chiều dọc."
+  },
+  "project_panel::Paste": {
+    "name": "Dán",
+    "description": "Dán các mục đã cắt hoặc sao chép trước đó."
+  },
+  "project_panel::Redo": {
+    "name": "Làm lại",
+    "description": "Làm lại thao tác tệp vừa hoàn tác gần nhất."
+  },
+  "project_panel::RemoveFromProject": {
+    "name": "Xóa khỏi dự án",
+    "description": "Xóa thư mục đã chọn khỏi dự án."
+  },
+  "project_panel::Rename": {
+    "name": "Đổi tên",
+    "description": "Đổi tên tệp hoặc thư mục đã chọn."
+  },
+  "project_panel::RevealInFileManager": {
+    "name": "Hiển thị trong trình quản lý tệp",
+    "description": "Hiển thị mục đã chọn trong trình quản lý tệp của hệ thống."
+  },
+  "project_panel::ScrollCursorBottom": {
+    "name": "Cuộn để con trỏ ở dưới cùng",
+    "description": "Cuộn chế độ xem để con trỏ hiển thị ở dưới cùng."
+  },
+  "project_panel::ScrollCursorCenter": {
+    "name": "Cuộn để con trỏ ở giữa",
+    "description": "Cuộn chế độ xem để con trỏ hiển thị ở giữa."
+  },
+  "project_panel::ScrollCursorTop": {
+    "name": "Cuộn để con trỏ ở trên cùng",
+    "description": "Cuộn chế độ xem để con trỏ hiển thị ở trên cùng."
+  },
+  "project_panel::ScrollDown": {
+    "name": "Cuộn xuống",
+    "description": "Cuộn xuống nửa trang."
+  },
+  "project_panel::ScrollUp": {
+    "name": "Cuộn lên",
+    "description": "Cuộn lên nửa trang."
+  },
+  "project_panel::SelectNextDiagnostic": {
+    "name": "Chọn chẩn đoán tiếp theo",
+    "description": "Chọn mục tiếp theo có chẩn đoán."
+  },
+  "project_panel::SelectNextDirectory": {
+    "name": "Chọn thư mục tiếp theo",
+    "description": "Chọn thư mục tiếp theo."
+  },
+  "project_panel::SelectNextGitEntry": {
+    "name": "Chọn thay đổi Git tiếp theo",
+    "description": "Chọn mục tiếp theo có thay đổi Git."
+  },
+  "project_panel::SelectParent": {
+    "name": "Chọn thư mục cha",
+    "description": "Chọn thư mục cha."
+  },
+  "project_panel::SelectPrevDiagnostic": {
+    "name": "Chọn chẩn đoán trước đó",
+    "description": "Chọn mục trước đó có chẩn đoán."
+  },
+  "project_panel::SelectPrevDirectory": {
+    "name": "Chọn thư mục trước đó",
+    "description": "Chọn thư mục trước đó."
+  },
+  "project_panel::SelectPrevGitEntry": {
+    "name": "Chọn thay đổi Git trước đó",
+    "description": "Chọn mục trước đó có thay đổi Git."
+  },
+  "project_panel::Toggle": {
+    "name": "Bật/tắt bảng dự án",
+    "description": "Bật/tắt bảng dự án."
+  },
+  "project_panel::ToggleFocus": {
+    "name": "Bật/tắt tiêu điểm",
+    "description": "Bật/tắt tiêu điểm của bảng dự án."
+  },
+  "project_panel::ToggleHideGitIgnore": {
+    "name": "Bật/tắt hiển thị tệp bị Git bỏ qua",
+    "description": "Bật/tắt hiển thị các tệp bị Git bỏ qua."
+  },
+  "project_panel::ToggleHideHidden": {
+    "name": "Bật/tắt hiển thị tệp ẩn",
+    "description": "Bật/tắt hiển thị các tệp ẩn."
+  },
+  "project_panel::Trash": {
+    "name": "Chuyển vào thùng rác",
+    "description": "Chuyển tệp hoặc thư mục đã chọn vào thùng rác của hệ thống."
+  },
+  "project_panel::Undo": {
+    "name": "Hoàn tác",
+    "description": "Hoàn tác thao tác tệp gần nhất."
+  },
+  "project_panel::UnfoldDirectory": {
+    "name": "Tách thư mục",
+    "description": "Tách thư mục đã gộp để hiển thị từng cấp thư mục con."
+  }
+}

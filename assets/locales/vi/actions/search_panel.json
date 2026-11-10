@@ -1,0 +1,34 @@
+{
+  "search_panel::ClearResults": {
+    "name": "Xóa kết quả",
+    "description": "Xóa nội dung tìm kiếm và kết quả."
+  },
+  "search_panel::CollapseAllEntries": {
+    "name": "Thu gọn tất cả",
+    "description": "Thu gọn tất cả tệp trong kết quả."
+  },
+  "search_panel::CollapseSelectedEntry": {
+    "name": "Thu gọn mục đã chọn",
+    "description": "Thu gọn tệp đã chọn."
+  },
+  "search_panel::ExpandAllEntries": {
+    "name": "Mở rộng tất cả",
+    "description": "Mở rộng tất cả tệp trong kết quả."
+  },
+  "search_panel::ExpandSelectedEntry": {
+    "name": "Mở rộng mục đã chọn",
+    "description": "Mở rộng tệp đã chọn."
+  },
+  "search_panel::OpenInEditor": {
+    "name": "Mở trong trình soạn thảo",
+    "description": "Mở kết quả tìm kiếm hiện tại trong một tab trình soạn thảo."
+  },
+  "search_panel::RefreshResults": {
+    "name": "Làm mới kết quả",
+    "description": "Chạy lại tìm kiếm."
+  },
+  "search_panel::ToggleFocus": {
+    "name": "Bật/tắt tiêu điểm",
+    "description": "Bật/tắt tiêu điểm của bảng tìm kiếm."
+  }
+}

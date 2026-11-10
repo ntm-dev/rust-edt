@@ -1,0 +1,15 @@
+{
+  "Auto-updates disabled for non-bundled app.": "Tự động cập nhật bị tắt đối với ứng dụng không đóng gói.",
+  "Could not auto-update because the required rsync utility was not found.": "Không thể tự động cập nhật vì không tìm thấy tiện ích rsync cần thiết.",
+  "Could not check for updates": "Không thể kiểm tra cập nhật",
+  "Downloading remote server": "Đang tải máy chủ từ xa",
+  "Fetching remote server release": "Đang lấy bản phát hành máy chủ từ xa",
+  "Install it with: sudo apt install rsync": "Cài đặt bằng: sudo apt install rsync",
+  "Install it with: sudo dnf install rsync": "Cài đặt bằng: sudo dnf install rsync",
+  "Install it with: sudo pacman -S rsync": "Cài đặt bằng: sudo pacman -S rsync",
+  "Install pkgs.rsync from nixpkgs": "Cài đặt pkgs.rsync từ nixpkgs",
+  "OK": "OK",
+  "Please install rsync using your package manager": "Vui lòng cài đặt rsync bằng trình quản lý gói của bạn",
+  "Wu was installed via a package manager.": "Wu được cài đặt qua trình quản lý gói.",
+  "rsync is required for auto-updates but is not installed. {install_hint}": "Tự động cập nhật cần có rsync nhưng rsync chưa được cài đặt. {install_hint}"
+}

@@ -4,6 +4,10 @@ All notable user-facing changes to Wu are listed here, newest first.
 
 ## Unreleased
 
+## 1.3.0 - 2026-11-10
+
+- Add Vietnamese (Tiếng Việt) as an interface language. Choose it in settings or set `"ui_language": "vi"`.
+
 ## 1.2.2 - 2026-11-10
 
 - Install script, auto-update and download links now use the ntm-dev/rust-edt releases.

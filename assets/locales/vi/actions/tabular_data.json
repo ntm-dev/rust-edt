@@ -1,0 +1,8 @@
+{
+  "tabular_data::OpenPreview": {
+    "name": "Mở bản xem trước"
+  },
+  "tabular_data::OpenPreviewToTheSide": {
+    "name": "Mở bản xem trước bên cạnh"
+  }
+}

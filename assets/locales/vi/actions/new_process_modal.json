@@ -1,0 +1,14 @@
+{
+  "new_process_modal::ActivateAttachTab": {
+    "name": "Chuyển đến tab Đính kèm"
+  },
+  "new_process_modal::ActivateDebugTab": {
+    "name": "Chuyển đến tab Gỡ lỗi"
+  },
+  "new_process_modal::ActivateLaunchTab": {
+    "name": "Chuyển đến tab Khởi chạy"
+  },
+  "new_process_modal::ActivateTaskTab": {
+    "name": "Chuyển đến tab Tác vụ"
+  }
+}

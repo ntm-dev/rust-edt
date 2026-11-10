@@ -1,0 +1,10 @@
+{
+  "stash_picker::DropStashItem": {
+    "name": "Xóa mục stash",
+    "description": "Xóa mục stash đã chọn."
+  },
+  "stash_picker::ShowStashItem": {
+    "name": "Hiển thị mục stash",
+    "description": "Hiển thị khung xem khác biệt của mục stash đã chọn."
+  }
+}

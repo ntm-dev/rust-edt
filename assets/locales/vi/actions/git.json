@@ -1,0 +1,304 @@
+{
+  "git::Add": {
+    "name": "Thêm",
+    "description": "Thêm tệp vào vùng stage của Git."
+  },
+  "git::AddToGitInfoExclude": {
+    "name": "Thêm vào .git/info/exclude",
+    "description": "Thêm tệp vào .git/info/exclude của kho lưu trữ."
+  },
+  "git::AddToGitignore": {
+    "name": "Thêm vào .gitignore",
+    "description": "Thêm tệp vào .gitignore."
+  },
+  "git::Amend": {
+    "name": "Sửa commit",
+    "description": "Sửa commit gần nhất bằng các thay đổi đã stage."
+  },
+  "git::ApplyCurrentStash": {
+    "name": "Áp dụng stash hiện tại"
+  },
+  "git::Blame": {
+    "name": "Blame",
+    "description": "Hiển thị thông tin Git blame của tệp hiện tại."
+  },
+  "git::Branch": {
+    "name": "Mở bộ chọn nhánh",
+    "description": "Mở bộ chọn nhánh Git."
+  },
+  "git::Cancel": {
+    "name": "Hủy",
+    "description": "Hủy thao tác Git hiện tại."
+  },
+  "git::CheckoutBranch": {
+    "name": "Checkout nhánh",
+    "description": "Checkout một nhánh Git khác."
+  },
+  "git::Clone": {
+    "name": "Clone",
+    "description": "Clone kho lưu trữ."
+  },
+  "git::Commit": {
+    "name": "Commit",
+    "description": "Tạo commit mới từ các thay đổi đã stage."
+  },
+  "git::CompareWithBranch": {
+    "name": "So sánh với nhánh",
+    "description": "So sánh với nhánh được chỉ định."
+  },
+  "git::CopyBranchName": {
+    "name": "Sao chép tên nhánh",
+    "description": "Sao chép tên nhánh hiện tại vào clipboard."
+  },
+  "git::CopyFilePermalink": {
+    "name": "Sao chép liên kết cố định của tệp",
+    "description": "Sao chép liên kết cố định của tệp đã chọn trên nền tảng lưu trữ Git."
+  },
+  "git::CreatePullRequest": {
+    "name": "Tạo pull request",
+    "description": "Tạo pull request cho nhánh hiện tại."
+  },
+  "git::CreateRemote": {
+    "name": "Tạo kho lưu trữ từ xa",
+    "description": "Tạo remote Git."
+  },
+  "git::CreateWorktree": {
+    "name": "Tạo worktree",
+    "description": "Tạo worktree Git mới và chuyển không gian làm việc sang worktree đó. Kích hoạt khi chọn mục \"Tạo worktree mới\" trong bộ chọn worktree hợp nhất."
+  },
+  "git::Diff": {
+    "name": "Xem khác biệt",
+    "description": "Hiển thị khác biệt so với cơ sở diff theo cài đặt `git.diff_base`: thay đổi của thư mục làm việc so với HEAD, hoặc toàn bộ thay đổi của nhánh so với nhánh mặc định."
+  },
+  "git::DiffBranch": {
+    "name": "So sánh khác biệt với nhánh mặc định",
+    "description": "Hiển thị khác biệt giữa thư mục làm việc và nhánh mặc định (thường là main hoặc master)."
+  },
+  "git::DiffHead": {
+    "name": "So sánh khác biệt với HEAD",
+    "description": "Hiển thị thay đổi của thư mục làm việc so với HEAD."
+  },
+  "git::DropCurrentStash": {
+    "name": "Xóa stash hiện tại"
+  },
+  "git::ExpandCommitEditor": {
+    "name": "Mở rộng trình soạn commit",
+    "description": "Mở rộng trình soạn thông điệp commit."
+  },
+  "git::Fetch": {
+    "name": "Fetch",
+    "description": "Fetch thay đổi từ kho lưu trữ từ xa."
+  },
+  "git::FetchFrom": {
+    "name": "Fetch từ remote chỉ định",
+    "description": "Fetch thay đổi từ remote được chỉ định."
+  },
+  "git::FileHistory": {
+    "name": "Lịch sử tệp",
+    "description": "Hiển thị lịch sử Git của tệp, thư mục hoặc dự án đã chọn."
+  },
+  "git::FilterRemotes": {
+    "name": "Lọc remote",
+    "description": "Lọc các remote."
+  },
+  "git::ForcePush": {
+    "name": "Force push",
+    "description": "Force push các commit lên kho lưu trữ từ xa."
+  },
+  "git::GenerateCommitMessage": {
+    "name": "Tạo thông điệp commit",
+    "description": "Dùng tác tử để tạo thông điệp commit cho các thay đổi của bạn."
+  },
+  "git::Init": {
+    "name": "Khởi tạo kho lưu trữ",
+    "description": "Khởi tạo kho lưu trữ Git mới."
+  },
+  "git::LeaderAndFollower": {
+    "name": "Người dẫn và người theo"
+  },
+  "git::OpenFileAtHead": {
+    "name": "Mở tệp trong dự án"
+  },
+  "git::OpenFileDiff": {
+    "name": "Mở khác biệt của tệp",
+    "description": "Mở tệp hiện tại trong chế độ xem khác biệt riêng."
+  },
+  "git::OpenFilePermalink": {
+    "name": "Mở liên kết cố định của tệp",
+    "description": "Mở liên kết cố định của tệp đã chọn trên nền tảng lưu trữ Git."
+  },
+  "git::OpenModifiedFiles": {
+    "name": "Mở các tệp đã sửa đổi",
+    "description": "Mở tất cả tệp đã sửa đổi trong trình soạn thảo."
+  },
+  "git::OpenWorktreeInNewWindow": {
+    "name": "Mở worktree trong cửa sổ mới",
+    "description": "Mở worktree hiện có trong cửa sổ mới. Kích hoạt bởi nút \"Mở trong cửa sổ mới\" trong bộ chọn worktree."
+  },
+  "git::PopCurrentStash": {
+    "name": "Pop stash hiện tại"
+  },
+  "git::Pull": {
+    "name": "Pull",
+    "description": "Pull thay đổi từ kho lưu trữ từ xa."
+  },
+  "git::PullFrom": {
+    "name": "Pull từ remote chỉ định",
+    "description": "Pull thay đổi từ remote được chỉ định."
+  },
+  "git::PullRebase": {
+    "name": "Pull (rebase)",
+    "description": "Pull thay đổi từ kho lưu trữ từ xa bằng rebase."
+  },
+  "git::Push": {
+    "name": "Push",
+    "description": "Push các commit lên kho lưu trữ từ xa."
+  },
+  "git::PushTo": {
+    "name": "Push tới remote chỉ định",
+    "description": "Push các commit tới remote được chỉ định."
+  },
+  "git::RenameBranch": {
+    "name": "Đổi tên nhánh",
+    "description": "Đổi tên nhánh Git."
+  },
+  "git::Restore": {
+    "name": "Khôi phục",
+    "description": "Khôi phục khối khác biệt đã chọn về trạng thái ban đầu."
+  },
+  "git::RestoreAndNext": {
+    "name": "Khôi phục và đi tới mục tiếp theo",
+    "description": "Khôi phục khối khác biệt đã chọn về trạng thái ban đầu rồi đi tới khối khác biệt tiếp theo."
+  },
+  "git::RestoreFile": {
+    "name": "Khôi phục tệp",
+    "description": "Khôi phục tệp về trạng thái ở commit gần nhất, bỏ các thay đổi cục bộ."
+  },
+  "git::RestoreTrackedFiles": {
+    "name": "Khôi phục các tệp đã theo dõi",
+    "description": "Khôi phục tất cả tệp đã theo dõi về trạng thái ở commit gần nhất."
+  },
+  "git::SelectRepo": {
+    "name": "Chọn kho lưu trữ",
+    "description": "Chọn một kho lưu trữ khác."
+  },
+  "git::Signoff": {
+    "name": "Signoff",
+    "description": "Bật tùy chọn --signoff."
+  },
+  "git::SkipHooks": {
+    "name": "Bỏ qua hook",
+    "description": "Chạy commit tiếp theo với `git commit --no-verify`."
+  },
+  "git::StageAll": {
+    "name": "Stage tất cả",
+    "description": "Stage tất cả thay đổi trong kho lưu trữ."
+  },
+  "git::StageAndNext": {
+    "name": "Stage và đi tới mục tiếp theo",
+    "description": "Stage khối khác biệt hiện tại rồi đi tới khối khác biệt tiếp theo."
+  },
+  "git::StageFile": {
+    "name": "Stage tệp",
+    "description": "Stage tệp hiện tại."
+  },
+  "git::StageRange": {
+    "name": "Stage phạm vi",
+    "description": "Stage các mục trạng thái từ mục neo đến con trỏ."
+  },
+  "git::StageSection": {
+    "name": "Stage nhóm",
+    "description": "Stage mọi mục trong nhóm chứa mục đã chọn."
+  },
+  "git::StashAll": {
+    "name": "Stash tất cả",
+    "description": "Stash tất cả thay đổi trong kho lưu trữ, gồm cả tệp chưa theo dõi."
+  },
+  "git::StashApply": {
+    "name": "Áp dụng stash",
+    "description": "Áp dụng stash gần nhất."
+  },
+  "git::StashPop": {
+    "name": "Pop stash",
+    "description": "Pop stash gần nhất."
+  },
+  "git::StashStaged": {
+    "name": "Stash các thay đổi đã stage",
+    "description": "Stash các thay đổi đã stage trong kho lưu trữ, giữ nguyên các thay đổi chưa stage."
+  },
+  "git::StashTracked": {
+    "name": "Stash các thay đổi đã theo dõi",
+    "description": "Stash các thay đổi đã theo dõi trong kho lưu trữ, giữ nguyên các tệp chưa theo dõi."
+  },
+  "git::Switch": {
+    "name": "Chuyển nhánh",
+    "description": "Chuyển sang một nhánh Git khác."
+  },
+  "git::SwitchWorktree": {
+    "name": "Chuyển worktree",
+    "description": "Chuyển không gian làm việc sang một worktree liên kết hiện có. Kích hoạt khi chọn worktree hiện có trong bộ chọn worktree hợp nhất."
+  },
+  "git::ToggleDiffBase": {
+    "name": "Đổi cơ sở diff",
+    "description": "Chuyển cơ sở diff của Git giữa HEAD và nhánh mặc định."
+  },
+  "git::ToggleFillCommitEditor": {
+    "name": "Bật/tắt trình soạn commit lấp đầy bảng",
+    "description": "Bật/tắt việc trình soạn thông điệp commit chiếm toàn bộ không gian dọc còn trống trong bảng Git."
+  },
+  "git::ToggleStaged": {
+    "name": "Bật/tắt trạng thái stage",
+    "description": "Bật/tắt trạng thái stage của khối khác biệt hoặc mục trạng thái tại con trỏ."
+  },
+  "git::TrashUntrackedFiles": {
+    "name": "Chuyển các tệp chưa theo dõi vào thùng rác",
+    "description": "Chuyển tất cả tệp chưa theo dõi vào thùng rác."
+  },
+  "git::Uncommit": {
+    "name": "Hoàn tác commit",
+    "description": "Hoàn tác commit gần nhất, giữ các thay đổi trong thư mục làm việc."
+  },
+  "git::UnstageAll": {
+    "name": "Bỏ stage tất cả",
+    "description": "Bỏ stage tất cả thay đổi trong kho lưu trữ."
+  },
+  "git::UnstageAndNext": {
+    "name": "Bỏ stage và đi tới mục tiếp theo",
+    "description": "Bỏ stage khối khác biệt hiện tại rồi đi tới khối khác biệt tiếp theo."
+  },
+  "git::UnstageFile": {
+    "name": "Bỏ stage tệp",
+    "description": "Bỏ stage tệp hiện tại."
+  },
+  "git::UnstageSection": {
+    "name": "Bỏ stage nhóm",
+    "description": "Bỏ stage mọi mục trong nhóm chứa mục đã chọn."
+  },
+  "git::ViewCommit": {
+    "name": "Xem commit"
+  },
+  "git::ViewFile": {
+    "name": "Xem tệp",
+    "description": "Mở tệp đã chọn trong trình soạn thảo, không dùng chế độ xem khác biệt."
+  },
+  "git::ViewStagedChanges": {
+    "name": "Xem các thay đổi đã stage",
+    "description": "Hiển thị các thay đổi đã stage trong toàn dự án."
+  },
+  "git::ViewStash": {
+    "name": "Xem stash",
+    "description": "Mở bộ chọn stash của Git."
+  },
+  "git::ViewUncommittedChanges": {
+    "name": "Xem các thay đổi chưa commit",
+    "description": "Hiển thị các thay đổi chưa commit trong toàn dự án."
+  },
+  "git::ViewUnstagedChanges": {
+    "name": "Xem các thay đổi chưa stage",
+    "description": "Hiển thị các thay đổi chưa stage trong toàn dự án."
+  },
+  "git::Worktree": {
+    "name": "Mở bộ chọn worktree",
+    "description": "Mở bộ chọn worktree của Git."
+  }
+}

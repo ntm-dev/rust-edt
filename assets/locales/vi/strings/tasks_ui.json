@@ -1,0 +1,12 @@
+{
+  "Delete from Recent Tasks": "Xóa khỏi tác vụ gần đây",
+  "Find a task, or run a command": "Tìm tác vụ hoặc chạy lệnh",
+  "Find a task, or run a command in the central pane": "Tìm tác vụ hoặc chạy lệnh trong ngăn trung tâm",
+  "Rerun": "Chạy lại",
+  "Rerun Last Task": "Chạy lại tác vụ gần nhất",
+  "Rerun Without History": "Chạy lại (không ghi vào lịch sử)",
+  "Spawn": "Chạy",
+  "Spawn Oneshot": "Chạy tác vụ một lần",
+  "Spawn Oneshot Without History": "Chạy tác vụ một lần (không ghi vào lịch sử)",
+  "Spawn Without History": "Chạy (không ghi vào lịch sử)"
+}

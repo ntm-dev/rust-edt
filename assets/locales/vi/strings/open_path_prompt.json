@@ -1,0 +1,12 @@
+{
+  "A file or folder with the same name already exists. Replacing it will overwrite its current contents.": "Đã có tệp hoặc thư mục cùng tên. Thay thế sẽ ghi đè nội dung hiện có.",
+  "Cancel": "Hủy",
+  "No such file or directory": "Không có tệp hoặc thư mục này",
+  "Replace": "Thay thế",
+  "Type a path…": "Nhập đường dẫn…",
+  "[directory{separator}]filename.ext": "[thư mục{separator}]tên_tệp.ext",
+  "open this directory": "mở thư mục này",
+  "{label} (create)": "{label} (tạo mới)",
+  "{label} (replace)": "{label} (thay thế)",
+  "{path} already exists. Do you want to replace it?": "{path} đã tồn tại. Bạn có muốn thay thế không?"
+}

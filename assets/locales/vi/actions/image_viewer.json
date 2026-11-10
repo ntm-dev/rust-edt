@@ -1,0 +1,22 @@
+{
+  "image_viewer::FitToView": {
+    "name": "Vừa khung xem",
+    "description": "Thu phóng ảnh vừa với khung xem."
+  },
+  "image_viewer::ResetZoom": {
+    "name": "Đặt lại thu phóng",
+    "description": "Đặt lại mức thu phóng về 100%."
+  },
+  "image_viewer::ZoomIn": {
+    "name": "Phóng to",
+    "description": "Phóng to ảnh."
+  },
+  "image_viewer::ZoomOut": {
+    "name": "Thu nhỏ",
+    "description": "Thu nhỏ ảnh."
+  },
+  "image_viewer::ZoomToActualSize": {
+    "name": "Thu phóng về kích thước thực",
+    "description": "Thu phóng về kích thước thực (100%)."
+  }
+}

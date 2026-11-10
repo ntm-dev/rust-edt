@@ -1,0 +1,14 @@
+{
+  "svg::OpenFollowingPreview": {
+    "name": "Mở bản xem trước đồng bộ",
+    "description": "Mở bản xem trước SVG đồng bộ theo trình soạn thảo."
+  },
+  "svg::OpenPreview": {
+    "name": "Mở bản xem trước",
+    "description": "Mở bản xem trước SVG của tệp hiện tại."
+  },
+  "svg::OpenPreviewToTheSide": {
+    "name": "Mở bản xem trước bên cạnh",
+    "description": "Mở bản xem trước SVG trong một ngăn tách."
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "diagnostics::Deploy": {
+    "name": "Mở chẩn đoán",
+    "description": "Mở chế độ xem chẩn đoán của dự án."
+  },
+  "diagnostics::DeployCurrentFile": {
+    "name": "Mở chẩn đoán của tệp hiện tại",
+    "description": "Mở chế độ xem chẩn đoán dự án cho tệp đang được chọn."
+  },
+  "diagnostics::ToggleDiagnosticsRefresh": {
+    "name": "Bật/tắt tự động làm mới chẩn đoán",
+    "description": "Bật/tắt việc tự động làm mới chẩn đoán."
+  },
+  "diagnostics::ToggleWarnings": {
+    "name": "Bật/tắt cảnh báo",
+    "description": "Bật/tắt hiển thị chẩn đoán mức cảnh báo."
+  }
+}

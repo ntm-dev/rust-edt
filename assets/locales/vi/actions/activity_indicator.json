@@ -1,0 +1,6 @@
+{
+  "activity_indicator::ShowErrorMessage": {
+    "description": "Hiển thị thông báo lỗi của máy chủ ngôn ngữ trên thanh trạng thái.",
+    "name": "Hiện thông báo lỗi"
+  }
+}

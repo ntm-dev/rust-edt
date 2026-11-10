@@ -1,0 +1,6 @@
+{
+  "project_symbols::Toggle": {
+    "name": "Bật/tắt ký hiệu dự án",
+    "description": "Bật/tắt tìm kiếm ký hiệu dự án."
+  }
+}

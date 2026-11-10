@@ -1,0 +1,4 @@
+{
+  "Could not install the Go language server `gopls`, because `go` was not found.": "Không thể cài máy chủ ngôn ngữ Go `gopls` vì không tìm thấy `go`.",
+  "Virtual Environment": "Môi trường ảo"
+}

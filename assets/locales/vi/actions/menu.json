@@ -1,0 +1,45 @@
+{
+  "menu::Cancel": {
+    "description": "Hủy thao tác menu hiện tại.",
+    "name": "Hủy"
+  },
+  "menu::Confirm": {
+    "description": "Xác nhận mục menu đã chọn.",
+    "name": "Xác nhận"
+  },
+  "menu::EndSlot": {
+    "name": "Kích hoạt nút cuối dòng"
+  },
+  "menu::Restart": {
+    "description": "Bắt đầu lại menu từ đầu.",
+    "name": "Về đầu"
+  },
+  "menu::SecondaryConfirm": {
+    "description": "Thực hiện thao tác xác nhận phụ.",
+    "name": "Xác nhận phụ"
+  },
+  "menu::SelectChild": {
+    "description": "Vào menu con.",
+    "name": "Vào menu con"
+  },
+  "menu::SelectFirst": {
+    "description": "Chọn mục đầu tiên trong menu.",
+    "name": "Chọn mục đầu"
+  },
+  "menu::SelectLast": {
+    "description": "Chọn mục cuối cùng trong menu.",
+    "name": "Chọn mục cuối"
+  },
+  "menu::SelectNext": {
+    "description": "Chọn mục tiếp theo trong menu.",
+    "name": "Chọn mục tiếp theo"
+  },
+  "menu::SelectParent": {
+    "description": "Thoát menu con và quay lại menu cấp trên.",
+    "name": "Quay lại menu cấp trên"
+  },
+  "menu::SelectPrevious": {
+    "description": "Chọn mục trước đó trong menu.",
+    "name": "Chọn mục trước đó"
+  }
+}

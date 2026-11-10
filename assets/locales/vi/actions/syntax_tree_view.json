@@ -1,0 +1,6 @@
+{
+  "syntax_tree_view::UseActiveEditor": {
+    "name": "Dùng trình soạn thảo đang hoạt động",
+    "description": "Cập nhật cây cú pháp để hiển thị tệp được đặt tiêu điểm gần nhất."
+  }
+}

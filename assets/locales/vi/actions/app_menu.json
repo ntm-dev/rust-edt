@@ -1,0 +1,14 @@
+{
+  "app_menu::ActivateMenuLeft": {
+    "description": "Kích hoạt menu bên trái trong menu tích hợp của ứng dụng.\n\nKhông áp dụng cho thanh menu hệ thống (ví dụ thanh menu trên macOS).",
+    "name": "Kích hoạt menu bên trái"
+  },
+  "app_menu::ActivateMenuRight": {
+    "description": "Kích hoạt menu bên phải trong menu tích hợp của ứng dụng.\n\nKhông áp dụng cho thanh menu hệ thống (ví dụ thanh menu trên macOS).",
+    "name": "Kích hoạt menu bên phải"
+  },
+  "app_menu::OpenApplicationMenu": {
+    "description": "Mở menu có tên chỉ định trong menu tích hợp của ứng dụng.\n\nKhông áp dụng cho thanh menu hệ thống (ví dụ thanh menu trên macOS).",
+    "name": "Mở menu ứng dụng"
+  }
+}

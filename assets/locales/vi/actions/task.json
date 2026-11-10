@@ -1,0 +1,10 @@
+{
+  "task::Rerun": {
+    "name": "Chạy lại",
+    "description": "Chạy lại tác vụ trước đó."
+  },
+  "task::Spawn": {
+    "name": "Chạy tác vụ",
+    "description": "Chạy tác vụ theo tên, hoặc mở cửa sổ bật lên tác vụ."
+  }
+}

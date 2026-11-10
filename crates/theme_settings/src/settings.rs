@@ -824,6 +824,7 @@ fn ui_language_from_settings(language: Option<settings::UiLanguage>) -> i18n::La
         settings::UiLanguage::System => i18n::Language::system(),
         settings::UiLanguage::English => i18n::Language::English,
         settings::UiLanguage::SimplifiedChinese => i18n::Language::SimplifiedChinese,
+        settings::UiLanguage::Vietnamese => i18n::Language::Vietnamese,
     }
 }
 

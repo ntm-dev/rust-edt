@@ -1,0 +1,22 @@
+{
+  "1 hour ago": "1 giờ trước",
+  "1 minute ago": "1 phút trước",
+  "1 month ago": "1 tháng trước",
+  "1 week ago": "1 tuần trước",
+  "1 year ago": "1 năm trước",
+  "1 year, 1 month ago": "1 năm 1 tháng trước",
+  "1 year, {months} months ago": "1 năm {months} tháng trước",
+  "Just now": "Vừa xong",
+  "Today": "Hôm nay",
+  "Today at {time}": "Hôm nay lúc {time}",
+  "Yesterday": "Hôm qua",
+  "Yesterday at {time}": "Hôm qua lúc {time}",
+  "{count} days ago": "{count} ngày trước",
+  "{count} hours ago": "{count} giờ trước",
+  "{count} minutes ago": "{count} phút trước",
+  "{count} months ago": "{count} tháng trước",
+  "{count} weeks ago": "{count} tuần trước",
+  "{count} years ago": "{count} năm trước",
+  "{years} years, 1 month ago": "{years} năm 1 tháng trước",
+  "{years} years, {months} months ago": "{years} năm {months} tháng trước"
+}

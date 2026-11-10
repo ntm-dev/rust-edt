@@ -66,8 +66,20 @@ pub fn format_date_medium(
     format_absolute_date_medium(timestamp, reference, enhanced_formatting)
 }
 
-fn uses_chinese_locale() -> bool {
-    i18n::language() == i18n::Language::SimplifiedChinese
+/// Languages whose dates and times follow their own format instead of the system's, because the
+/// system locale can differ from the language chosen for the UI.
+#[derive(Clone, Copy, PartialEq, Eq)]
+enum LocalizedFormat {
+    Chinese,
+    Vietnamese,
+}
+
+fn localized_format() -> Option<LocalizedFormat> {
+    match i18n::language() {
+        i18n::Language::SimplifiedChinese => Some(LocalizedFormat::Chinese),
+        i18n::Language::Vietnamese => Some(LocalizedFormat::Vietnamese),
+        i18n::Language::English | i18n::Language::Pseudo => None,
+    }
 }
 
 fn format_absolute_date(
@@ -376,8 +388,10 @@ fn format_naive_date(date: time::Date, is_12_hour_time: bool) -> String {
     let year = date.year();
     let month = date.month() as u8;
     let day = date.day();
-    if uses_chinese_locale() {
+    if localized_format() == Some(LocalizedFormat::Chinese) {
         format!("{year}/{month}/{day}")
+    } else if localized_format() == Some(LocalizedFormat::Vietnamese) {
+        format!("{day:02}/{month:02}/{year}")
     } else if is_12_hour_time {
         format!("{month:02}/{day:02}/{year}")
     } else {
@@ -387,10 +401,19 @@ fn format_naive_date(date: time::Date, is_12_hour_time: bool) -> String {
 
 #[cfg(not(any(target_os = "macos", target_os = "windows")))]
 fn format_naive_date_medium(date: time::Date, is_12_hour_time: bool) -> String {
-    if uses_chinese_locale() {
-        format!("{}年{}月{}日", date.year(), date.month() as u8, date.day())
-    } else {
-        format_naive_date(date, is_12_hour_time)
+    match localized_format() {
+        Some(LocalizedFormat::Chinese) => {
+            format!("{}年{}月{}日", date.year(), date.month() as u8, date.day())
+        }
+        Some(LocalizedFormat::Vietnamese) => {
+            format!(
+                "{} tháng {}, {}",
+                date.day(),
+                date.month() as u8,
+                date.year()
+            )
+        }
+        None => format_naive_date(date, is_12_hour_time),
     }
 }
 
@@ -436,7 +459,7 @@ static CURRENT_LOCALE: std::sync::OnceLock<String> = std::sync::OnceLock::new();
 
 #[cfg(not(any(target_os = "macos", target_os = "windows")))]
 fn uses_12_hour_time() -> bool {
-    if uses_chinese_locale() {
+    if localized_format().is_some() {
         return false;
     }
     let current_locale = CURRENT_LOCALE
@@ -495,10 +518,10 @@ mod macos {
         timestamp: &time::OffsetDateTime,
         select: fn(&Formatters) -> CFDateFormatterRef,
     ) -> String {
-        let fmt = if super::uses_chinese_locale() {
-            CHINESE_FORMATTERS.with(select)
-        } else {
-            SYSTEM_FORMATTERS.with(select)
+        let fmt = match super::localized_format() {
+            Some(super::LocalizedFormat::Chinese) => CHINESE_FORMATTERS.with(select),
+            Some(super::LocalizedFormat::Vietnamese) => VIETNAMESE_FORMATTERS.with(select),
+            None => SYSTEM_FORMATTERS.with(select),
         };
         const UNIX_TO_CF_ABSOLUTE_TIME_OFFSET: i64 = 978307200;
         // Convert timestamp to macOS absolute time
@@ -541,6 +564,12 @@ mod macos {
                 CFLocaleCreate(kCFAllocatorDefault, identifier.as_concrete_TypeRef())
             })
         };
+        static VIETNAMESE_FORMATTERS: Formatters = {
+            let identifier = CFString::from_static_string("vi-VN");
+            Formatters::new(unsafe {
+                CFLocaleCreate(kCFAllocatorDefault, identifier.as_concrete_TypeRef())
+            })
+        };
     }
 }
 
@@ -555,18 +584,19 @@ mod windows {
     use windows::core::{PCWSTR, w};
 
     pub fn format_time(timestamp: &time::OffsetDateTime) -> String {
-        let chinese = super::uses_chinese_locale();
-        let formatted = if chinese {
-            format_chinese_time(timestamp)
+        let localized = super::localized_format();
+        let formatted = if let Some(format) = localized {
+            format_localized_time(format, timestamp)
         } else {
             format_with_formatter(DateTimeFormatter::ShortTime(), timestamp)
         };
-        formatted.unwrap_or_else(|| super::format_timestamp_naive_time(*timestamp, !chinese))
+        formatted
+            .unwrap_or_else(|| super::format_timestamp_naive_time(*timestamp, localized.is_none()))
     }
 
     pub fn format_date(timestamp: &time::OffsetDateTime) -> String {
-        let formatted = if super::uses_chinese_locale() {
-            format_chinese_date(timestamp, DATE_SHORTDATE)
+        let formatted = if let Some(format) = super::localized_format() {
+            format_localized_date(format, timestamp, DATE_SHORTDATE)
         } else {
             format_with_formatter(DateTimeFormatter::ShortDate(), timestamp)
         };
@@ -574,8 +604,8 @@ mod windows {
     }
 
     pub fn format_date_medium(timestamp: &time::OffsetDateTime) -> String {
-        let formatted = if super::uses_chinese_locale() {
-            format_chinese_date(timestamp, DATE_LONGDATE)
+        let formatted = if let Some(format) = super::localized_format() {
+            format_localized_date(format, timestamp, DATE_LONGDATE)
         } else {
             format_with_formatter(
                 DateTimeFormatter::CreateDateTimeFormatter(windows::core::h!(
@@ -597,7 +627,15 @@ mod windows {
             .ok()
     }
 
-    fn format_chinese_date(
+    fn locale_name(format: super::LocalizedFormat) -> PCWSTR {
+        match format {
+            super::LocalizedFormat::Chinese => w!("zh-CN"),
+            super::LocalizedFormat::Vietnamese => w!("vi-VN"),
+        }
+    }
+
+    fn format_localized_date(
+        format: super::LocalizedFormat,
         timestamp: &time::OffsetDateTime,
         flags: ENUM_DATE_FORMATS_FLAGS,
     ) -> Option<String> {
@@ -605,7 +643,7 @@ mod windows {
         let mut buffer = [0u16; 64];
         let length = unsafe {
             GetDateFormatEx(
-                w!("zh-CN"),
+                locale_name(format),
                 flags,
                 Some(&system_time),
                 PCWSTR::null(),
@@ -616,12 +654,15 @@ mod windows {
         string_from_utf16(&buffer, length)
     }
 
-    fn format_chinese_time(timestamp: &time::OffsetDateTime) -> Option<String> {
+    fn format_localized_time(
+        format: super::LocalizedFormat,
+        timestamp: &time::OffsetDateTime,
+    ) -> Option<String> {
         let system_time = to_system_time(timestamp)?;
         let mut buffer = [0u16; 64];
         let length = unsafe {
             GetTimeFormatEx(
-                w!("zh-CN"),
+                locale_name(format),
                 TIME_NOSECONDS,
                 Some(&system_time),
                 PCWSTR::null(),

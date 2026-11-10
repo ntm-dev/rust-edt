@@ -1,0 +1,18 @@
+{
+  "Cannot have two different hosts in debug configuration": "Cấu hình gỡ lỗi không thể có hai máy chủ khác nhau",
+  "Cannot have two different ports in debug configuration": "Cấu hình gỡ lỗi không thể có hai cổng khác nhau",
+  "Checking latest version of {name}...": "Đang kiểm tra phiên bản mới nhất của {name}...",
+  "Could not find a Python installation": "Không tìm thấy bản cài đặt Python",
+  "Could not find a Python installation. Install Python from the Microsoft Store, or manually from https://www.python.org/downloads/windows.": "Không tìm thấy bản cài đặt Python. Hãy cài đặt Python từ Microsoft Store hoặc cài thủ công từ https://www.python.org/downloads/windows.",
+  "Could not find gdb path or it's not installed": "Không tìm thấy đường dẫn gdb hoặc gdb chưa được cài đặt",
+  "Failed to create base virtual environment with {base_python} in:\n{debug_adapter_path}\nstderr:\n{stderr}\nstdout:\n{stdout}\n": "Không thể tạo môi trường ảo cơ sở bằng {base_python} tại:\n{debug_adapter_path}\nstderr:\n{stderr}\nstdout:\n{stdout}\n",
+  "Go not found in path. Please install Go first, then Dlv will be installed automatically.": "Không tìm thấy Go trong PATH. Vui lòng cài đặt Go trước, sau đó Dlv sẽ được cài đặt tự động.",
+  "No cached adapter directory": "Không có thư mục bộ điều hợp đã lưu đệm",
+  "No cached adapter found": "Không tìm thấy bộ điều hợp đã lưu đệm",
+  "Searching for adapters in: {path}": "Đang tìm bộ điều hợp trong: {path}",
+  "Unable to fetch latest version": "Không thể lấy phiên bản mới nhất",
+  "debugpy installation failed (could not fetch Debugpy's wheel)": "Cài đặt debugpy thất bại (không thể lấy gói wheel của Debugpy)",
+  "failed to find binary path for Python": "không tìm thấy đường dẫn tệp thực thi của Python",
+  "failed to install dlv via `go install`. stdout: {stdout}, stderr: {stderr}\n Please try installing it manually using 'go install github.com/go-delve/delve/cmd/dlv@latest'": "không thể cài đặt dlv qua `go install`. stdout: {stdout}, stderr: {stderr}\n Hãy thử cài thủ công bằng 'go install github.com/go-delve/delve/cmd/dlv@latest'",
+  "{name} debug adapter is up to date": "Bộ điều hợp gỡ lỗi {name} đã là bản mới nhất"
+}

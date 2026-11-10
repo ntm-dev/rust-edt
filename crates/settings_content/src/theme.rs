@@ -444,10 +444,12 @@ pub enum UiLanguage {
     English,
     #[serde(rename = "zh-CN")]
     SimplifiedChinese,
+    #[serde(rename = "vi")]
+    Vietnamese,
 }
 
 impl strum::VariantNames for UiLanguage {
-    const VARIANTS: &'static [&'static str] = &["System", "English", "简体中文"];
+    const VARIANTS: &'static [&'static str] = &["System", "English", "简体中文", "Tiếng Việt"];
 }
 
 /// Specifies the density of the UI.

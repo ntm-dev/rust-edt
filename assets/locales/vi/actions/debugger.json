@@ -1,0 +1,141 @@
+{
+  "debugger::ClearAllBreakpoints": {
+    "name": "Xóa tất cả điểm dừng",
+    "description": "Xóa tất cả điểm dừng trong dự án."
+  },
+  "debugger::Continue": {
+    "name": "Tiếp tục",
+    "description": "Cho tất cả luồng tiếp tục chạy đến điểm dừng tiếp theo."
+  },
+  "debugger::ContinueThread": {
+    "name": "Tiếp tục luồng",
+    "description": "Cho luồng đã chọn tiếp tục chạy đến điểm dừng tiếp theo."
+  },
+  "debugger::Detach": {
+    "name": "Tách",
+    "description": "Tách trình gỡ lỗi khỏi tiến trình đang chạy."
+  },
+  "debugger::EvaluateSelectedText": {
+    "name": "Tính giá trị văn bản đã chọn",
+    "description": "Tính giá trị của văn bản đã chọn trong ngữ cảnh trình gỡ lỗi."
+  },
+  "debugger::FocusBreakpointList": {
+    "name": "Đưa tiêu điểm vào danh sách điểm dừng",
+    "description": "Đưa tiêu điểm vào bảng danh sách điểm dừng."
+  },
+  "debugger::FocusConsole": {
+    "name": "Đưa tiêu điểm vào bảng điều khiển",
+    "description": "Đưa tiêu điểm vào bảng điều khiển gỡ lỗi."
+  },
+  "debugger::FocusFrames": {
+    "name": "Đưa tiêu điểm vào ngăn xếp lời gọi",
+    "description": "Đưa tiêu điểm vào bảng khung ngăn xếp lời gọi."
+  },
+  "debugger::FocusLoadedSources": {
+    "name": "Đưa tiêu điểm vào nguồn đã tải",
+    "description": "Đưa tiêu điểm vào bảng nguồn đã tải."
+  },
+  "debugger::FocusModules": {
+    "name": "Đưa tiêu điểm vào mô-đun",
+    "description": "Đưa tiêu điểm vào bảng mô-đun đã tải."
+  },
+  "debugger::FocusTerminal": {
+    "name": "Đưa tiêu điểm vào terminal",
+    "description": "Đưa tiêu điểm vào bảng terminal."
+  },
+  "debugger::FocusVariables": {
+    "name": "Đưa tiêu điểm vào biến",
+    "description": "Đưa tiêu điểm vào bảng biến."
+  },
+  "debugger::GoToSelectedAddress": {
+    "name": "Đi tới địa chỉ đã chọn"
+  },
+  "debugger::NextBreakpointProperty": {
+    "name": "Thuộc tính điểm dừng tiếp theo",
+    "description": "Đi tới thuộc tính điểm dừng tiếp theo trong danh sách."
+  },
+  "debugger::OpenProjectDebugTasks": {
+    "name": "Mở tác vụ gỡ lỗi của dự án",
+    "description": "Mở cấu hình tác vụ gỡ lỗi của dự án."
+  },
+  "debugger::Pause": {
+    "name": "Tạm dừng",
+    "description": "Tạm dừng chương trình đang chạy."
+  },
+  "debugger::PreviousBreakpointProperty": {
+    "name": "Thuộc tính điểm dừng trước đó",
+    "description": "Đi tới thuộc tính điểm dừng trước đó trong danh sách."
+  },
+  "debugger::Rerun": {
+    "name": "Chạy lại",
+    "description": "Chạy lại phiên gỡ lỗi gần nhất."
+  },
+  "debugger::RerunSession": {
+    "name": "Chạy lại phiên",
+    "description": "Chạy lại phiên gỡ lỗi hiện tại với cùng cấu hình."
+  },
+  "debugger::Restart": {
+    "name": "Khởi động lại",
+    "description": "Khởi động lại phiên gỡ lỗi hiện tại."
+  },
+  "debugger::RunToCursor": {
+    "name": "Chạy đến con trỏ",
+    "description": "Chạy chương trình đến vị trí con trỏ hiện tại."
+  },
+  "debugger::Start": {
+    "name": "Bắt đầu gỡ lỗi",
+    "description": "Bắt đầu phiên gỡ lỗi mới."
+  },
+  "debugger::StepBack": {
+    "name": "Bước lùi",
+    "description": "Lùi về câu lệnh trước đó."
+  },
+  "debugger::StepInto": {
+    "name": "Bước vào",
+    "description": "Đi vào lời gọi hàm tiếp theo."
+  },
+  "debugger::StepOut": {
+    "name": "Bước ra",
+    "description": "Thoát khỏi hàm hiện tại."
+  },
+  "debugger::StepOver": {
+    "name": "Bước qua",
+    "description": "Bỏ qua dòng hiện tại."
+  },
+  "debugger::Stop": {
+    "name": "Dừng",
+    "description": "Dừng phiên gỡ lỗi."
+  },
+  "debugger::ToggleDataBreakpoint": {
+    "name": "Bật/tắt điểm dừng dữ liệu",
+    "description": "Đặt điểm dừng dữ liệu trên biến hoặc vùng bộ nhớ đã chọn."
+  },
+  "debugger::ToggleEnableBreakpoint": {
+    "name": "Bật/tắt trạng thái kích hoạt điểm dừng",
+    "description": "Bật hoặc tắt điểm dừng."
+  },
+  "debugger::ToggleExpandItem": {
+    "name": "Bật/tắt mở rộng mục",
+    "description": "Mở rộng hoặc thu gọn mục đã chọn trong giao diện trình gỡ lỗi."
+  },
+  "debugger::ToggleIgnoreBreakpoints": {
+    "name": "Bật/tắt bỏ qua điểm dừng",
+    "description": "Bật/tắt việc bỏ qua tất cả điểm dừng."
+  },
+  "debugger::ToggleSessionPicker": {
+    "name": "Bật/tắt bộ chọn phiên",
+    "description": "Mở hoặc đóng danh sách thả xuống chọn phiên."
+  },
+  "debugger::ToggleThreadPicker": {
+    "name": "Bật/tắt bộ chọn luồng",
+    "description": "Mở hoặc đóng danh sách thả xuống chọn luồng."
+  },
+  "debugger::ToggleUserFrames": {
+    "name": "Bật/tắt khung người dùng",
+    "description": "Bật/tắt bộ lọc khung người dùng trong danh sách ngăn xếp lời gọi. Khi bật, chỉ hiện các khung trong mã của người dùng. Khi tắt, hiện tất cả khung."
+  },
+  "debugger::UnsetBreakpoint": {
+    "name": "Gỡ điểm dừng",
+    "description": "Gỡ điểm dừng."
+  }
+}

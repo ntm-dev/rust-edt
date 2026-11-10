@@ -1,0 +1,16 @@
+{
+  "Back": "Quay lại",
+  "Fetching call hierarchy…": "Đang lấy phân cấp lời gọi…",
+  "No callable symbol under the cursor": "Không có ký hiệu có thể gọi tại con trỏ",
+  "No incoming calls found": "Không tìm thấy lời gọi đến",
+  "No matches": "Không có kết quả khớp",
+  "No outgoing calls found": "Không tìm thấy lời gọi đi",
+  "Search calls from `{name}`...": "Tìm các lời gọi từ `{name}`…",
+  "Search calls to `{name}`...": "Tìm các lời gọi tới `{name}`…",
+  "Search incoming calls...": "Tìm lời gọi đến…",
+  "Search outgoing calls...": "Tìm lời gọi đi…",
+  "Show Callees": "Hiện hàm được gọi",
+  "Show Callers": "Hiện hàm gọi",
+  "Switch Direction": "Đổi hướng",
+  "{path}:{line} ({count} calls)": "{path}:{line} ({count} lời gọi)"
+}

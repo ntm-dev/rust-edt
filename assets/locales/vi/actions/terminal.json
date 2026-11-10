@@ -1,0 +1,82 @@
+{
+  "terminal::Clear": {
+    "name": "Xóa màn hình",
+    "description": "Xóa màn hình terminal."
+  },
+  "terminal::Copy": {
+    "name": "Sao chép",
+    "description": "Sao chép văn bản đã chọn vào bộ nhớ tạm."
+  },
+  "terminal::Paste": {
+    "name": "Dán",
+    "description": "Dán từ bộ nhớ tạm."
+  },
+  "terminal::PasteText": {
+    "name": "Dán văn bản",
+    "description": "Dán văn bản từ bộ nhớ tạm."
+  },
+  "terminal::RenameTerminal": {
+    "name": "Đổi tên terminal",
+    "description": "Đổi tên tab terminal."
+  },
+  "terminal::RerunTask": {
+    "name": "Chạy lại tác vụ",
+    "description": "Chạy lại tác vụ đã chạy gần nhất trong terminal."
+  },
+  "terminal::ScrollHalfPageDown": {
+    "name": "Cuộn xuống nửa trang",
+    "description": "Cuộn xuống nửa trang."
+  },
+  "terminal::ScrollHalfPageUp": {
+    "name": "Cuộn lên nửa trang",
+    "description": "Cuộn lên nửa trang."
+  },
+  "terminal::ScrollLineDown": {
+    "name": "Cuộn xuống một dòng",
+    "description": "Cuộn xuống một dòng."
+  },
+  "terminal::ScrollLineUp": {
+    "name": "Cuộn lên một dòng",
+    "description": "Cuộn lên một dòng."
+  },
+  "terminal::ScrollPageDown": {
+    "name": "Cuộn xuống một trang",
+    "description": "Cuộn xuống một trang."
+  },
+  "terminal::ScrollPageUp": {
+    "name": "Cuộn lên một trang",
+    "description": "Cuộn lên một trang."
+  },
+  "terminal::ScrollToBottom": {
+    "name": "Cuộn đến cuối",
+    "description": "Cuộn đến cuối vùng đệm terminal."
+  },
+  "terminal::ScrollToTop": {
+    "name": "Cuộn lên đầu",
+    "description": "Cuộn lên đầu vùng đệm terminal."
+  },
+  "terminal::SearchTest": {
+    "name": "Tìm văn bản",
+    "description": "Tìm kiếm văn bản trong terminal."
+  },
+  "terminal::SelectAll": {
+    "name": "Chọn tất cả",
+    "description": "Chọn tất cả văn bản trong terminal."
+  },
+  "terminal::SendKeystroke": {
+    "name": "Gửi phím bấm",
+    "description": "Gửi chuỗi phím bấm đến terminal."
+  },
+  "terminal::SendText": {
+    "name": "Gửi văn bản",
+    "description": "Gửi trực tiếp văn bản đã chỉ định đến terminal."
+  },
+  "terminal::ShowCharacterPalette": {
+    "name": "Hiển thị bảng ký tự",
+    "description": "Hiển thị bảng ký tự để nhập ký tự đặc biệt."
+  },
+  "terminal::ToggleViMode": {
+    "name": "Bật/tắt chế độ Vi",
+    "description": "Bật/tắt chế độ Vi của terminal."
+  }
+}

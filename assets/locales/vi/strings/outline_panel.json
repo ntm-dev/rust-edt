@@ -1,0 +1,21 @@
+{
+  "Clear Filter": "Xóa bộ lọc",
+  "Copy Path": "Sao chép đường dẫn",
+  "Copy Relative Path": "Sao chép đường dẫn tương đối",
+  "Fold Directory": "Gộp thư mục",
+  "Hide Symbols": "Ẩn ký hiệu",
+  "Lines {start}- {end}": "Dòng {start}-{end}",
+  "No matches for query": "Không có kết quả khớp với truy vấn",
+  "No outlines available": "Không có dàn ý nào",
+  "Open in Terminal": "Mở trong terminal",
+  "Outline Panel": "Bảng dàn ý",
+  "Pin Active Outline": "Ghim dàn ý hiện tại",
+  "Search buffer symbols…": "Tìm ký hiệu trong tệp…",
+  "Searching:": "Đang tìm kiếm:",
+  "Show Symbols": "Hiện ký hiệu",
+  "Toggle Panel With": "Bật/tắt bảng bằng",
+  "Unfold Directory": "Bỏ gộp thư mục",
+  "Unknown buffer": "Tệp không rõ",
+  "Unpin Outline": "Bỏ ghim dàn ý",
+  "Untitled": "Chưa đặt tên"
+}

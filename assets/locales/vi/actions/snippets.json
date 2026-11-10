@@ -1,0 +1,10 @@
+{
+  "snippets::ConfigureSnippets": {
+    "name": "Cấu hình đoạn mã mẫu",
+    "description": "Mở tệp cấu hình đoạn mã mẫu."
+  },
+  "snippets::OpenFolder": {
+    "name": "Mở thư mục",
+    "description": "Mở thư mục đoạn mã mẫu trong trình quản lý tệp."
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "Filter declarations…": "Lọc khai báo…",
+  "Filter definitions…": "Lọc định nghĩa…",
+  "Filter implementations…": "Lọc triển khai…",
+  "Filter references…": "Lọc tham chiếu…",
+  "Filter type definitions…": "Lọc định nghĩa kiểu…",
+  "No declarations found": "Không tìm thấy khai báo",
+  "No definitions found": "Không tìm thấy định nghĩa",
+  "No implementations found": "Không tìm thấy triển khai",
+  "No references found": "Không tìm thấy tham chiếu",
+  "No type definitions found": "Không tìm thấy định nghĩa kiểu"
+}

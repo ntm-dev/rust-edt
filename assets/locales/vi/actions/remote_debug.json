@@ -1,0 +1,14 @@
+{
+  "remote_debug::SimulateDisconnect": {
+    "name": "Mô phỏng ngắt kết nối",
+    "description": "Mô phỏng việc ngắt kết nối với máy chủ từ xa để kiểm thử. Thao tác này kích hoạt logic kết nối lại."
+  },
+  "remote_debug::SimulateTimeout": {
+    "name": "Mô phỏng hết thời gian chờ",
+    "description": "Mô phỏng kết nối đến máy chủ từ xa bị hết thời gian chờ hoặc chậm để kiểm thử. Thao tác này làm heartbeat thất bại và kích hoạt kết nối lại."
+  },
+  "remote_debug::SimulateTimeoutExhausted": {
+    "name": "Mô phỏng hết thời gian chờ và hết lượt thử lại",
+    "description": "Mô phỏng kết nối đến máy chủ từ xa bị hết thời gian chờ hoặc chậm để kiểm thử. Thao tác này làm heartbeat thất bại và thử kết nối lại khi đã dùng hết mọi lượt thử lại."
+  }
+}

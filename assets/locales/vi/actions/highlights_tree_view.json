@@ -1,0 +1,14 @@
+{
+  "highlights_tree_view::ToggleSemanticTokens": {
+    "name": "Bật/tắt token ngữ nghĩa",
+    "description": "Bật/tắt hiển thị tô sáng token ngữ nghĩa."
+  },
+  "highlights_tree_view::ToggleSyntaxTokens": {
+    "name": "Bật/tắt token cú pháp",
+    "description": "Bật/tắt hiển thị tô sáng token cú pháp."
+  },
+  "highlights_tree_view::ToggleTextHighlights": {
+    "name": "Bật/tắt tô sáng văn bản",
+    "description": "Bật/tắt hiển thị tô sáng văn bản."
+  }
+}

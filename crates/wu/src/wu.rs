@@ -2005,6 +2005,7 @@ fn set_macos_system_text_language(choice: Option<i18n::Language>) {
         None => None,
         Some(i18n::Language::English) => Some("en"),
         Some(i18n::Language::SimplifiedChinese) => Some("zh-Hans"),
+        Some(i18n::Language::Vietnamese) => Some("vi"),
         Some(i18n::Language::Pseudo) => return,
     };
     unsafe {

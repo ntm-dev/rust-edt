@@ -1,0 +1,6 @@
+{
+  "console::WatchExpression": {
+    "name": "Theo dõi biểu thức",
+    "description": "Thêm biểu thức vào danh sách theo dõi."
+  }
+}

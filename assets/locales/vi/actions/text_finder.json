@@ -1,0 +1,18 @@
+{
+  "text_finder::Fold": {
+    "name": "Thu gọn"
+  },
+  "text_finder::ToProjectSearch": {
+    "name": "Chuyển sang tìm kiếm dự án"
+  },
+  "text_finder::Toggle": {
+    "name": "Bật/tắt trình tìm văn bản",
+    "description": "Mở bộ chọn tìm kiếm dự án."
+  },
+  "text_finder::ToggleFoldAll": {
+    "name": "Bật/tắt thu gọn tất cả"
+  },
+  "text_finder::Unfold": {
+    "name": "Mở rộng"
+  }
+}

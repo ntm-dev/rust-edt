@@ -1,0 +1,6 @@
+{
+  "action::Sequence": {
+    "description": "Chạy một chuỗi lệnh theo thứ tự.\n\nLưu ý: **không** chờ lệnh bất đồng bộ hoàn tất trước khi chạy lệnh tiếp theo.",
+    "name": "Chạy theo thứ tự"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "theme_selector::Reload": {
+    "description": "Tải lại tất cả giao diện từ đĩa.",
+    "name": "Tải lại"
+  },
+  "theme_selector::Toggle": {
+    "description": "Mở hoặc đóng bộ chọn giao diện.",
+    "name": "Bật/tắt bộ chọn giao diện"
+  }
+}

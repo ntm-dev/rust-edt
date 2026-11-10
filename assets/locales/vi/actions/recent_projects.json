@@ -1,0 +1,11 @@
+{
+  "recent_projects::AddToWorkspace": {
+    "name": "Thêm vào không gian làm việc"
+  },
+  "recent_projects::RemoveSelected": {
+    "name": "Xóa mục đã chọn"
+  },
+  "recent_projects::ToggleActionsMenu": {
+    "name": "Bật/tắt menu hành động"
+  }
+}

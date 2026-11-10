@@ -1,0 +1,6 @@
+{
+  "lsp_tool::ToggleMenu": {
+    "name": "Bật/tắt menu",
+    "description": "Bật/tắt menu công cụ máy chủ ngôn ngữ."
+  }
+}

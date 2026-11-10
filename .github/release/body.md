@@ -1,1 +1,1 @@
-See [ReadMe](https://github.com/dstrml/wu#download) for installation instructions.
+See [ReadMe](https://github.com/ntm-dev/rust-edt#download) for installation instructions.

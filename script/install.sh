@@ -9,7 +9,7 @@ main() {
     platform="$(uname -s)"
     arch="$(uname -m)"
     channel="${WU_CHANNEL:-${ZED_CHANNEL:-stable}}"
-    repo="dstrml/wu"
+    repo="ntm-dev/rust-edt"
     version="${WU_VERSION:-${ZED_VERSION:-latest}}"
     bundle_path="${WU_BUNDLE_PATH:-${ZED_BUNDLE_PATH:-}}"
     if [ "$version" = "latest" ]; then

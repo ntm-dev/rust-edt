@@ -10,6 +10,10 @@
 
 ---
 
+**rust-edt** là trình soạn thảo mã nguồn gốc (native) và không gian làm việc cho agent, viết bằng Rust, được duy trì tại [ntm-dev/rust-edt](https://github.com/ntm-dev/rust-edt). Đây là bản fork của [dstrml/wu](https://github.com/dstrml/wu); bản phát hành, script cài đặt và tự động cập nhật đều lấy từ repo này. Phần còn lại của README này theo README của Wu.
+
+---
+
 Wu là trình soạn thảo mã nguồn gốc, nhanh, viết bằng Rust, với thiết kế sạch sẽ, hiện đại và có sẵn các coding agent. Cái tên bắt nguồn từ [vô vi (wu wei)](https://en.wikipedia.org/wiki/Wu_wei): hành động không gượng ép. Wu là bản fork của [Zed](https://github.com/zed-industries/zed) nhưng đã khác biệt rất nhiều so với bản gốc.
 
 ## Tính năng

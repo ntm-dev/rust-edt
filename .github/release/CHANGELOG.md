@@ -4,6 +4,10 @@ All notable user-facing changes to Wu are listed here, newest first.
 
 ## Unreleased
 
+## 1.4.1 - 2026-11-11
+
+- Fix the build failure in the terminal panel list introduced in 1.4.0.
+
 ## 1.4.0 - 2026-11-11
 
 - Add the "VS Code Dark Modern" and "VS Code Light Modern" themes, now the default, with VS Code's terminal colors.

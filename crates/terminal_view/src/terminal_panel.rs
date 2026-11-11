@@ -1533,7 +1533,7 @@ impl TerminalPanel {
 
     /// VS Code-style terminal list shown on the right of the panel: one row per
     /// terminal (across all split panes) plus a small header with new/split/zoom.
-    fn render_terminal_list(&self, cx: &mut Context<Self>) -> impl IntoElement {
+    fn render_terminal_list(&self, cx: &mut Context<Self>) -> impl IntoElement + use<> {
         let colors = cx.theme().colors().clone();
         let mut rows = Vec::new();
         let mut row_ix = 0usize;

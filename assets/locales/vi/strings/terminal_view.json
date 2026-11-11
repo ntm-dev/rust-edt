@@ -6,6 +6,8 @@
   "Edit Settings": "Chỉnh sửa cài đặt",
   "Edit settings.json": "Chỉnh sửa settings.json",
   "Failed to spawn terminal": "Không thể khởi chạy terminal",
+  "Join Terminals": "Gộp các terminal",
+  "Unjoin Terminals": "Tách các terminal",
   "New Center Terminal": "Terminal mới ở vùng soạn thảo",
   "New Terminal": "Terminal mới",
   "Open Settings": "Mở cài đặt",

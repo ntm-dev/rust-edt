@@ -8,8 +8,8 @@
   // - "dark": Use the theme indicated by the "dark" field
   "theme": {
     "mode": "system",
-    "light": "Wu Light",
-    "dark": "Wu Dark",
+    "light": "VS Code Light Modern",
+    "dark": "VS Code Dark Modern",
   },
   "icon_theme": {
     "mode": "system",
@@ -30,7 +30,7 @@
   // 9. "None"
   "base_keymap": "Zed",
   // The name of a font to use for rendering text in the editor
-  "buffer_font_family": "JetBrains Mono",
+  "buffer_font_family": "Menlo",
   // Set the buffer text's font fallbacks, this will be merged with
   // the platform's default fallbacks.
   "buffer_font_fallbacks": null,
@@ -40,7 +40,7 @@
     // "calt": false
   },
   // The default font size for text in the editor
-  "buffer_font_size": 15,
+  "buffer_font_size": 12,
   // The weight of the editor font in standard CSS units from 100 to 900.
   "buffer_font_weight": 400,
   // Set the buffer's line height.
@@ -53,14 +53,14 @@
   //         "buffer_line_height": {
   //           "custom": 2
   //         },
-  "buffer_line_height": "comfortable",
+  "buffer_line_height": { "custom": 1.5 },
   // The language of Wu's interface: "system" follows your system language,
   // or set "en" for English, "zh-CN" for Simplified Chinese or "vi" for Vietnamese.
   "ui_language": "system",
   // The name of a font to use for rendering text in the UI
   // You can set this to ".SystemUIFont" to use the system font, or to
   // "Geist" for the previous default
-  "ui_font_family": "Inter",
+  "ui_font_family": ".SystemUIFont",
   // Set the UI's font fallbacks, this will be merged with the platform's
   // default font fallbacks.
   "ui_font_fallbacks": null,
@@ -72,7 +72,7 @@
   // The weight of the UI font in standard CSS units from 100 to 900.
   "ui_font_weight": 350,
   // The default font size for text in the UI
-  "ui_font_size": 15,
+  "ui_font_size": 13,
   // The default font size for the commit editor in the git panel and commit modal.
   "git_commit_buffer_font_size": 12,
   // How much to fade out unused code.
@@ -1802,7 +1802,7 @@
       "show": null,
     },
     // Set the terminal's font size. Set it to null to match the buffer's font size.
-    "font_size": 13.5,
+    "font_size": 14,
     // Set the terminal's font family. If this option is not included,
     // the terminal will default to matching the buffer's font family.
     // "font_family": "JetBrains Mono",

@@ -1310,7 +1310,8 @@ pub fn new_terminal_pane(
         pane.set_zoomed(zoomed, cx);
         pane.set_can_navigate(false, cx);
         pane.display_nav_history_buttons(None);
-        pane.set_should_display_tab_bar(|_, _| true);
+        // Terminals are listed in the panel's right-hand list instead (VS Code style).
+        pane.set_should_display_tab_bar(|_, _| false);
         pane.set_zoom_out_on_close(false);
 
         let split_closure_terminal_panel = terminal_panel.downgrade();
@@ -1454,8 +1455,225 @@ impl workspace::Item for FailedToSpawnTerminal {
 
 impl EventEmitter<PanelEvent> for TerminalPanel {}
 
+impl TerminalPanel {
+    /// Show every terminal at once: each tab that is not the active one in a pane is moved
+    /// into its own split pane to the right of that pane.
+    fn join_terminals(&mut self, window: &mut Window, cx: &mut Context<Self>) {
+        let Ok(project) = self
+            .workspace
+            .update(cx, |workspace, _| workspace.project().clone())
+        else {
+            return;
+        };
+        for pane in self.center.panes().into_iter().cloned().collect::<Vec<_>>() {
+            let mut anchor = pane.clone();
+            while pane.read(cx).items_len() > 1 {
+                let last_ix = pane.read(cx).items_len() - 1;
+                let active_ix = pane.read(cx).active_item_index();
+                // Never take the item that stays in the original pane.
+                let take_ix = if last_ix == active_ix {
+                    last_ix - 1
+                } else {
+                    last_ix
+                };
+                let item = pane.update(cx, |pane, cx| {
+                    pane.activate_item(take_ix, false, false, window, cx);
+                    pane.take_active_item(window, cx)
+                });
+                let Some(item) = item else {
+                    break;
+                };
+                let new_pane =
+                    new_terminal_pane(self.workspace.clone(), project.clone(), false, window, cx);
+                self.apply_tab_bar_buttons(&new_pane, cx);
+                new_pane.update(cx, |pane, cx| {
+                    pane.add_item(item, true, true, None, window, cx);
+                });
+                self.center
+                    .split(&anchor, &new_pane, SplitDirection::Right, cx);
+                anchor = new_pane;
+                // Restore the original pane's remaining active item.
+                pane.update(cx, |pane, cx| {
+                    pane.activate_item(0, false, false, window, cx);
+                });
+            }
+        }
+        self.serialize(cx);
+        cx.notify();
+    }
+
+    /// Inverse of join: move the terminals of every other pane into the active pane as tabs.
+    fn unjoin_terminals(&mut self, window: &mut Window, cx: &mut Context<Self>) {
+        let target = self.active_pane.clone();
+        for source in self.center.panes().into_iter().cloned().collect::<Vec<_>>() {
+            if source == target {
+                continue;
+            }
+            let item_ids: Vec<_> = source
+                .read(cx)
+                .items()
+                .map(|item| item.item_id())
+                .collect();
+            for item_id in item_ids {
+                let destination_index = target.read(cx).items_len();
+                workspace::move_item(
+                    &source,
+                    &target,
+                    item_id,
+                    destination_index,
+                    false,
+                    window,
+                    cx,
+                );
+            }
+        }
+        self.serialize(cx);
+        cx.notify();
+    }
+
+    /// VS Code-style terminal list shown on the right of the panel: one row per
+    /// terminal (across all split panes) plus a small header with new/split/zoom.
+    fn render_terminal_list(&self, cx: &mut Context<Self>) -> impl IntoElement {
+        let colors = cx.theme().colors().clone();
+        let mut rows = Vec::new();
+        let mut row_ix = 0usize;
+        for pane in self.center.panes() {
+            let pane_is_active = *pane == self.active_pane;
+            let (items, active_ix) = {
+                let pane_ref = pane.read(cx);
+                (
+                    pane_ref
+                        .items()
+                        .map(|item| (item.item_id(), item.tab_content_text(0, cx)))
+                        .collect::<Vec<_>>(),
+                    pane_ref.active_item_index(),
+                )
+            };
+            for (ix, (item_id, title)) in items.into_iter().enumerate() {
+                let selected = pane_is_active && ix == active_ix;
+                let select_pane = pane.clone();
+                let close_pane = pane.clone();
+                rows.push(
+                    h_flex()
+                        .id(("terminal-list-row", row_ix))
+                        .w_full()
+                        .gap_1p5()
+                        .px_2()
+                        .py_1()
+                        .rounded_sm()
+                        .cursor_pointer()
+                        .when(selected, |row| row.bg(colors.element_selected))
+                        .hover(|row| row.bg(colors.element_hover))
+                        .child(
+                            Icon::new(IconName::Terminal)
+                                .size(IconSize::Small)
+                                .color(Color::Muted),
+                        )
+                        .child(
+                            div()
+                                .flex_1()
+                                .min_w_0()
+                                .overflow_hidden()
+                                .child(Label::new(title).size(LabelSize::Small).truncate()),
+                        )
+                        .child(
+                            IconButton::new(("terminal-list-close", row_ix), IconName::Close)
+                                .icon_size(IconSize::XSmall)
+                                .on_click(move |_, window, cx| {
+                                    cx.stop_propagation();
+                                    close_pane.update(cx, |pane, cx| {
+                                        pane.close_item_by_id(
+                                            item_id,
+                                            workspace::SaveIntent::Close,
+                                            window,
+                                            cx,
+                                        )
+                                        .detach_and_log_err(cx);
+                                    });
+                                }),
+                        )
+                        .on_click(move |_, window, cx| {
+                            select_pane.update(cx, |pane, cx| {
+                                pane.activate_item(ix, true, true, window, cx);
+                            });
+                        }),
+                );
+                row_ix += 1;
+            }
+        }
+
+        v_flex()
+            .h_full()
+            .w(px(180.))
+            .flex_none()
+            .border_l_1()
+            .border_color(colors.border)
+            .child(
+                h_flex()
+                    .w_full()
+                    .px_1()
+                    .py_1()
+                    .gap_0p5()
+                    .justify_end()
+                    .child(
+                        IconButton::new("terminal-list-new", IconName::Plus)
+                            .icon_size(IconSize::Small)
+                            .tooltip(Tooltip::text(t!("New Terminal")))
+                            .on_click(|_, window, cx| {
+                                window.dispatch_action(
+                                    workspace::NewTerminal::default().boxed_clone(),
+                                    cx,
+                                );
+                            }),
+                    )
+                    .child(
+                        IconButton::new("terminal-list-join", IconName::Split)
+                            .icon_size(IconSize::Small)
+                            .tooltip(Tooltip::text(t!("Join Terminals")))
+                            .on_click(cx.listener(|panel, _, window, cx| {
+                                panel.join_terminals(window, cx);
+                            })),
+                    )
+                    .child(
+                        IconButton::new("terminal-list-unjoin", IconName::Menu)
+                            .icon_size(IconSize::Small)
+                            .tooltip(Tooltip::text(t!("Unjoin Terminals")))
+                            .on_click(cx.listener(|panel, _, window, cx| {
+                                panel.unjoin_terminals(window, cx);
+                            })),
+                    )
+                    .child(
+                        IconButton::new("terminal-list-split", IconName::Split)
+                            .icon_size(IconSize::Small)
+                            .tooltip(Tooltip::text(t!("Split Right")))
+                            .on_click(|_, window, cx| {
+                                window.dispatch_action(SplitRight::default().boxed_clone(), cx);
+                            }),
+                    )
+                    .child(
+                        IconButton::new("terminal-list-zoom", IconName::Maximize)
+                            .icon_size(IconSize::Small)
+                            .on_click(|_, window, cx| {
+                                window.dispatch_action(ToggleZoom.boxed_clone(), cx);
+                            }),
+                    ),
+            )
+            .child(
+                v_flex()
+                    .id("terminal-list-rows")
+                    .flex_1()
+                    .min_h_0()
+                    .overflow_y_scroll()
+                    .px_1()
+                    .gap_0p5()
+                    .children(rows),
+            )
+    }
+}
+
 impl Render for TerminalPanel {
     fn render(&mut self, window: &mut Window, cx: &mut Context<Self>) -> impl IntoElement {
+        let terminal_list = self.render_terminal_list(cx);
         let registrar = cx
             .try_global::<workspace::PaneSearchBarCallbacks>()
             .map(|callbacks| {
@@ -1493,18 +1711,23 @@ impl Render for TerminalPanel {
                     .track_focus(&self.focus_handle)
                     .size_full()
                     .relative()
-                    .child(self.center.render(
-                        workspace.zoomed_item(),
-                        None,
-                        &workspace::PaneRenderContext {
-                            active_pane: &self.active_pane,
-                            app_state: workspace.app_state(),
-                            project: workspace.project(),
-                            workspace: &workspace.weak_handle(),
-                        },
-                        window,
-                        cx,
-                    ))
+                    .child(
+                        h_flex()
+                            .size_full()
+                            .child(div().flex_1().min_w_0().h_full().child(self.center.render(
+                                workspace.zoomed_item(),
+                                None,
+                                &workspace::PaneRenderContext {
+                                    active_pane: &self.active_pane,
+                                    app_state: workspace.app_state(),
+                                    project: workspace.project(),
+                                    workspace: &workspace.weak_handle(),
+                                },
+                                window,
+                                cx,
+                            )))
+                            .child(terminal_list),
+                    )
                     .children(restoring_placeholder)
             })
             .ok()

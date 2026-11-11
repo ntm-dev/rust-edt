@@ -1637,10 +1637,12 @@ impl Terminal {
 
                 self.breadcrumb_text = title;
                 cx.emit(Event::BreadcrumbsChanged);
+                cx.emit(Event::TitleChanged);
             }
             TerminalBackendEvent::ResetTitle => {
                 self.breadcrumb_text = String::new();
                 cx.emit(Event::BreadcrumbsChanged);
+                cx.emit(Event::TitleChanged);
             }
             TerminalBackendEvent::ClipboardStore(data) => {
                 cx.write_to_clipboard(ClipboardItem::new_string(data))
@@ -2985,6 +2987,18 @@ impl Terminal {
                 .title_override
                 .as_ref()
                 .map(|title_override| title_override.to_string())
+                // Like VS Code, prefer the title the running program set via
+                // OSC 0/2 (e.g. Claude Code) over the process name.
+                .or_else(|| {
+                    let sequence_title = self.breadcrumb_text.trim();
+                    (!sequence_title.is_empty()).then(|| {
+                        if truncate {
+                            truncate_and_trailoff(sequence_title, MAX_CHARS)
+                        } else {
+                            sequence_title.to_string()
+                        }
+                    })
+                })
                 .unwrap_or_else(|| match &self.terminal_type {
                     TerminalType::Pty { info, .. } => info
                         .current

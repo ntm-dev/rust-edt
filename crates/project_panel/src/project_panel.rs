@@ -178,6 +178,7 @@ pub struct ProjectPanel {
     sticky_items_count: usize,
     update_visible_entries_task: UpdateVisibleEntriesTask,
     undo_manager: UndoManager,
+    open_editors_expanded: bool,
     state: State,
 }
 
@@ -746,9 +747,14 @@ impl ProjectPanel {
         let project = workspace.project().clone();
         let git_store = project.read(cx).git_store().clone();
         let path_style = project.read(cx).path_style(cx);
+        let workspace_entity = cx.entity();
         let project_panel = cx.new(|cx| {
             let focus_handle = cx.focus_handle();
             cx.on_focus(&focus_handle, window, Self::focus_in).detach();
+
+            // Keep the "Open Editors" section in sync with tabs opening/closing.
+            cx.observe(&workspace_entity, |_, _, cx| cx.notify())
+                .detach();
 
             cx.subscribe_in(
                 &git_store,
@@ -952,6 +958,7 @@ impl ProjectPanel {
                 },
                 update_visible_entries_task: Default::default(),
                 undo_manager: UndoManager::new(workspace.weak_handle(), weak_project_panel, &cx),
+                open_editors_expanded: true,
             };
             this.update_visible_entries(None, false, false, window, cx);
 
@@ -1689,6 +1696,208 @@ impl ProjectPanel {
 
         self.update_visible_entries(None, false, false, window, cx);
         cx.notify();
+    }
+
+    /// Re-scan every local worktree from disk (VS Code's "Refresh Explorer").
+    fn refresh_explorer(&mut self, cx: &mut Context<Self>) {
+        let worktrees: Vec<_> = self.project.read(cx).visible_worktrees(cx).collect();
+        for worktree in worktrees {
+            let worktree_id = worktree.read(cx).id();
+            // Re-scan the root and every currently expanded directory.
+            let mut paths: Vec<Arc<RelPath>> = vec![RelPath::empty().into()];
+            if let Some(expanded) = self.state.expanded_dir_ids.get(&worktree_id) {
+                let snapshot = worktree.read(cx);
+                paths.extend(
+                    expanded
+                        .iter()
+                        .filter_map(|id| snapshot.entry_for_id(*id))
+                        .map(|entry| entry.path.clone()),
+                );
+            }
+            worktree.update(cx, |worktree, _| {
+                if let Some(local) = worktree.as_local() {
+                    // The returned barrier resolves when the scan finishes; the
+                    // panel updates itself from worktree events, so just drop it.
+                    drop(local.refresh_entries_for_paths(paths));
+                }
+            });
+        }
+        cx.notify();
+    }
+
+    /// VS Code-style "OPEN EDITORS" section listing the files open in every pane.
+    fn render_open_editors(&self, cx: &Context<Self>) -> impl IntoElement {
+        let expanded = self.open_editors_expanded;
+        let colors = cx.theme().colors().clone();
+        let mut rows = Vec::new();
+        if expanded && let Some(workspace) = self.workspace.upgrade() {
+            let mut row_ix = 0usize;
+            for pane in workspace.read(cx).panes() {
+                let pane_ref = pane.read(cx);
+                let active_ix = pane_ref.active_item_index();
+                let is_active_pane = workspace.read(cx).active_pane() == pane;
+                for (ix, item) in pane_ref.items().enumerate() {
+                    if item.project_path(cx).is_none() {
+                        continue;
+                    }
+                    let item_id = item.item_id();
+                    let title = item.tab_content_text(0, cx);
+                    let is_dirty = item.is_dirty(cx);
+                    let file_icon = item
+                        .project_path(cx)
+                        .and_then(|path| FileIcons::get_icon(path.path.as_std_path(), cx));
+                    let selected = is_active_pane && ix == active_ix;
+                    let select_pane = pane.clone();
+                    let close_pane = pane.clone();
+                    rows.push(
+                        h_flex()
+                            .id(("open-editor-row", row_ix))
+                            .w_full()
+                            .gap_1p5()
+                            .pl_4()
+                            .pr_1()
+                            .py_0p5()
+                            .cursor_pointer()
+                            .when(selected, |row| row.bg(colors.element_selected))
+                            .hover(|row| row.bg(colors.element_hover))
+                            .child(match file_icon {
+                                Some(path) => Icon::from_path(path)
+                                    .size(IconSize::Small)
+                                    .color(Color::Muted),
+                                None => Icon::new(IconName::File)
+                                    .size(IconSize::Small)
+                                    .color(Color::Muted),
+                            })
+                            .child(
+                                div()
+                                    .flex_1()
+                                    .min_w_0()
+                                    .overflow_hidden()
+                                    .child(Label::new(title).size(LabelSize::Small).truncate()),
+                            )
+                            .child(
+                                IconButton::new(
+                                    ("open-editor-close", row_ix),
+                                    // VS Code shows a dot instead of the close button for unsaved files.
+                                    if is_dirty {
+                                        IconName::Circle
+                                    } else {
+                                        IconName::Close
+                                    },
+                                )
+                                .icon_size(IconSize::XSmall)
+                                    .on_click(move |_, window, cx| {
+                                        cx.stop_propagation();
+                                        close_pane.update(cx, |pane, cx| {
+                                            pane.close_item_by_id(
+                                                item_id,
+                                                workspace::SaveIntent::Close,
+                                                window,
+                                                cx,
+                                            )
+                                            .detach_and_log_err(cx);
+                                        });
+                                    }),
+                            )
+                            .on_click(move |_, window, cx| {
+                                select_pane.update(cx, |pane, cx| {
+                                    pane.activate_item(ix, true, true, window, cx);
+                                });
+                            }),
+                    );
+                    row_ix += 1;
+                }
+            }
+        }
+        v_flex()
+            .w_full()
+            .child(
+                h_flex()
+                    .id("open-editors-header")
+                    .w_full()
+                    .px_1()
+                    .py_1()
+                    .gap_1()
+                    .cursor_pointer()
+                    .child(
+                        Icon::new(if expanded {
+                            IconName::ChevronDown
+                        } else {
+                            IconName::ChevronRight
+                        })
+                        .size(IconSize::Small)
+                        .color(Color::Muted),
+                    )
+                    .child(
+                        Label::new(t!("OPEN EDITORS"))
+                            .size(LabelSize::XSmall)
+                            .color(Color::Muted),
+                    )
+                    .on_click(cx.listener(|this, _, _, cx| {
+                        this.open_editors_expanded = !this.open_editors_expanded;
+                        cx.notify();
+                    })),
+            )
+            .children(rows)
+    }
+
+    /// Header above the folder tree with new file / new folder / refresh / collapse buttons.
+    fn render_explorer_header(&self, cx: &Context<Self>) -> impl IntoElement {
+        // VS Code shows the workspace (root folder) name in upper case.
+        let title = {
+            let project = self.project.read(cx);
+            let mut worktrees = project.visible_worktrees(cx);
+            match (worktrees.next(), worktrees.next()) {
+                (Some(worktree), None) => {
+                    worktree.read(cx).root_name_str().to_uppercase()
+                }
+                _ => t!("FOLDERS").to_string(),
+            }
+        };
+        h_flex()
+            .w_full()
+            .px_1()
+            .py_1()
+            .gap_0p5()
+            .child(
+                Label::new(title)
+                    .size(LabelSize::XSmall)
+                    .color(Color::Muted)
+                    .truncate(),
+            )
+            .child(div().flex_1())
+            .child(
+                IconButton::new("explorer-new-file", IconName::NewFile)
+                    .icon_size(IconSize::Small)
+                    .tooltip(Tooltip::text(t!("New File")))
+                    .on_click(cx.listener(|this, _, window, cx| {
+                        this.new_file(&NewFile, window, cx);
+                    })),
+            )
+            .child(
+                IconButton::new("explorer-new-folder", IconName::NewFolder)
+                    .icon_size(IconSize::Small)
+                    .tooltip(Tooltip::text(t!("New Folder")))
+                    .on_click(cx.listener(|this, _, window, cx| {
+                        this.new_directory(&NewDirectory, window, cx);
+                    })),
+            )
+            .child(
+                IconButton::new("explorer-refresh", IconName::RotateCw)
+                    .icon_size(IconSize::Small)
+                    .tooltip(Tooltip::text(t!("Refresh Explorer")))
+                    .on_click(cx.listener(|this, _, _, cx| {
+                        this.refresh_explorer(cx);
+                    })),
+            )
+            .child(
+                IconButton::new("explorer-collapse", IconName::CollapseAll)
+                    .icon_size(IconSize::Small)
+                    .tooltip(Tooltip::text(t!("Collapse All")))
+                    .on_click(cx.listener(|this, _, window, cx| {
+                        this.collapse_all_entries(&CollapseAllEntries, window, cx);
+                    })),
+            )
     }
 
     fn collapse_all_entries(
@@ -7894,6 +8103,8 @@ impl Render for ProjectPanel {
                 .track_focus(&self.focus_handle(cx))
                 .child(
                     v_flex()
+                        .child(self.render_open_editors(cx))
+                        .child(self.render_explorer_header(cx))
                         .child(
                             uniform_list("entries", item_count, {
                                 cx.processor(|this, range: Range<usize>, window, cx| {

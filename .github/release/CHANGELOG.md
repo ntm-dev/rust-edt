@@ -4,6 +4,14 @@ All notable user-facing changes to Wu are listed here, newest first.
 
 ## Unreleased
 
+## 1.4.0 - 2026-11-11
+
+- Add the "VS Code Dark Modern" and "VS Code Light Modern" themes, now the default, with VS Code's terminal colors.
+- Default fonts and sizes now match VS Code (Menlo 12 in the editor, system font 13 in the UI, 14 in the terminal).
+- Terminal tabs now follow the title set by the running program (for example Claude Code) instead of staying fixed.
+- Terminal panel lists terminals in a right-hand side list, with join and unjoin buttons.
+- Project panel gains an "Open Editors" section and New File, New Folder, Refresh and Collapse All buttons.
+
 ## 1.3.0 - 2026-11-10
 
 - Add Vietnamese (Tiếng Việt) as an interface language. Choose it in settings or set `"ui_language": "vi"`.

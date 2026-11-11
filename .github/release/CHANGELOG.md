@@ -4,6 +4,8 @@ All notable user-facing changes to Wu are listed here, newest first.
 
 ## Unreleased
 
+- Install script, auto-update and download links now use the ntm-dev/rust-edt releases.
+
 ## 1.2.1 - 2026-11-09
 
 - Fix links and text selection in tables rendered in agent chat.

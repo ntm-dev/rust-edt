@@ -1,4 +1,4 @@
-<p align="center">English | <a href="README.zh-CN.md">中文</a></p>
+<p align="center">English | <a href="README.zh-CN.md">中文</a> | <a href="README.vi.md">Tiếng Việt</a></p>
 
 <div align="center">
   <img src="crates/wu/resources/app-icon.png" alt="Wu" width="128">

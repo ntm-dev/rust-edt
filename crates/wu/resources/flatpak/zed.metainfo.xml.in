@@ -32,10 +32,10 @@
     <content_rating type="oars-1.1" />
 
     <url type="homepage">https://wu.dstrml.org</url>
-    <url type="bugtracker">https://github.com/dstrml/wu/issues</url>
+    <url type="bugtracker">https://github.com/ntm-dev/rust-edt/issues</url>
     <url type="help">https://wu.dstrml.org/docs</url>
-    <url type="contact">https://github.com/dstrml/wu/issues</url>
-    <url type="vcs-browser">https://github.com/dstrml/wu</url>
+    <url type="contact">https://github.com/ntm-dev/rust-edt/issues</url>
+    <url type="vcs-browser">https://github.com/ntm-dev/rust-edt</url>
 
     <supports>
         <internet>offline-only</internet>

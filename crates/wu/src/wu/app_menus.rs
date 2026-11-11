@@ -350,7 +350,7 @@ pub fn app_menus(cx: &mut App) -> Vec<Menu> {
                 MenuItem::action(
                     t!("Wu Repository"),
                     super::OpenBrowser {
-                        url: "https://github.com/dstrml/wu".into(),
+                        url: "https://github.com/ntm-dev/rust-edt".into(),
                     },
                 ),
             ],

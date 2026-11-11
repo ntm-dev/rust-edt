@@ -6170,6 +6170,7 @@ mod translation_tests {
         "JetBrains",
         "Sublime Text",
         "TextMate",
+        "Tiếng Việt",
         "VSCode",
         "Wu",
         "简体中文",

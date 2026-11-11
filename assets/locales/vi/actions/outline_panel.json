@@ -1,0 +1,74 @@
+{
+  "outline_panel::CollapseAllEntries": {
+    "name": "Thu gọn tất cả",
+    "description": "Thu gọn tất cả các mục trong cây dàn ý."
+  },
+  "outline_panel::CollapseSelectedEntry": {
+    "name": "Thu gọn mục đã chọn",
+    "description": "Thu gọn mục đang được chọn."
+  },
+  "outline_panel::ExpandAllEntries": {
+    "name": "Mở rộng tất cả",
+    "description": "Mở rộng tất cả các mục trong cây dàn ý."
+  },
+  "outline_panel::ExpandSelectedEntry": {
+    "name": "Mở rộng mục đã chọn",
+    "description": "Mở rộng mục đang được chọn."
+  },
+  "outline_panel::FoldDirectory": {
+    "name": "Gộp thư mục",
+    "description": "Gộp thư mục đã chọn với thư mục con duy nhất bên trong để hiển thị trên một dòng."
+  },
+  "outline_panel::OpenSelectedEntry": {
+    "name": "Mở mục đã chọn",
+    "description": "Mở mục đã chọn trong trình soạn thảo."
+  },
+  "outline_panel::RevealInFileManager": {
+    "name": "Hiển thị trong trình quản lý tệp",
+    "description": "Hiển thị mục đã chọn trong trình quản lý tệp của hệ thống."
+  },
+  "outline_panel::ScrollCursorBottom": {
+    "name": "Cuộn để con trỏ ở dưới cùng",
+    "description": "Cuộn chế độ xem để con trỏ hiển thị ở dưới cùng."
+  },
+  "outline_panel::ScrollCursorCenter": {
+    "name": "Cuộn để con trỏ ở giữa",
+    "description": "Cuộn chế độ xem để con trỏ hiển thị ở giữa."
+  },
+  "outline_panel::ScrollCursorTop": {
+    "name": "Cuộn để con trỏ ở trên cùng",
+    "description": "Cuộn chế độ xem để con trỏ hiển thị ở trên cùng."
+  },
+  "outline_panel::ScrollDown": {
+    "name": "Cuộn xuống",
+    "description": "Cuộn xuống nửa trang."
+  },
+  "outline_panel::ScrollUp": {
+    "name": "Cuộn lên",
+    "description": "Cuộn lên nửa trang."
+  },
+  "outline_panel::SelectParent": {
+    "name": "Chọn mục cha",
+    "description": "Chọn mục cha của mục hiện tại."
+  },
+  "outline_panel::Toggle": {
+    "name": "Bật/tắt bảng dàn ý",
+    "description": "Bật/tắt bảng dàn ý."
+  },
+  "outline_panel::ToggleActiveEditorPin": {
+    "name": "Bật/tắt ghim trình soạn thảo đang hoạt động",
+    "description": "Bật/tắt trạng thái ghim của trình soạn thảo đang hoạt động."
+  },
+  "outline_panel::ToggleFocus": {
+    "name": "Bật/tắt tiêu điểm",
+    "description": "Bật/tắt tiêu điểm của bảng dàn ý."
+  },
+  "outline_panel::ToggleSymbols": {
+    "name": "Bật/tắt ký hiệu",
+    "description": "Bật/tắt hiển thị ký hiệu, đoạn trích và kết quả tìm kiếm trong chế độ xem nhiều vùng đệm."
+  },
+  "outline_panel::UnfoldDirectory": {
+    "name": "Tách thư mục",
+    "description": "Tách thư mục đã gộp để hiển thị từng cấp thư mục con."
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "command_palette::Toggle": {
+    "description": "Mở hoặc đóng bảng lệnh.",
+    "name": "Bật/tắt bảng lệnh"
+  }
+}

@@ -1,0 +1,213 @@
+{
+  "wu::About": {
+    "description": "Hiển thị thông tin về Wu.",
+    "name": "Giới thiệu"
+  },
+  "wu::CopySystemSpecsIntoClipboard": {
+    "description": "Sao chép thông tin hệ thống vào bộ nhớ tạm để đính kèm khi báo lỗi.",
+    "name": "Sao chép thông tin hệ thống vào bộ nhớ tạm"
+  },
+  "wu::DebugElements": {
+    "description": "Mở trình kiểm tra phần tử để gỡ lỗi giao diện.",
+    "name": "Gỡ lỗi phần tử"
+  },
+  "wu::DecreaseBufferFontSize": {
+    "description": "Giảm cỡ chữ của vùng đệm trình soạn thảo.",
+    "name": "Giảm cỡ chữ trình soạn thảo"
+  },
+  "wu::DecreaseUiFontSize": {
+    "description": "Giảm cỡ chữ của giao diện người dùng.",
+    "name": "Giảm cỡ chữ giao diện"
+  },
+  "wu::Extensions": {
+    "description": "Mở trình quản lý tiện ích mở rộng.",
+    "name": "Tiện ích mở rộng"
+  },
+  "wu::Hide": {
+    "description": "Ẩn cửa sổ ứng dụng.",
+    "name": "Ẩn"
+  },
+  "wu::HideOthers": {
+    "description": "Ẩn cửa sổ của tất cả ứng dụng khác.",
+    "name": "Ẩn các ứng dụng khác"
+  },
+  "wu::ImportCursorSettings": {
+    "description": "Nhập cài đặt từ trình soạn thảo Cursor.",
+    "name": "Nhập cài đặt Cursor"
+  },
+  "wu::ImportVsCodeSettings": {
+    "description": "Nhập cài đặt từ Visual Studio Code.",
+    "name": "Nhập cài đặt VS Code"
+  },
+  "wu::IncreaseBufferFontSize": {
+    "description": "Tăng cỡ chữ của vùng đệm trình soạn thảo.",
+    "name": "Tăng cỡ chữ trình soạn thảo"
+  },
+  "wu::IncreaseUiFontSize": {
+    "description": "Tăng cỡ chữ của giao diện người dùng.",
+    "name": "Tăng cỡ chữ giao diện"
+  },
+  "wu::InstallDevExtension": {
+    "description": "Cài đặt tiện ích mở rộng từ thư mục cục bộ để phát triển.",
+    "name": "Cài đặt tiện ích mở rộng phát triển"
+  },
+  "wu::Minimize": {
+    "description": "Thu nhỏ cửa sổ hiện tại.",
+    "name": "Thu nhỏ"
+  },
+  "wu::NoAction": {
+    "description": "Lệnh được xử lý đặc biệt: nếu là kết quả khớp có ưu tiên cao nhất, phím tắt gắn với nó sẽ bị vô hiệu hóa.",
+    "name": "Không làm gì"
+  },
+  "wu::OpenBrowser": {
+    "description": "Mở URL trong trình duyệt web mặc định của hệ thống.",
+    "name": "Mở trình duyệt"
+  },
+  "wu::OpenDebugTasks": {
+    "description": "Mở cấu hình tác vụ gỡ lỗi.",
+    "name": "Mở tác vụ gỡ lỗi"
+  },
+  "wu::OpenDefaultKeymap": {
+    "description": "Mở tệp bản đồ phím mặc định.",
+    "name": "Mở bản đồ phím mặc định"
+  },
+  "wu::OpenDefaultSettings": {
+    "description": "Mở tệp cài đặt mặc định.",
+    "name": "Mở cài đặt mặc định"
+  },
+  "wu::OpenDocs": {
+    "description": "Mở trang tài liệu.",
+    "name": "Mở tài liệu"
+  },
+  "wu::OpenKeymap": {
+    "description": "Mở trình chỉnh sửa bản đồ phím.",
+    "name": "Mở bản đồ phím"
+  },
+  "wu::OpenKeymapFile": {
+    "description": "Mở tệp bản đồ phím của người dùng.",
+    "name": "Mở tệp bản đồ phím"
+  },
+  "wu::OpenLicenses": {
+    "description": "Xem giấy phép mã nguồn mở.",
+    "name": "Xem giấy phép mã nguồn mở"
+  },
+  "wu::OpenLog": {
+    "description": "Mở tệp nhật ký của Wu.",
+    "name": "Mở nhật ký"
+  },
+  "wu::OpenOnboarding": {
+    "description": "Mở trang làm quen.",
+    "name": "Mở trang làm quen"
+  },
+  "wu::OpenPerformanceProfiler": {
+    "description": "Mở trình phân tích hiệu năng.",
+    "name": "Mở trình phân tích hiệu năng"
+  },
+  "wu::OpenProjectSettings": {
+    "description": "Mở cài đặt riêng của dự án.",
+    "name": "Mở cài đặt dự án"
+  },
+  "wu::OpenProjectSettingsFile": {
+    "description": "Mở tệp cài đặt riêng của dự án.",
+    "name": "Mở tệp cài đặt dự án"
+  },
+  "wu::OpenProjectTasks": {
+    "description": "Mở cấu hình tác vụ của dự án.",
+    "name": "Mở tác vụ dự án"
+  },
+  "wu::OpenServerSettings": {
+    "description": "Mở cài đặt máy chủ.",
+    "name": "Mở cài đặt máy chủ"
+  },
+  "wu::OpenSettings": {
+    "description": "Mở trình chỉnh sửa cài đặt.",
+    "name": "Mở cài đặt"
+  },
+  "wu::OpenSettingsAt": {
+    "description": "Mở trình chỉnh sửa cài đặt tại đường dẫn chỉ định.",
+    "name": "Mở cài đặt tại vị trí chỉ định"
+  },
+  "wu::OpenSettingsFile": {
+    "description": "Mở tệp JSON cài đặt.",
+    "name": "Mở tệp cài đặt"
+  },
+  "wu::OpenSettingsPage": {
+    "name": "Mở trang cài đặt"
+  },
+  "wu::OpenTasks": {
+    "description": "Mở bảng tác vụ.",
+    "name": "Mở tác vụ"
+  },
+  "wu::OpenWorktreeSetupTasks": {
+    "description": "Mở cấu hình tác vụ của dự án kèm hướng dẫn thiết lập worktree.",
+    "name": "Mở tác vụ thiết lập worktree"
+  },
+  "wu::OpenWuUrl": {
+    "description": "Mở liên kết wu:// trong ứng dụng.",
+    "name": "Mở liên kết Wu"
+  },
+  "wu::Quit": {
+    "description": "Thoát ứng dụng.",
+    "name": "Thoát"
+  },
+  "wu::RebuildDevExtension": {
+    "description": "Build lại tiện ích mở rộng phát triển đã cài đặt.",
+    "name": "Build lại tiện ích mở rộng phát triển"
+  },
+  "wu::ReloadExtensions": {
+    "description": "Tải lại tất cả tiện ích mở rộng đã cài đặt.",
+    "name": "Tải lại tiện ích mở rộng"
+  },
+  "wu::ResetAllZoom": {
+    "description": "Đặt lại mọi mức thu phóng (cỡ chữ giao diện và trình soạn thảo, gồm cả trong bảng tác tử) về mặc định.",
+    "name": "Đặt lại mọi mức thu phóng"
+  },
+  "wu::ResetBufferFontSize": {
+    "description": "Đặt lại cỡ chữ của vùng đệm trình soạn thảo về mặc định.",
+    "name": "Đặt lại cỡ chữ trình soạn thảo"
+  },
+  "wu::ResetDatabase": {
+    "description": "Đặt lại cơ sở dữ liệu của ứng dụng.",
+    "name": "Đặt lại cơ sở dữ liệu"
+  },
+  "wu::ResetUiFontSize": {
+    "description": "Đặt lại cỡ chữ giao diện về mặc định.",
+    "name": "Đặt lại cỡ chữ giao diện"
+  },
+  "wu::RevealLogInFileManager": {
+    "description": "Hiển thị tệp nhật ký của Wu trong trình quản lý tệp của hệ thống.",
+    "name": "Hiển thị nhật ký trong trình quản lý tệp"
+  },
+  "wu::ShowAll": {
+    "description": "Hiện tất cả cửa sổ đang ẩn.",
+    "name": "Hiện tất cả"
+  },
+  "wu::ShowDefaultSemanticTokenRules": {
+    "description": "Hiển thị các quy tắc semantic token mặc định (chỉ đọc).",
+    "name": "Hiển thị quy tắc semantic token mặc định"
+  },
+  "wu::ShowUpdateNotification": {
+    "description": "Hiển thị thông báo tự động cập nhật, dùng để kiểm thử.",
+    "name": "Hiển thị thông báo cập nhật"
+  },
+  "wu::ShowWelcome": {
+    "description": "Hiển thị trang chào mừng của Wu.",
+    "name": "Hiển thị trang chào mừng"
+  },
+  "wu::ToggleBaseKeymapSelector": {
+    "description": "Mở hoặc đóng hộp thoại chọn bản đồ phím cơ sở.",
+    "name": "Bật/tắt bộ chọn bản đồ phím cơ sở"
+  },
+  "wu::ToggleFullScreen": {
+    "description": "Vào hoặc thoát chế độ toàn màn hình.",
+    "name": "Bật/tắt toàn màn hình"
+  },
+  "wu::Unbind": {
+    "description": "Lệnh được xử lý đặc biệt: hủy các phím tắt được gán sau đó cho cùng phím bấm và chạy lệnh chỉ định, bất kể ngữ cảnh của lệnh đó.\n\nTrong JSON bản đồ phím được viết như sau:\n\n`[\"wu::Unbind\", \"editor::NewLine\"]`",
+    "name": "Hủy gán phím"
+  },
+  "wu::Zoom": {
+    "description": "Thu phóng cửa sổ.",
+    "name": "Thu phóng"
+  }
+}

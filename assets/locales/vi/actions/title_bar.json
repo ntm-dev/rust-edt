@@ -1,0 +1,14 @@
+{
+  "title_bar::SimulateUpdateAvailable": {
+    "description": "Lệnh gỡ lỗi mô phỏng có bản cập nhật mới, dùng để kiểm thử banner cập nhật.",
+    "name": "Mô phỏng có bản cập nhật"
+  },
+  "title_bar::SwitchBranch": {
+    "description": "Chuyển sang một nhánh Git khác.",
+    "name": "Chuyển nhánh"
+  },
+  "title_bar::ToggleProjectMenu": {
+    "description": "Mở hoặc đóng menu thả xuống của dự án.",
+    "name": "Bật/tắt menu dự án"
+  }
+}

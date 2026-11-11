@@ -1,0 +1,353 @@
+{
+  "editor::SelectInsideDelimiters": {
+    "name": "Chọn nội dung trong dấu phân cách",
+    "description": "Chọn nội dung bên trong cặp dấu phân cách bao ngoài gần nhất (ngoặc vuông, ngoặc nhọn, ngoặc tròn hoặc dấu nháy), không gồm chính dấu phân cách. Chạy lặp lại sẽ mở rộng vùng chọn ra cặp dấu phân cách bên ngoài kế tiếp."
+  },
+  "editor::SelectLargerSyntaxNode": {
+    "name": "Chọn nút cú pháp lớn hơn",
+    "description": "Chọn nút cú pháp lớn hơn tiếp theo."
+  },
+  "editor::SelectLeft": {
+    "name": "Chọn sang trái",
+    "description": "Mở rộng vùng chọn sang trái."
+  },
+  "editor::SelectLine": {
+    "name": "Chọn dòng",
+    "description": "Chọn dòng hiện tại."
+  },
+  "editor::SelectNext": {
+    "name": "Chọn kết quả khớp tiếp theo",
+    "description": "Chọn kết quả khớp tiếp theo với vùng chọn hiện tại."
+  },
+  "editor::SelectNextSyntaxNode": {
+    "name": "Chọn nút cú pháp tiếp theo",
+    "description": "Chọn nút cú pháp cùng cấp tiếp theo."
+  },
+  "editor::SelectPageDown": {
+    "name": "Chọn xuống một trang",
+    "description": "Mở rộng vùng chọn xuống một trang."
+  },
+  "editor::SelectPageUp": {
+    "name": "Chọn lên một trang",
+    "description": "Mở rộng vùng chọn lên một trang."
+  },
+  "editor::SelectPrevious": {
+    "name": "Chọn kết quả khớp trước đó",
+    "description": "Chọn kết quả khớp trước đó với vùng chọn hiện tại."
+  },
+  "editor::SelectPreviousSyntaxNode": {
+    "name": "Chọn nút cú pháp trước đó",
+    "description": "Chọn nút cú pháp cùng cấp trước đó."
+  },
+  "editor::SelectRight": {
+    "name": "Chọn sang phải",
+    "description": "Mở rộng vùng chọn sang phải."
+  },
+  "editor::SelectSmallerSyntaxNode": {
+    "name": "Chọn nút cú pháp nhỏ hơn",
+    "description": "Chọn nút cú pháp nhỏ hơn tiếp theo."
+  },
+  "editor::SelectToBeginning": {
+    "name": "Chọn đến đầu tài liệu",
+    "description": "Chọn đến đầu tài liệu."
+  },
+  "editor::SelectToBeginningOfLine": {
+    "name": "Chọn đến đầu dòng",
+    "description": "Chọn từ con trỏ đến đầu dòng hiện tại."
+  },
+  "editor::SelectToEnd": {
+    "name": "Chọn đến cuối tài liệu",
+    "description": "Chọn đến cuối tài liệu."
+  },
+  "editor::SelectToEndOfExcerpt": {
+    "name": "Chọn đến cuối đoạn trích",
+    "description": "Chọn đến cuối đoạn trích hiện tại."
+  },
+  "editor::SelectToEndOfLargerSyntaxNode": {
+    "name": "Chọn đến cuối nút cú pháp lớn hơn",
+    "description": "Chọn đến cuối nút cú pháp lớn hơn tiếp theo."
+  },
+  "editor::SelectToEndOfLine": {
+    "name": "Chọn đến cuối dòng",
+    "description": "Chọn từ con trỏ đến cuối dòng hiện tại."
+  },
+  "editor::SelectToEndOfParagraph": {
+    "name": "Chọn đến cuối đoạn văn",
+    "description": "Chọn đến cuối đoạn văn."
+  },
+  "editor::SelectToEndOfPreviousExcerpt": {
+    "name": "Chọn đến cuối đoạn trích trước đó",
+    "description": "Chọn đến cuối đoạn trích trước đó."
+  },
+  "editor::SelectToNextSubwordEnd": {
+    "name": "Chọn đến cuối từ con tiếp theo",
+    "description": "Chọn đến cuối từ con tiếp theo."
+  },
+  "editor::SelectToNextWordEnd": {
+    "name": "Chọn đến cuối từ tiếp theo",
+    "description": "Chọn đến cuối từ tiếp theo."
+  },
+  "editor::SelectToPreviousSubwordStart": {
+    "name": "Chọn đến đầu từ con trước đó",
+    "description": "Chọn đến đầu từ con trước đó."
+  },
+  "editor::SelectToPreviousWordStart": {
+    "name": "Chọn đến đầu từ trước đó",
+    "description": "Chọn đến đầu từ trước đó."
+  },
+  "editor::SelectToStartOfExcerpt": {
+    "name": "Chọn đến đầu đoạn trích",
+    "description": "Chọn đến đầu đoạn trích hiện tại."
+  },
+  "editor::SelectToStartOfLargerSyntaxNode": {
+    "name": "Chọn đến đầu nút cú pháp lớn hơn",
+    "description": "Chọn đến đầu nút cú pháp lớn hơn tiếp theo."
+  },
+  "editor::SelectToStartOfNextExcerpt": {
+    "name": "Chọn đến đầu đoạn trích tiếp theo",
+    "description": "Chọn đến đầu đoạn trích tiếp theo."
+  },
+  "editor::SelectToStartOfParagraph": {
+    "name": "Chọn đến đầu đoạn văn",
+    "description": "Chọn đến đầu đoạn văn."
+  },
+  "editor::SelectUp": {
+    "name": "Chọn lên",
+    "description": "Mở rộng vùng chọn lên trên."
+  },
+  "editor::SelectUpByLines": {
+    "name": "Chọn lên nhiều dòng",
+    "description": "Mở rộng vùng chọn lên một số dòng đã chỉ định."
+  },
+  "editor::SetMark": {
+    "name": "Đặt điểm đánh dấu",
+    "description": "Đặt điểm đánh dấu tại vị trí hiện tại."
+  },
+  "editor::ShowCharacterPalette": {
+    "name": "Hiện bảng ký tự",
+    "description": "Hiện bảng ký tự của hệ thống."
+  },
+  "editor::ShowCompletions": {
+    "name": "Hiện gợi ý hoàn thành",
+    "description": "Hiện gợi ý hoàn thành mã tại con trỏ."
+  },
+  "editor::ShowSignatureHelp": {
+    "name": "Hiện trợ giúp chữ ký hàm",
+    "description": "Hiện trợ giúp chữ ký của hàm hiện tại."
+  },
+  "editor::ShowWordCompletions": {
+    "name": "Hiện gợi ý hoàn thành từ",
+    "description": "Hiện gợi ý hoàn thành từ."
+  },
+  "editor::ShuffleLines": {
+    "name": "Xáo trộn dòng",
+    "description": "Xáo trộn ngẫu nhiên thứ tự các dòng đã chọn."
+  },
+  "editor::SignatureHelpNext": {
+    "name": "Chữ ký tiếp theo",
+    "description": "Đi tới chữ ký tiếp theo trong cửa sổ bật lên trợ giúp chữ ký."
+  },
+  "editor::SignatureHelpPrevious": {
+    "name": "Chữ ký trước đó",
+    "description": "Đi tới chữ ký trước đó trong cửa sổ bật lên trợ giúp chữ ký."
+  },
+  "editor::SortLinesByLength": {
+    "name": "Sắp xếp dòng theo độ dài",
+    "description": "Sắp xếp các dòng đã chọn theo độ dài."
+  },
+  "editor::SortLinesCaseInsensitive": {
+    "name": "Sắp xếp dòng (không phân biệt hoa thường)",
+    "description": "Sắp xếp các dòng đã chọn, không phân biệt hoa thường."
+  },
+  "editor::SortLinesCaseSensitive": {
+    "name": "Sắp xếp dòng (phân biệt hoa thường)",
+    "description": "Sắp xếp các dòng đã chọn, phân biệt hoa thường."
+  },
+  "editor::SpawnNearestTask": {
+    "name": "Chạy tác vụ gần nhất",
+    "description": "Chạy tác vụ khả dụng gần vị trí con trỏ hiện tại nhất."
+  },
+  "editor::SplitSelectionIntoLines": {
+    "name": "Tách vùng chọn thành các dòng",
+    "description": "Tách vùng chọn thành từng dòng riêng."
+  },
+  "editor::StopLanguageServer": {
+    "name": "Dừng máy chủ ngôn ngữ",
+    "description": "Dừng máy chủ ngôn ngữ của tệp hiện tại."
+  },
+  "editor::SwapSelectionEnds": {
+    "name": "Hoán đổi hai đầu vùng chọn",
+    "description": "Hoán đổi điểm đầu và điểm cuối của vùng chọn hiện tại."
+  },
+  "editor::SwitchSourceHeader": {
+    "name": "Chuyển giữa tệp nguồn và tệp header",
+    "description": "Chuyển qua lại giữa tệp nguồn và tệp header."
+  },
+  "editor::Tab": {
+    "name": "Chèn tab",
+    "description": "Chèn một ký tự tab hoặc tăng thụt lề."
+  },
+  "editor::ToggleAllDiffHunks": {
+    "name": "Bật/tắt tất cả khối khác biệt",
+    "description": "Bật/tắt tất cả khối khác biệt trong trình soạn thảo. Nếu có khối khác biệt nào đang mở rộng thì thu gọn tất cả, ngược lại mở rộng tất cả."
+  },
+  "editor::ToggleAutoSignatureHelp": {
+    "name": "Bật/tắt trợ giúp chữ ký tự động",
+    "description": "Bật hoặc tắt tự động hiện trợ giúp chữ ký."
+  },
+  "editor::ToggleBlockComments": {
+    "name": "Bật/tắt chú thích khối",
+    "description": "Thêm hoặc xóa dấu chú thích khối cho văn bản đã chọn."
+  },
+  "editor::ToggleBookmark": {
+    "name": "Bật/tắt dấu trang",
+    "description": "Thêm hoặc xóa dấu trang ở dòng hiện tại."
+  },
+  "editor::ToggleBookmarkWithLabel": {
+    "name": "Bật/tắt dấu trang có nhãn",
+    "description": "Thêm hoặc xóa dấu trang ở dòng hiện tại, khi thêm sẽ yêu cầu nhập nhãn."
+  },
+  "editor::ToggleBreadcrumb": {
+    "name": "Bật/tắt đường dẫn điều hướng",
+    "description": "Hiện hoặc ẩn đường dẫn điều hướng."
+  },
+  "editor::ToggleBreakpoint": {
+    "name": "Bật/tắt điểm dừng",
+    "description": "Thêm hoặc xóa điểm dừng ở dòng hiện tại."
+  },
+  "editor::ToggleCase": {
+    "name": "Bật/tắt hoa thường",
+    "description": "Đảo kiểu chữ hoa thường của văn bản đã chọn."
+  },
+  "editor::ToggleCodeActions": {
+    "name": "Bật/tắt hành động mã",
+    "description": "Hiện hoặc ẩn các hành động mã khả dụng tại con trỏ."
+  },
+  "editor::ToggleCodeLens": {
+    "name": "Bật/tắt CodeLens",
+    "description": "Hiện hoặc ẩn CodeLens."
+  },
+  "editor::ToggleComments": {
+    "name": "Bật/tắt chú thích",
+    "description": "Thêm hoặc xóa dấu chú thích cho các dòng đã chọn."
+  },
+  "editor::ToggleDiagnostics": {
+    "name": "Bật/tắt chẩn đoán",
+    "description": "Hiện hoặc ẩn bảng chẩn đoán."
+  },
+  "editor::ToggleFocus": {
+    "name": "Bật/tắt tiêu điểm",
+    "description": "Chuyển tiêu điểm về vùng đệm đã hoạt động trước đó."
+  },
+  "editor::ToggleFold": {
+    "name": "Bật/tắt thu gọn",
+    "description": "Thu gọn hoặc mở rộng tại vị trí hiện tại."
+  },
+  "editor::ToggleFoldAll": {
+    "name": "Bật/tắt thu gọn tất cả",
+    "description": "Thu gọn hoặc mở rộng tất cả vùng đã thu gọn trong vùng đệm, hoặc tất cả đoạn trích trong multibuffer."
+  },
+  "editor::ToggleFoldRecursive": {
+    "name": "Bật/tắt thu gọn đệ quy",
+    "description": "Thu gọn hoặc mở rộng đệ quy tại vị trí hiện tại."
+  },
+  "editor::ToggleGitBlameInline": {
+    "name": "Bật/tắt blame nội dòng",
+    "description": "Hiện hoặc ẩn thông tin Git blame nội dòng."
+  },
+  "editor::ToggleIndentGuides": {
+    "name": "Bật/tắt đường kẻ thụt lề",
+    "description": "Hiện hoặc ẩn đường kẻ thụt lề."
+  },
+  "editor::ToggleInlayHints": {
+    "name": "Bật/tắt gợi ý nội dòng",
+    "description": "Hiện hoặc ẩn gợi ý nội dòng."
+  },
+  "editor::ToggleInlineDiagnostics": {
+    "name": "Bật/tắt chẩn đoán nội dòng",
+    "description": "Hiện hoặc ẩn chẩn đoán nội dòng."
+  },
+  "editor::ToggleInlineValues": {
+    "name": "Bật/tắt giá trị nội dòng",
+    "description": "Hiện hoặc ẩn giá trị nội dòng."
+  },
+  "editor::ToggleLineNumbers": {
+    "name": "Bật/tắt số dòng",
+    "description": "Hiện hoặc ẩn số dòng."
+  },
+  "editor::ToggleMinimap": {
+    "name": "Bật/tắt bản đồ thu nhỏ",
+    "description": "Hiện hoặc ẩn bản đồ thu nhỏ."
+  },
+  "editor::ToggleRelativeLineNumbers": {
+    "name": "Bật/tắt số dòng tương đối",
+    "description": "Hiện hoặc ẩn số dòng tương đối."
+  },
+  "editor::ToggleSelectedDiffHunks": {
+    "name": "Bật/tắt khối khác biệt đã chọn",
+    "description": "Hiện hoặc ẩn khác biệt của các khối khác biệt đã chọn."
+  },
+  "editor::ToggleSelectionMenu": {
+    "name": "Bật/tắt menu vùng chọn",
+    "description": "Hiện hoặc ẩn menu vùng chọn."
+  },
+  "editor::ToggleSemanticHighlights": {
+    "name": "Bật/tắt tô sáng ngữ nghĩa",
+    "description": "Hiện hoặc ẩn tô sáng ngữ nghĩa."
+  },
+  "editor::ToggleSoftWrap": {
+    "name": "Bật/tắt ngắt dòng mềm",
+    "description": "Bật hoặc tắt ngắt dòng mềm."
+  },
+  "editor::ToggleSplitDiff": {
+    "name": "Bật/tắt chế độ xem khác biệt tách đôi"
+  },
+  "editor::ToggleTabBar": {
+    "name": "Bật/tắt thanh tab",
+    "description": "Hiện hoặc ẩn thanh tab."
+  },
+  "editor::Transpose": {
+    "name": "Hoán đổi ký tự",
+    "description": "Hoán đổi các ký tự ở hai bên con trỏ."
+  },
+  "editor::Undo": {
+    "name": "Hoàn tác",
+    "description": "Hoàn tác chỉnh sửa gần nhất."
+  },
+  "editor::UndoSelection": {
+    "name": "Hoàn tác thay đổi vùng chọn",
+    "description": "Hoàn tác thay đổi vùng chọn gần nhất."
+  },
+  "editor::UnfoldAll": {
+    "name": "Mở rộng tất cả",
+    "description": "Mở rộng tất cả vùng đã thu gọn."
+  },
+  "editor::UnfoldLines": {
+    "name": "Mở rộng dòng",
+    "description": "Mở rộng các dòng tại con trỏ."
+  },
+  "editor::UnfoldRecursive": {
+    "name": "Mở rộng đệ quy",
+    "description": "Mở rộng đệ quy tại con trỏ."
+  },
+  "editor::UniqueLinesCaseInsensitive": {
+    "name": "Xóa dòng trùng lặp (không phân biệt hoa thường)",
+    "description": "Xóa các dòng trùng lặp (không phân biệt hoa thường)."
+  },
+  "editor::UniqueLinesCaseSensitive": {
+    "name": "Xóa dòng trùng lặp (phân biệt hoa thường)",
+    "description": "Xóa các dòng trùng lặp (phân biệt hoa thường)."
+  },
+  "editor::UnwrapSyntaxNode": {
+    "name": "Gỡ nút cú pháp bao ngoài",
+    "description": "Gỡ nút cú pháp bao ngoài (ví dụ dấu ngoặc hoặc closure) khỏi vùng chọn hiện tại."
+  },
+  "editor::ViewBookmarks": {
+    "name": "Xem dấu trang",
+    "description": "Mở một khung nhìn liệt kê tất cả dấu trang trong dự án."
+  },
+  "editor::WrapSelectionsInTag": {
+    "name": "Bao vùng chọn bằng thẻ",
+    "description": "Bao vùng chọn bằng thẻ do ngôn ngữ hiện tại chỉ định."
+  }
+}

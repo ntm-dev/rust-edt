@@ -1,0 +1,10 @@
+{
+  "toolchain::AddToolchain": {
+    "name": "Thêm toolchain",
+    "description": "Thêm một toolchain mới cho dự án hiện tại."
+  },
+  "toolchain::Select": {
+    "name": "Chọn toolchain",
+    "description": "Chọn toolchain cho dự án hiện tại."
+  }
+}

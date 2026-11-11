@@ -1,0 +1,10 @@
+{
+  "CLI should already be installed": "CLI hẳn đã được cài đặt",
+  "Cannot install the Wu CLI": "Không thể cài đặt Wu CLI",
+  "Couldn't install the Wu CLI": "Không thể cài đặt Wu CLI",
+  "If you installed Wu from our official release add ~/.local/bin to your PATH.\n\nIf you installed Wu from a different source like your package manager, then you may need to create an alias/symlink manually.\n\nDepending on your package manager, the CLI might be named zeditor, zedit, zed-editor or something else.": "Nếu bạn cài Wu từ bản phát hành chính thức, hãy thêm ~/.local/bin vào PATH.\n\nNếu bạn cài Wu từ nguồn khác như trình quản lý gói, bạn có thể cần tạo alias/symlink thủ công.\n\nTùy trình quản lý gói, CLI có thể có tên zeditor, zedit, zed-editor hoặc tên khác.",
+  "Installed `wu` to {path}. You can launch {app} from your terminal.": "Đã cài `wu` vào {path}. Bạn có thể chạy {app} từ terminal.",
+  "OK": "OK",
+  "Show me how": "Xem hướng dẫn",
+  "You can add `wu` to your PATH manually.": "Bạn có thể tự thêm `wu` vào PATH."
+}

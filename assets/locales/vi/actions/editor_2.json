@@ -1,0 +1,402 @@
+{
+  "editor::GoToNextBookmark": {
+    "name": "Đi tới dấu trang tiếp theo",
+    "description": "Đi tới dấu trang tiếp theo trong tệp."
+  },
+  "editor::GoToNextChange": {
+    "name": "Đi tới thay đổi tiếp theo",
+    "description": "Đi tới thay đổi tiếp theo trong tệp."
+  },
+  "editor::GoToNextDocumentHighlight": {
+    "name": "Đi tới tô sáng tài liệu tiếp theo",
+    "description": "Đi tới tô sáng tài liệu tiếp theo."
+  },
+  "editor::GoToNextReference": {
+    "name": "Đi tới tham chiếu tiếp theo",
+    "description": "Đi tới tham chiếu tiếp theo của ký hiệu tại con trỏ."
+  },
+  "editor::GoToNextSymbol": {
+    "name": "Đi tới ký hiệu tiếp theo",
+    "description": "Đi tới ký hiệu tiếp theo."
+  },
+  "editor::GoToParentModule": {
+    "name": "Đi tới mô-đun cha",
+    "description": "Đi tới mô-đun cha của tệp hiện tại."
+  },
+  "editor::GoToPreviousBookmark": {
+    "name": "Đi tới dấu trang trước đó",
+    "description": "Đi tới dấu trang trước đó trong tệp."
+  },
+  "editor::GoToPreviousChange": {
+    "name": "Đi tới thay đổi trước đó",
+    "description": "Đi tới thay đổi trước đó trong tệp."
+  },
+  "editor::GoToPreviousDiagnostic": {
+    "name": "Đi tới chẩn đoán trước đó",
+    "description": "Nếu chẩn đoán chưa được kích hoạt, mở rộng chẩn đoán tại con trỏ (nếu có). Nếu không, đi tới chẩn đoán trước đó trong tệp."
+  },
+  "editor::GoToPreviousDocumentHighlight": {
+    "name": "Đi tới tô sáng tài liệu trước đó",
+    "description": "Đi tới tô sáng tài liệu trước đó."
+  },
+  "editor::GoToPreviousHunk": {
+    "name": "Đi tới khối khác biệt trước đó",
+    "description": "Đi tới khối khác biệt trước đó."
+  },
+  "editor::GoToPreviousReference": {
+    "name": "Đi tới tham chiếu trước đó",
+    "description": "Đi tới tham chiếu trước đó của ký hiệu tại con trỏ."
+  },
+  "editor::GoToPreviousSymbol": {
+    "name": "Đi tới ký hiệu trước đó",
+    "description": "Đi tới ký hiệu trước đó."
+  },
+  "editor::GoToTypeDefinition": {
+    "name": "Đi tới định nghĩa kiểu",
+    "description": "Đi tới định nghĩa kiểu của ký hiệu tại con trỏ."
+  },
+  "editor::GoToTypeDefinitionSplit": {
+    "name": "Đi tới định nghĩa kiểu trong ngăn tách",
+    "description": "Đi tới định nghĩa kiểu trong ngăn tách."
+  },
+  "editor::HalfPageDown": {
+    "name": "Cuộn xuống nửa trang",
+    "description": "Cuộn xuống nửa trang."
+  },
+  "editor::HalfPageUp": {
+    "name": "Cuộn lên nửa trang",
+    "description": "Cuộn lên nửa trang."
+  },
+  "editor::HandleInput": {
+    "name": "Xử lý nhập liệu",
+    "description": "Xử lý văn bản nhập vào trình soạn thảo."
+  },
+  "editor::Hover": {
+    "name": "Hiện thông tin di chuột",
+    "description": "Hiện thông tin di chuột của ký hiệu tại con trỏ."
+  },
+  "editor::Indent": {
+    "name": "Tăng thụt lề",
+    "description": "Tăng thụt lề của các dòng đã chọn."
+  },
+  "editor::InsertSnippet": {
+    "name": "Chèn đoạn mã mẫu",
+    "description": "Chèn đoạn mã mẫu tại con trỏ."
+  },
+  "editor::InsertUuidV4": {
+    "name": "Chèn UUID v4",
+    "description": "Chèn một UUID v4 tại con trỏ."
+  },
+  "editor::InsertUuidV7": {
+    "name": "Chèn UUID v7",
+    "description": "Chèn một UUID v7 tại con trỏ."
+  },
+  "editor::JoinLines": {
+    "name": "Nối dòng",
+    "description": "Nối dòng hiện tại với dòng tiếp theo."
+  },
+  "editor::KillRingCut": {
+    "name": "Cắt vào kill ring",
+    "description": "Cắt vào kill ring (kiểu Emacs)."
+  },
+  "editor::KillRingYank": {
+    "name": "Dán từ kill ring",
+    "description": "Dán từ kill ring (kiểu Emacs)."
+  },
+  "editor::LineDown": {
+    "name": "Xuống một dòng",
+    "description": "Di chuyển con trỏ xuống một dòng."
+  },
+  "editor::LineUp": {
+    "name": "Lên một dòng",
+    "description": "Di chuyển con trỏ lên một dòng."
+  },
+  "editor::MoveDown": {
+    "name": "Di chuyển xuống",
+    "description": "Di chuyển con trỏ xuống."
+  },
+  "editor::MoveDownByLines": {
+    "name": "Di chuyển xuống nhiều dòng",
+    "description": "Di chuyển con trỏ xuống một số dòng đã chỉ định."
+  },
+  "editor::MoveLeft": {
+    "name": "Di chuyển sang trái",
+    "description": "Di chuyển con trỏ sang trái."
+  },
+  "editor::MoveLineDown": {
+    "name": "Di chuyển dòng xuống",
+    "description": "Di chuyển dòng hiện tại xuống."
+  },
+  "editor::MoveLineUp": {
+    "name": "Di chuyển dòng lên",
+    "description": "Di chuyển dòng hiện tại lên."
+  },
+  "editor::MovePageDown": {
+    "name": "Di chuyển xuống một trang",
+    "description": "Di chuyển con trỏ xuống một trang."
+  },
+  "editor::MovePageUp": {
+    "name": "Di chuyển lên một trang",
+    "description": "Di chuyển con trỏ lên một trang."
+  },
+  "editor::MoveRight": {
+    "name": "Di chuyển sang phải",
+    "description": "Di chuyển con trỏ sang phải."
+  },
+  "editor::MoveToBeginning": {
+    "name": "Về đầu tài liệu",
+    "description": "Di chuyển con trỏ về đầu tài liệu."
+  },
+  "editor::MoveToBeginningOfLine": {
+    "name": "Về đầu dòng",
+    "description": "Di chuyển con trỏ về đầu dòng hiện tại."
+  },
+  "editor::MoveToEnclosingBracket": {
+    "name": "Tới dấu ngoặc khớp",
+    "description": "Di chuyển con trỏ tới dấu ngoặc bao ngoài."
+  },
+  "editor::MoveToEnd": {
+    "name": "Về cuối tài liệu",
+    "description": "Di chuyển con trỏ về cuối tài liệu."
+  },
+  "editor::MoveToEndOfExcerpt": {
+    "name": "Về cuối đoạn trích",
+    "description": "Di chuyển con trỏ về cuối đoạn trích hiện tại."
+  },
+  "editor::MoveToEndOfLargerSyntaxNode": {
+    "name": "Về cuối nút cú pháp lớn hơn",
+    "description": "Di chuyển con trỏ về cuối nút cú pháp lớn hơn tiếp theo."
+  },
+  "editor::MoveToEndOfLine": {
+    "name": "Về cuối dòng",
+    "description": "Di chuyển con trỏ về cuối dòng hiện tại."
+  },
+  "editor::MoveToEndOfParagraph": {
+    "name": "Về cuối đoạn văn",
+    "description": "Di chuyển con trỏ về cuối đoạn văn."
+  },
+  "editor::MoveToEndOfPreviousExcerpt": {
+    "name": "Về cuối đoạn trích trước đó",
+    "description": "Di chuyển con trỏ về cuối đoạn trích trước đó."
+  },
+  "editor::MoveToNextCommentParagraph": {
+    "name": "Tới đoạn chú thích tiếp theo",
+    "description": "Di chuyển con trỏ về đầu đoạn chú thích tiếp theo."
+  },
+  "editor::MoveToNextSubwordEnd": {
+    "name": "Tới cuối từ con tiếp theo",
+    "description": "Di chuyển con trỏ tới cuối từ con tiếp theo."
+  },
+  "editor::MoveToNextWordEnd": {
+    "name": "Tới cuối từ tiếp theo",
+    "description": "Di chuyển con trỏ tới cuối từ tiếp theo."
+  },
+  "editor::MoveToPreviousCommentParagraph": {
+    "name": "Tới đoạn chú thích trước đó",
+    "description": "Di chuyển con trỏ về đầu đoạn chú thích trước đó."
+  },
+  "editor::MoveToPreviousSubwordStart": {
+    "name": "Tới đầu từ con trước đó",
+    "description": "Di chuyển con trỏ tới đầu từ con trước đó."
+  },
+  "editor::MoveToPreviousWordStart": {
+    "name": "Tới đầu từ trước đó",
+    "description": "Di chuyển con trỏ tới đầu từ trước đó."
+  },
+  "editor::MoveToStartOfExcerpt": {
+    "name": "Về đầu đoạn trích",
+    "description": "Di chuyển con trỏ về đầu đoạn trích hiện tại."
+  },
+  "editor::MoveToStartOfLargerSyntaxNode": {
+    "name": "Về đầu nút cú pháp lớn hơn",
+    "description": "Di chuyển con trỏ về đầu nút cú pháp lớn hơn tiếp theo."
+  },
+  "editor::MoveToStartOfNextExcerpt": {
+    "name": "Về đầu đoạn trích tiếp theo",
+    "description": "Di chuyển con trỏ về đầu đoạn trích tiếp theo."
+  },
+  "editor::MoveToStartOfParagraph": {
+    "name": "Về đầu đoạn văn",
+    "description": "Di chuyển con trỏ về đầu đoạn văn."
+  },
+  "editor::MoveUp": {
+    "name": "Di chuyển lên",
+    "description": "Di chuyển con trỏ lên."
+  },
+  "editor::MoveUpByLines": {
+    "name": "Di chuyển lên nhiều dòng",
+    "description": "Di chuyển con trỏ lên một số dòng đã chỉ định."
+  },
+  "editor::Newline": {
+    "name": "Xuống dòng",
+    "description": "Chèn dòng mới và di chuyển con trỏ xuống dòng mới."
+  },
+  "editor::NewlineAbove": {
+    "name": "Chèn dòng mới phía trên",
+    "description": "Chèn dòng mới phía trên dòng hiện tại."
+  },
+  "editor::NewlineBelow": {
+    "name": "Chèn dòng mới phía dưới",
+    "description": "Chèn dòng mới phía dưới dòng hiện tại."
+  },
+  "editor::NextScreen": {
+    "name": "Màn hình tiếp theo",
+    "description": "Cuộn tới màn hình tiếp theo."
+  },
+  "editor::NextSnippetTabstop": {
+    "name": "Điểm dừng tab tiếp theo của đoạn mã mẫu",
+    "description": "Đi tới điểm dừng tab tiếp theo của đoạn mã mẫu nếu có."
+  },
+  "editor::OpenContextMenu": {
+    "name": "Mở menu ngữ cảnh",
+    "description": "Mở menu ngữ cảnh tại con trỏ."
+  },
+  "editor::OpenDocs": {
+    "name": "Mở tài liệu",
+    "description": "Mở tài liệu của ký hiệu tại con trỏ."
+  },
+  "editor::OpenExcerpts": {
+    "name": "Mở đoạn trích",
+    "description": "Mở các đoạn trích trong tệp hiện tại."
+  },
+  "editor::OpenExcerptsSplit": {
+    "name": "Mở đoạn trích trong ngăn tách",
+    "description": "Mở đoạn trích trong ngăn tách."
+  },
+  "editor::OpenGitBlameCommit": {
+    "name": "Mở commit của blame",
+    "description": "Mở Git commit tương ứng với blame tại con trỏ."
+  },
+  "editor::OpenPermalinkToLine": {
+    "name": "Mở liên kết cố định của dòng",
+    "description": "Mở liên kết cố định của dòng hoặc vùng chọn hiện tại."
+  },
+  "editor::OpenProposedChangesEditor": {
+    "name": "Mở trình soạn thảo thay đổi đề xuất",
+    "description": "Mở trình soạn thảo thay đổi đề xuất."
+  },
+  "editor::OpenSelectedFilename": {
+    "name": "Mở tên tệp đã chọn",
+    "description": "Mở tệp tương ứng với tên tệp được chọn trong trình soạn thảo."
+  },
+  "editor::OpenSelectionsInMultibuffer": {
+    "name": "Mở vùng chọn trong multibuffer",
+    "description": "Mở tất cả vùng chọn trong multibuffer."
+  },
+  "editor::OpenUrl": {
+    "name": "Mở liên kết",
+    "description": "Mở URL tại con trỏ."
+  },
+  "editor::OrganizeImports": {
+    "name": "Sắp xếp import",
+    "description": "Sắp xếp các câu lệnh import."
+  },
+  "editor::Outdent": {
+    "name": "Giảm thụt lề",
+    "description": "Giảm thụt lề của các dòng đã chọn."
+  },
+  "editor::PageDown": {
+    "name": "Trang xuống",
+    "description": "Cuộn xuống một trang."
+  },
+  "editor::PageUp": {
+    "name": "Trang lên",
+    "description": "Cuộn lên một trang."
+  },
+  "editor::Paste": {
+    "name": "Dán",
+    "description": "Dán từ bộ nhớ tạm."
+  },
+  "editor::PreviousSnippetTabstop": {
+    "name": "Điểm dừng tab trước đó của đoạn mã mẫu",
+    "description": "Đi tới điểm dừng tab trước đó của đoạn mã mẫu nếu có."
+  },
+  "editor::Redo": {
+    "name": "Làm lại",
+    "description": "Làm lại chỉnh sửa vừa hoàn tác gần nhất."
+  },
+  "editor::RedoSelection": {
+    "name": "Làm lại thay đổi vùng chọn",
+    "description": "Làm lại thay đổi vùng chọn gần nhất."
+  },
+  "editor::ReloadFile": {
+    "name": "Tải lại tệp",
+    "description": "Tải lại tệp từ đĩa."
+  },
+  "editor::Rename": {
+    "name": "Đổi tên ký hiệu",
+    "description": "Đổi tên ký hiệu tại con trỏ."
+  },
+  "editor::RestartLanguageServer": {
+    "name": "Khởi động lại máy chủ ngôn ngữ",
+    "description": "Khởi động lại máy chủ ngôn ngữ của tệp hiện tại."
+  },
+  "editor::RevealInFileManager": {
+    "name": "Hiển thị trong trình quản lý tệp",
+    "description": "Hiển thị tệp hiện tại trong trình quản lý tệp của hệ thống."
+  },
+  "editor::ReverseLines": {
+    "name": "Đảo thứ tự dòng",
+    "description": "Đảo thứ tự các dòng đã chọn."
+  },
+  "editor::Rewrap": {
+    "name": "Ngắt dòng lại",
+    "description": "Ngắt dòng lại để văn bản không vượt quá độ dài dòng ưu tiên."
+  },
+  "editor::RotateSelectionsBackward": {
+    "name": "Xoay vùng chọn lùi",
+    "description": "Xoay các vùng chọn hoặc dòng theo hướng lùi."
+  },
+  "editor::RotateSelectionsForward": {
+    "name": "Xoay vùng chọn tiến",
+    "description": "Xoay các vùng chọn hoặc dòng theo hướng tiến."
+  },
+  "editor::RunFlycheck": {
+    "name": "Chạy Flycheck",
+    "description": "Chạy chẩn đoán Flycheck."
+  },
+  "editor::SaveLocation": {
+    "name": "Lưu vị trí",
+    "description": "Lưu vị trí hiện tại vào lịch sử điều hướng."
+  },
+  "editor::ScrollCursorBottom": {
+    "name": "Cuộn con trỏ xuống đáy",
+    "description": "Cuộn khung nhìn để con trỏ nằm ở đáy vùng hiển thị."
+  },
+  "editor::ScrollCursorCenter": {
+    "name": "Cuộn con trỏ vào giữa",
+    "description": "Cuộn khung nhìn để con trỏ nằm ở giữa vùng hiển thị."
+  },
+  "editor::ScrollCursorCenterTopBottom": {
+    "name": "Xoay con trỏ giữa, trên, dưới",
+    "description": "Xoay vị trí con trỏ lần lượt giữa giữa, trên và dưới."
+  },
+  "editor::ScrollCursorTop": {
+    "name": "Cuộn con trỏ lên đỉnh",
+    "description": "Cuộn khung nhìn để con trỏ nằm ở đỉnh vùng hiển thị."
+  },
+  "editor::SelectAll": {
+    "name": "Chọn tất cả",
+    "description": "Chọn toàn bộ văn bản trong trình soạn thảo."
+  },
+  "editor::SelectAllMatches": {
+    "name": "Chọn tất cả kết quả khớp",
+    "description": "Chọn tất cả kết quả khớp với vùng chọn hiện tại."
+  },
+  "editor::SelectAroundDelimiters": {
+    "name": "Chọn dấu phân cách và nội dung",
+    "description": "Chọn cặp dấu phân cách bao ngoài gần nhất (ngoặc vuông, ngoặc nhọn, ngoặc tròn hoặc dấu nháy) cùng nội dung bên trong. Chạy lặp lại sẽ mở rộng vùng chọn ra cặp dấu phân cách bên ngoài kế tiếp."
+  },
+  "editor::SelectDown": {
+    "name": "Chọn xuống",
+    "description": "Mở rộng vùng chọn xuống dưới."
+  },
+  "editor::SelectDownByLines": {
+    "name": "Chọn xuống nhiều dòng",
+    "description": "Mở rộng vùng chọn xuống một số dòng đã chỉ định."
+  },
+  "editor::SelectEnclosingSymbol": {
+    "name": "Chọn ký hiệu bao ngoài",
+    "description": "Chọn ký hiệu bao ngoài."
+  }
+}

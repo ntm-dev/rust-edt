@@ -1,0 +1,335 @@
+{
+  "workspace::ActivateLastPane": {
+    "description": "Kích hoạt ngăn cuối cùng trong không gian làm việc.",
+    "name": "Kích hoạt ngăn cuối cùng"
+  },
+  "workspace::ActivateNextPane": {
+    "description": "Kích hoạt ngăn tiếp theo trong không gian làm việc.",
+    "name": "Kích hoạt ngăn tiếp theo"
+  },
+  "workspace::ActivateNextWindow": {
+    "description": "Chuyển sang cửa sổ tiếp theo.",
+    "name": "Chuyển sang cửa sổ tiếp theo"
+  },
+  "workspace::ActivatePane": {
+    "description": "Kích hoạt ngăn đã chỉ định theo số thứ tự.",
+    "name": "Kích hoạt ngăn"
+  },
+  "workspace::ActivatePaneDown": {
+    "description": "Kích hoạt ngăn bên dưới.",
+    "name": "Kích hoạt ngăn bên dưới"
+  },
+  "workspace::ActivatePaneLeft": {
+    "description": "Kích hoạt ngăn bên trái.",
+    "name": "Kích hoạt ngăn bên trái"
+  },
+  "workspace::ActivatePaneRight": {
+    "description": "Kích hoạt ngăn bên phải.",
+    "name": "Kích hoạt ngăn bên phải"
+  },
+  "workspace::ActivatePaneUp": {
+    "description": "Kích hoạt ngăn bên trên.",
+    "name": "Kích hoạt ngăn bên trên"
+  },
+  "workspace::ActivatePreviousPane": {
+    "description": "Kích hoạt ngăn trước đó trong không gian làm việc.",
+    "name": "Kích hoạt ngăn trước đó"
+  },
+  "workspace::ActivatePreviousWindow": {
+    "description": "Chuyển sang cửa sổ trước đó.",
+    "name": "Chuyển sang cửa sổ trước đó"
+  },
+  "workspace::AddFolderToProject": {
+    "description": "Thêm thư mục vào dự án hiện tại.",
+    "name": "Thêm thư mục vào dự án"
+  },
+  "workspace::ClearAllNotifications": {
+    "description": "Xóa tất cả thông báo.",
+    "name": "Xóa tất cả thông báo"
+  },
+  "workspace::ClearBookmarks": {
+    "description": "Xóa tất cả dấu trang trong dự án.",
+    "name": "Xóa dấu trang"
+  },
+  "workspace::ClearNavigationHistory": {
+    "description": "Xóa toàn bộ lịch sử điều hướng, gồm điều hướng tiến/lùi, tệp mở gần đây và tab đã đóng gần đây. **Không thể hoàn tác thao tác này**.",
+    "name": "Xóa lịch sử điều hướng"
+  },
+  "workspace::ClearTrustedWorktrees": {
+    "description": "Xóa tất cả worktree đáng tin cậy, lần mở tiếp theo chúng sẽ ở chế độ hạn chế.\nCác dự án đang mở cần khởi động lại mới có hiệu lực.",
+    "name": "Xóa worktree đáng tin cậy"
+  },
+  "workspace::CloseActiveDock": {
+    "description": "Đóng thanh dock hiện tại.",
+    "name": "Đóng thanh dock hiện tại"
+  },
+  "workspace::CloseAllDocks": {
+    "description": "Đóng tất cả thanh dock.",
+    "name": "Đóng tất cả thanh dock"
+  },
+  "workspace::CloseAllItemsAndPanes": {
+    "description": "Đóng tất cả mục và ngăn trong không gian làm việc.",
+    "name": "Đóng tất cả mục và ngăn"
+  },
+  "workspace::CloseInactiveTabsAndPanes": {
+    "description": "Đóng tất cả tab và ngăn không hoạt động trong không gian làm việc.",
+    "name": "Đóng tab và ngăn không hoạt động"
+  },
+  "workspace::CloseItemInAllPanes": {
+    "description": "Đóng mục hiện tại trong tất cả các ngăn.",
+    "name": "Đóng mục này trong tất cả ngăn"
+  },
+  "workspace::CloseProject": {
+    "description": "Đóng dự án hiện tại.",
+    "name": "Đóng dự án"
+  },
+  "workspace::CloseWindow": {
+    "description": "Đóng cửa sổ hiện tại.",
+    "name": "Đóng cửa sổ"
+  },
+  "workspace::CopyPath": {
+    "name": "Sao chép đường dẫn"
+  },
+  "workspace::CopyRelativePath": {
+    "name": "Sao chép đường dẫn tương đối"
+  },
+  "workspace::DecreaseActiveDockSize": {
+    "description": "Thu nhỏ thanh dock đang được đặt tiêu điểm theo số pixel đã chỉ định.",
+    "name": "Thu nhỏ thanh dock hiện tại"
+  },
+  "workspace::DecreaseOpenDocksSize": {
+    "description": "Thu nhỏ đồng loạt tất cả thanh dock đang hiển thị theo số pixel đã chỉ định.",
+    "name": "Thu nhỏ tất cả thanh dock đang mở"
+  },
+  "workspace::FocusCenterPane": {
+    "description": "Chuyển tiêu điểm đến ngăn ở giữa không gian làm việc.",
+    "name": "Đặt tiêu điểm vào ngăn giữa"
+  },
+  "workspace::FocusNextPart": {
+    "description": "Chuyển tiêu điểm đến vùng chính tiếp theo của cửa sổ (trình soạn thảo, các bảng đang mở, thanh trạng thái), đến cuối thì quay lại từ đầu. Đây là cách điều hướng cửa sổ dễ khám phá và thân thiện với trình đọc màn hình.",
+    "name": "Đặt tiêu điểm vào vùng tiếp theo"
+  },
+  "workspace::FocusPreviousPart": {
+    "description": "Chuyển tiêu điểm đến vùng chính trước đó của cửa sổ. Xem [`FocusNextPart`].",
+    "name": "Đặt tiêu điểm vào vùng trước đó"
+  },
+  "workspace::FormatAndSave": {
+    "description": "Định dạng và lưu tệp hiện tại, bất kể cài đặt format_on_save.",
+    "name": "Định dạng và lưu"
+  },
+  "workspace::IncreaseActiveDockSize": {
+    "description": "Phóng to thanh dock đang được đặt tiêu điểm theo số pixel đã chỉ định.",
+    "name": "Phóng to thanh dock hiện tại"
+  },
+  "workspace::IncreaseOpenDocksSize": {
+    "description": "Phóng to đồng loạt tất cả thanh dock đang hiển thị theo số pixel đã chỉ định.",
+    "name": "Phóng to tất cả thanh dock đang mở"
+  },
+  "workspace::MoveFocusedPanelToNextPosition": {
+    "description": "Chuyển bảng đang được đặt tiêu điểm sang vị trí tiếp theo.",
+    "name": "Chuyển bảng đang chọn sang vị trí tiếp theo"
+  },
+  "workspace::MoveItemToPane": {
+    "description": "Chuyển mục đến ngăn đã chỉ định theo số thứ tự.",
+    "name": "Chuyển mục sang ngăn"
+  },
+  "workspace::MoveItemToPaneInDirection": {
+    "description": "Chuyển mục đến ngăn ở hướng đã chỉ định.",
+    "name": "Chuyển mục sang ngăn theo hướng"
+  },
+  "workspace::MovePaneDown": {
+    "description": "Chuyển ngăn hiện tại xuống dưới cùng.",
+    "name": "Chuyển ngăn xuống dưới cùng"
+  },
+  "workspace::MovePaneLeft": {
+    "description": "Chuyển ngăn hiện tại sang ngoài cùng bên trái.",
+    "name": "Chuyển ngăn sang ngoài cùng bên trái"
+  },
+  "workspace::MovePaneRight": {
+    "description": "Chuyển ngăn hiện tại sang ngoài cùng bên phải.",
+    "name": "Chuyển ngăn sang ngoài cùng bên phải"
+  },
+  "workspace::MovePaneUp": {
+    "description": "Chuyển ngăn hiện tại lên trên cùng.",
+    "name": "Chuyển ngăn lên trên cùng"
+  },
+  "workspace::NewCenterTerminal": {
+    "description": "Mở một terminal mới trong vùng trình soạn thảo.",
+    "name": "Terminal mới trong vùng trình soạn thảo"
+  },
+  "workspace::NewFile": {
+    "description": "Tạo một tệp mới.",
+    "name": "Tệp mới"
+  },
+  "workspace::NewFileSplit": {
+    "description": "Tạo tệp mới trong ngăn tách theo hướng đã chỉ định.",
+    "name": "Tệp mới trong ngăn tách"
+  },
+  "workspace::NewFileSplitHorizontal": {
+    "description": "Tạo tệp mới trong ngăn tách ngang.",
+    "name": "Tệp mới trong ngăn tách ngang"
+  },
+  "workspace::NewFileSplitVertical": {
+    "description": "Tạo tệp mới trong ngăn tách dọc.",
+    "name": "Tệp mới trong ngăn tách dọc"
+  },
+  "workspace::NewSearch": {
+    "description": "Mở một tìm kiếm mới.",
+    "name": "Tìm kiếm mới"
+  },
+  "workspace::NewTerminal": {
+    "description": "Mở một terminal mới.",
+    "name": "Terminal mới"
+  },
+  "workspace::NewWindow": {
+    "description": "Mở một cửa sổ mới.",
+    "name": "Cửa sổ mới"
+  },
+  "workspace::Open": {
+    "description": "Mở tệp hoặc thư mục.",
+    "name": "Mở"
+  },
+  "workspace::OpenComponentPreview": {
+    "description": "Mở bản xem trước thành phần.",
+    "name": "Mở bản xem trước thành phần"
+  },
+  "workspace::OpenFiles": {
+    "description": "Mở nhiều tệp cùng lúc.",
+    "name": "Mở nhiều tệp"
+  },
+  "workspace::OpenInTerminal": {
+    "description": "Mở vị trí hiện tại trong terminal.",
+    "name": "Mở trong terminal"
+  },
+  "workspace::OpenTerminal": {
+    "description": "Mở một terminal mới với thư mục làm việc đã chỉ định.",
+    "name": "Mở terminal"
+  },
+  "workspace::OpenWithSystem": {
+    "description": "Mở tệp đã chọn bằng ứng dụng mặc định của hệ thống.",
+    "name": "Mở bằng ứng dụng mặc định của hệ thống"
+  },
+  "workspace::Reload": {
+    "description": "Tải lại ứng dụng.",
+    "name": "Tải lại"
+  },
+  "workspace::ReloadActiveItem": {
+    "description": "Tải lại mục hiện tại.",
+    "name": "Tải lại mục hiện tại"
+  },
+  "workspace::ReopenLastPicker": {
+    "description": "Mở lại bộ chọn đã đóng gần nhất trong cửa sổ hiện tại.",
+    "name": "Mở lại bộ chọn trước đó"
+  },
+  "workspace::ResetActiveDockSize": {
+    "description": "Đặt lại thanh dock hiện tại về kích thước mặc định.",
+    "name": "Đặt lại kích thước thanh dock hiện tại"
+  },
+  "workspace::ResetOpenDocksSize": {
+    "description": "Đặt lại tất cả thanh dock đang mở về kích thước mặc định.",
+    "name": "Đặt lại kích thước tất cả thanh dock đang mở"
+  },
+  "workspace::ResetPaneSizes": {
+    "description": "Đặt lại tất cả ngăn trong vùng giữa về cùng kích thước, giữ nguyên bố cục tách.",
+    "name": "Đặt lại kích thước ngăn"
+  },
+  "workspace::RestoreBanner": {
+    "description": "Khôi phục banner.",
+    "name": "Khôi phục banner"
+  },
+  "workspace::Save": {
+    "description": "Lưu tệp hiện tại với các tùy chọn đã chỉ định.",
+    "name": "Lưu"
+  },
+  "workspace::SaveAll": {
+    "description": "Lưu tất cả tệp đang mở trong không gian làm việc.",
+    "name": "Lưu tất cả"
+  },
+  "workspace::SaveAs": {
+    "description": "Lưu tệp hiện tại với tên mới.",
+    "name": "Lưu thành"
+  },
+  "workspace::SaveWithoutFormat": {
+    "description": "Lưu tệp mà không định dạng.",
+    "name": "Lưu không định dạng"
+  },
+  "workspace::SendKeystrokes": {
+    "description": "Gửi một chuỗi phím bấm đến phần tử hiện tại.",
+    "name": "Gửi phím bấm"
+  },
+  "workspace::ShutdownDebugAdapters": {
+    "description": "Tắt tất cả bộ điều hợp gỡ lỗi.",
+    "name": "Tắt bộ điều hợp gỡ lỗi"
+  },
+  "workspace::SuppressNotification": {
+    "description": "Không hiển thị thông báo hiện tại nữa.",
+    "name": "Không hiển thị lại thông báo này"
+  },
+  "workspace::SwapPaneAdjacent": {
+    "name": "Hoán đổi với ngăn liền kề"
+  },
+  "workspace::SwapPaneDown": {
+    "description": "Hoán đổi ngăn hiện tại với ngăn bên dưới.",
+    "name": "Hoán đổi với ngăn bên dưới"
+  },
+  "workspace::SwapPaneLeft": {
+    "description": "Hoán đổi ngăn hiện tại với ngăn bên trái.",
+    "name": "Hoán đổi với ngăn bên trái"
+  },
+  "workspace::SwapPaneRight": {
+    "description": "Hoán đổi ngăn hiện tại với ngăn bên phải.",
+    "name": "Hoán đổi với ngăn bên phải"
+  },
+  "workspace::SwapPaneUp": {
+    "description": "Hoán đổi ngăn hiện tại với ngăn bên trên.",
+    "name": "Hoán đổi với ngăn bên trên"
+  },
+  "workspace::ToggleAllDocks": {
+    "description": "Hiện hoặc ẩn tất cả thanh dock.",
+    "name": "Bật/tắt tất cả thanh dock"
+  },
+  "workspace::ToggleBottomDock": {
+    "description": "Hiện hoặc ẩn thanh dock dưới.",
+    "name": "Bật/tắt thanh dock dưới"
+  },
+  "workspace::ToggleCenteredLayout": {
+    "description": "Bật hoặc tắt chế độ bố cục căn giữa.",
+    "name": "Bật/tắt bố cục căn giữa"
+  },
+  "workspace::ToggleEditorZoom": {
+    "description": "Phóng to hoặc khôi phục ngăn trình soạn thảo hiện tại trong vùng giữa, ẩn các ngăn tách khác khi phóng to, không ảnh hưởng đến thanh dock và bảng.",
+    "name": "Bật/tắt phóng to trình soạn thảo"
+  },
+  "workspace::ToggleExpandItem": {
+    "description": "Mở rộng hoặc thu gọn mục đã chọn.",
+    "name": "Bật/tắt mở rộng mục"
+  },
+  "workspace::ToggleLeftDock": {
+    "description": "Hiện hoặc ẩn thanh dock trái.",
+    "name": "Bật/tắt thanh dock trái"
+  },
+  "workspace::ToggleReadOnlyFile": {
+    "description": "Bật hoặc tắt chế độ chỉ đọc cho mục hiện tại (nếu mục đó hỗ trợ).",
+    "name": "Bật/tắt chỉ đọc"
+  },
+  "workspace::ToggleRightDock": {
+    "description": "Hiện hoặc ẩn thanh dock phải.",
+    "name": "Bật/tắt thanh dock phải"
+  },
+  "workspace::ToggleWorktreeSecurity": {
+    "description": "Nếu có worktree ở chế độ hạn chế, hiển thị hộp thoại liệt kê các thao tác khả dụng.\nNếu hộp thoại đang hiển thị, đóng nó và không tin cậy worktree nào.",
+    "name": "Bật/tắt bảo mật worktree"
+  },
+  "workspace::ToggleZoom": {
+    "description": "Phóng to hoặc khôi phục ngăn hiện tại.",
+    "name": "Bật/tắt phóng to ngăn"
+  },
+  "workspace::ZoomIn": {
+    "description": "Phóng to ngăn hiện tại.",
+    "name": "Phóng to ngăn"
+  },
+  "workspace::ZoomOut": {
+    "description": "Khôi phục ngăn hiện tại đang được phóng to.",
+    "name": "Khôi phục ngăn"
+  }
+}

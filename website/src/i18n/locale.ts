@@ -1,14 +1,15 @@
 import { createContext, useContext } from 'react';
 import { en, type Messages } from './en';
+import { vi } from './vi';
 import { zhCN } from './zh-CN';
 
-export type Locale = 'en' | 'zh-CN';
+export type Locale = 'en' | 'zh-CN' | 'vi';
 
-export const locales: Locale[] = ['en', 'zh-CN'];
+export const locales: Locale[] = ['en', 'zh-CN', 'vi'];
 
-const messagesByLocale: Record<Locale, Messages> = { en, 'zh-CN': zhCN };
+const messagesByLocale: Record<Locale, Messages> = { en, 'zh-CN': zhCN, vi };
 
-const pathPrefixes: Record<Locale, string> = { en: '', 'zh-CN': '/zh' };
+const pathPrefixes: Record<Locale, string> = { en: '', 'zh-CN': '/zh', vi: '/vi' };
 
 export function isLocale(value: string): value is Locale {
   return (locales as string[]).includes(value);

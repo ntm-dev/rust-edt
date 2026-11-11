@@ -1,0 +1,8 @@
+{
+  "git_picker::ActivateBranchesTab": {
+    "name": "Chuyển đến tab Nhánh"
+  },
+  "git_picker::ActivateStashTab": {
+    "name": "Chuyển đến tab Stash"
+  }
+}

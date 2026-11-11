@@ -1,0 +1,8 @@
+{
+  "Arguments": "Đối số",
+  "Executing command…": "Đang thực thi lệnh…",
+  "Failed to execute language server command {command}: {error}": "Không thể thực thi lệnh {command} của máy chủ ngôn ngữ: {error}",
+  "JSON arguments (42, {\"key\": \"value\"}, …) or plain text for one string": "Đối số JSON (42, {\"key\": \"value\"}, …) hoặc văn bản thuần cho một chuỗi",
+  "Select a language server command…": "Chọn một lệnh của máy chủ ngôn ngữ…",
+  "to switch focus": "để chuyển tiêu điểm"
+}

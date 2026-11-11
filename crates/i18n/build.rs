@@ -8,7 +8,7 @@ use std::{
 
 use serde::Deserialize;
 
-const LANGUAGES: &[(&str, &str)] = &[("zh-CN", "SIMPLIFIED_CHINESE")];
+const LANGUAGES: &[(&str, &str)] = &[("zh-CN", "SIMPLIFIED_CHINESE"), ("vi", "VIETNAMESE")];
 
 #[derive(Deserialize)]
 #[serde(deny_unknown_fields)]

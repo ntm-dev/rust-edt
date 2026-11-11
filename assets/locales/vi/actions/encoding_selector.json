@@ -1,0 +1,6 @@
+{
+  "encoding_selector::Toggle": {
+    "name": "Bật/tắt bộ chọn mã hóa",
+    "description": "Bật/tắt cửa sổ bật lên chọn mã hóa."
+  }
+}

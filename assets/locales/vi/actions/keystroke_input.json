@@ -1,0 +1,14 @@
+{
+  "keystroke_input::ClearKeystrokes": {
+    "name": "Xóa tổ hợp phím",
+    "description": "Xóa các tổ hợp phím đã ghi."
+  },
+  "keystroke_input::StartRecording": {
+    "name": "Bắt đầu ghi",
+    "description": "Bắt đầu ghi tổ hợp phím."
+  },
+  "keystroke_input::StopRecording": {
+    "name": "Dừng ghi",
+    "description": "Dừng ghi tổ hợp phím."
+  }
+}

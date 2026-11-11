@@ -1,0 +1,54 @@
+{
+  "dev::CopyAccessibilityTree": {
+    "description": "Sao chép cây trợ năng hiện tại vào clipboard dưới dạng JSON, không mở vùng đệm. Xem [`DumpAccessibilityTree`].",
+    "name": "Sao chép cây trợ năng"
+  },
+  "dev::CopyDebugAdapterArguments": {
+    "description": "Sao chép tham số khởi chạy của bộ điều hợp gỡ lỗi vào clipboard.",
+    "name": "Sao chép tham số bộ điều hợp gỡ lỗi"
+  },
+  "dev::DumpAccessibilityTree": {
+    "description": "Xuất cây trợ năng hiện tại (nội dung gần nhất được gửi tới bộ điều hợp hệ thống) dưới dạng JSON vào một tệp mới, để gỡ lỗi những gì công nghệ hỗ trợ có thể thấy.",
+    "name": "Xuất cây trợ năng"
+  },
+  "dev::OpenDebugAdapterLogs": {
+    "description": "Mở trình xem nhật ký giao thức bộ điều hợp gỡ lỗi.",
+    "name": "Mở nhật ký bộ điều hợp gỡ lỗi"
+  },
+  "dev::OpenHighlightsTreeView": {
+    "description": "Mở dạng cây tô sáng của tệp hiện tại.",
+    "name": "Mở dạng cây tô sáng"
+  },
+  "dev::OpenKeyContextView": {
+    "description": "Mở chế độ xem ngữ cảnh phím để gỡ lỗi phím tắt.",
+    "name": "Mở chế độ xem ngữ cảnh phím"
+  },
+  "dev::OpenLanguageServerLogs": {
+    "description": "Mở trình xem nhật ký giao thức máy chủ ngôn ngữ.",
+    "name": "Mở nhật ký máy chủ ngôn ngữ"
+  },
+  "dev::OpenSyntaxTreeView": {
+    "description": "Mở dạng cây cú pháp của tệp hiện tại.",
+    "name": "Mở dạng cây cú pháp"
+  },
+  "dev::OpenThemePreview": {
+    "description": "Mở cửa sổ xem trước giao diện.",
+    "name": "Mở xem trước giao diện"
+  },
+  "dev::OpenUrlPrompt": {
+    "description": "Mở hộp nhập để nhập URL cần mở.",
+    "name": "Mở hộp nhập URL"
+  },
+  "dev::ShowGitJobQueue": {
+    "description": "Hiển thị trạng thái gỡ lỗi của hàng đợi tác vụ Git của kho lưu trữ hiện tại.",
+    "name": "Hiện hàng đợi tác vụ Git"
+  },
+  "dev::ShowWorkspaceError": {
+    "description": "Hiển thị một lỗi ở cấp không gian làm việc.",
+    "name": "Hiện lỗi không gian làm việc"
+  },
+  "dev::ToggleInspector": {
+    "description": "Mở hoặc đóng trình kiểm tra dành cho nhà phát triển để gỡ lỗi các phần tử giao diện.",
+    "name": "Bật/tắt trình kiểm tra"
+  }
+}

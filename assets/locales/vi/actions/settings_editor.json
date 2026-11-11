@@ -1,0 +1,57 @@
+{
+  "settings_editor::CollapseNavEntry": {
+    "description": "Thu gọn mục điều hướng.",
+    "name": "Thu gọn mục điều hướng"
+  },
+  "settings_editor::ExpandNavEntry": {
+    "description": "Mở rộng mục điều hướng.",
+    "name": "Mở rộng mục điều hướng"
+  },
+  "settings_editor::FocusFile": {
+    "name": "Đặt tiêu điểm vào tệp"
+  },
+  "settings_editor::FocusFirstNavEntry": {
+    "description": "Đặt tiêu điểm vào mục điều hướng đầu tiên.",
+    "name": "Đặt tiêu điểm vào mục điều hướng đầu tiên"
+  },
+  "settings_editor::FocusLastNavEntry": {
+    "description": "Đặt tiêu điểm vào mục điều hướng cuối cùng.",
+    "name": "Đặt tiêu điểm vào mục điều hướng cuối cùng"
+  },
+  "settings_editor::FocusNextFile": {
+    "description": "Đặt tiêu điểm vào tệp tiếp theo trong danh sách tệp.",
+    "name": "Đặt tiêu điểm vào tệp tiếp theo"
+  },
+  "settings_editor::FocusNextNavEntry": {
+    "description": "Đặt tiêu điểm và mở mục điều hướng tiếp theo, tiêu điểm không chuyển sang vùng nội dung.",
+    "name": "Đặt tiêu điểm vào mục điều hướng tiếp theo"
+  },
+  "settings_editor::FocusNextRootNavEntry": {
+    "description": "Đặt tiêu điểm vào mục điều hướng cấp cao nhất tiếp theo.",
+    "name": "Đặt tiêu điểm vào mục điều hướng cấp cao nhất tiếp theo"
+  },
+  "settings_editor::FocusPreviousFile": {
+    "description": "Đặt tiêu điểm vào tệp trước đó trong danh sách tệp.",
+    "name": "Đặt tiêu điểm vào tệp trước đó"
+  },
+  "settings_editor::FocusPreviousNavEntry": {
+    "description": "Đặt tiêu điểm và mở mục điều hướng trước đó, tiêu điểm không chuyển sang vùng nội dung.",
+    "name": "Đặt tiêu điểm vào mục điều hướng trước đó"
+  },
+  "settings_editor::FocusPreviousRootNavEntry": {
+    "description": "Đặt tiêu điểm vào mục điều hướng cấp cao nhất trước đó.",
+    "name": "Đặt tiêu điểm vào mục điều hướng cấp cao nhất trước đó"
+  },
+  "settings_editor::Minimize": {
+    "description": "Thu nhỏ cửa sổ cài đặt.",
+    "name": "Thu nhỏ"
+  },
+  "settings_editor::OpenCurrentFile": {
+    "description": "Mở tệp hiện tại trong trình soạn thảo.",
+    "name": "Mở tệp hiện tại"
+  },
+  "settings_editor::ToggleFocusNav": {
+    "description": "Chuyển tiêu điểm giữa thanh điều hướng và nội dung chính.",
+    "name": "Bật/tắt tiêu điểm điều hướng"
+  }
+}

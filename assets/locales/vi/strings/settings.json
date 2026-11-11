@@ -1,0 +1,15 @@
+{
+  "Deprecated, use {new_name}": "Đã lỗi thời, hãy dùng {new_name}",
+  "Emacs (beta)": "Emacs (beta)",
+  "Errors in user keymap file.": "Có lỗi trong tệp bản đồ phím của người dùng.",
+  "In binding {keystrokes}, {error}": "Trong phím tắt {keystrokes}, {error}",
+  "In section with {context}:": "Trong phần có {context}:",
+  "In section without context predicate:": "Trong phần không có điều kiện ngữ cảnh:",
+  "In unbind {keystrokes}, {error}": "Trong hủy gán {keystrokes}, {error}",
+  "No action named this.": "Không có lệnh nào có tên này.",
+  "No language with this name is installed.": "Chưa cài đặt ngôn ngữ nào có tên này.",
+  "Parse error in section `context` field: {error}": "Lỗi phân tích trường `context` của phần: {error}",
+  "This action does not take input - just the action name string should be used.": "Lệnh này không nhận đầu vào, chỉ cần dùng chuỗi tên lệnh.",
+  "Unrecognized fields: {fields}": "Trường không nhận diện được: {fields}",
+  "Wu (Default)": "Wu (Mặc định)"
+}

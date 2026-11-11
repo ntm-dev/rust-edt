@@ -1,0 +1,9 @@
+{
+  "Adapter Logs": "Nhật ký bộ điều hợp",
+  "Clear": "Xóa",
+  "DAP Logs": "Nhật ký DAP",
+  "Initialization Sequence": "Trình tự khởi tạo",
+  "No adapter selected": "Chưa chọn bộ điều hợp",
+  "RPC Messages": "Thông điệp RPC",
+  "Session {id} (child)": "Phiên {id} (phiên con)"
+}

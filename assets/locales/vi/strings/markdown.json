@@ -1,0 +1,11 @@
+{
+  "Caution": "Thận trọng",
+  "Failed to Load: {label}": "Tải thất bại: {label}",
+  "Image failed to load. Open `wu: log` for more details.": "Không tải được ảnh. Mở `wu: log` để xem chi tiết.",
+  "Important": "Quan trọng",
+  "Note": "Ghi chú",
+  "Tip": "Mẹo",
+  "Unwrap Content": "Bỏ ngắt dòng nội dung",
+  "Warning": "Cảnh báo",
+  "Wrap Content": "Ngắt dòng nội dung"
+}

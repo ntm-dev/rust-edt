@@ -1,0 +1,46 @@
+{
+  "keymap_editor::CopyAction": {
+    "name": "Sao chép lệnh",
+    "description": "Sao chép tên lệnh vào bộ nhớ tạm."
+  },
+  "keymap_editor::CopyContext": {
+    "name": "Sao chép ngữ cảnh",
+    "description": "Sao chép điều kiện ngữ cảnh vào bộ nhớ tạm."
+  },
+  "keymap_editor::CreateBinding": {
+    "name": "Tạo phím tắt",
+    "description": "Tạo phím tắt mới cho lệnh đã chọn."
+  },
+  "keymap_editor::DeleteBinding": {
+    "name": "Xóa phím tắt",
+    "description": "Xóa phím tắt đã chọn."
+  },
+  "keymap_editor::EditBinding": {
+    "name": "Sửa phím tắt",
+    "description": "Sửa phím tắt đã chọn."
+  },
+  "keymap_editor::OpenCreateKeybindingModal": {
+    "name": "Phím tắt mới",
+    "description": "Tạo phím tắt mới từ đầu và nhắc chọn lệnh."
+  },
+  "keymap_editor::ShowMatchingKeybinds": {
+    "name": "Hiện phím tắt trùng khớp",
+    "description": "Hiện các phím tắt có cùng tổ hợp phím với phím tắt đang chọn."
+  },
+  "keymap_editor::ToggleConflictFilter": {
+    "name": "Bật/tắt bộ lọc xung đột",
+    "description": "Bật/tắt bộ lọc xung đột."
+  },
+  "keymap_editor::ToggleExactKeystrokeMatching": {
+    "name": "Bật/tắt khớp chính xác tổ hợp phím",
+    "description": "Bật/tắt khớp chính xác khi tìm kiếm theo tổ hợp phím."
+  },
+  "keymap_editor::ToggleKeystrokeSearch": {
+    "name": "Bật/tắt tìm kiếm theo tổ hợp phím",
+    "description": "Bật/tắt tìm kiếm theo tổ hợp phím."
+  },
+  "keymap_editor::ToggleNoActionBindings": {
+    "name": "Bật/tắt phím tắt NoAction",
+    "description": "Bật/tắt hiển thị các phím tắt NoAction."
+  }
+}

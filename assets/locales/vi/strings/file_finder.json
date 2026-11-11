@@ -1,0 +1,14 @@
+{
+  "Create File: {path}": "Tạo tệp: {path}",
+  "Create file {path}?": "Tạo tệp {path}?",
+  "Exclude Ignored Files": "Loại trừ tệp bị bỏ qua",
+  "Include Ignored Files": "Bao gồm tệp bị bỏ qua",
+  "Open File": "Mở tệp",
+  "Open multiple": "Mở nhiều tệp",
+  "Search project files...": "Tìm tệp trong dự án…",
+  "Split…": "Chia ngăn…",
+  "split|Down": "Xuống",
+  "split|Left": "Trái",
+  "split|Right": "Phải",
+  "split|Up": "Lên"
+}

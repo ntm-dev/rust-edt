@@ -1,0 +1,11 @@
+{
+  "call_hierarchy::ShowIncomingCalls": {
+    "name": "Hiện lời gọi đến"
+  },
+  "call_hierarchy::ShowOutgoingCalls": {
+    "name": "Hiện lời gọi đi"
+  },
+  "call_hierarchy::ToggleDirection": {
+    "name": "Đổi hướng"
+  }
+}

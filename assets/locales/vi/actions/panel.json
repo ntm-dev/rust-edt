@@ -1,0 +1,10 @@
+{
+  "panel::NextPanelTab": {
+    "description": "Chuyển đến tab tiếp theo trong bảng.",
+    "name": "Tab bảng tiếp theo"
+  },
+  "panel::PreviousPanelTab": {
+    "description": "Chuyển đến tab trước đó trong bảng.",
+    "name": "Tab bảng trước đó"
+  }
+}

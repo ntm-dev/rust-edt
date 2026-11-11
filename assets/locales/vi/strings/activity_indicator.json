@@ -1,0 +1,17 @@
+{
+  "({server_name}) Error: {message}": "({server_name}) Lỗi: {message}",
+  "({server_name}) Warning: {message}": "({server_name}) Cảnh báo: {message}",
+  "Cancel {title}": "Hủy {title}",
+  "Checking for updates to {servers}...": "Đang kiểm tra cập nhật cho {servers}…",
+  "Debug: {adapter}": "Gỡ lỗi: {adapter}",
+  "Directories outside of git repositories and deeper than the `file_scan_depth` setting will be indexed on demand.": "Các thư mục nằm ngoài kho Git và sâu hơn cài đặt `file_scan_depth` sẽ được lập chỉ mục khi cần.",
+  "Downloading {servers}...": "Đang tải xuống {servers}…",
+  "Failed to run {servers}. Click to show error.": "Không thể chạy {servers}. Nhấp để xem lỗi.",
+  "Formatting failed: {failure}. Click to see logs.": "Định dạng thất bại: {failure}. Nhấp để xem nhật ký.",
+  "Installing {extension_id} extension…": "Đang cài đặt tiện ích mở rộng {extension_id}…",
+  "Language server {server_name}:\n\n{status}": "Máy chủ ngôn ngữ {server_name}:\n\n{status}",
+  "Partial file index": "Chỉ mục tệp chưa đầy đủ",
+  "Removing {extension_id} extension…": "Đang gỡ tiện ích mở rộng {extension_id}…",
+  "Updating {extension_id} extension…": "Đang cập nhật tiện ích mở rộng {extension_id}…",
+  "{message} + {count} more": "{message} + {count} mục khác"
+}

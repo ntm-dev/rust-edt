@@ -1,0 +1,8 @@
+{
+  "lsp_command_selector::Toggle": {
+    "name": "Bật/tắt bộ chọn lệnh máy chủ ngôn ngữ"
+  },
+  "lsp_command_selector::ToggleArgumentsFocus": {
+    "name": "Bật/tắt tiêu điểm ô nhập tham số"
+  }
+}

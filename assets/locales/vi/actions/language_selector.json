@@ -1,0 +1,6 @@
+{
+  "language_selector::Toggle": {
+    "name": "Bật/tắt bộ chọn ngôn ngữ",
+    "description": "Bật/tắt cửa sổ bật lên chọn ngôn ngữ."
+  }
+}

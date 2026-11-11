@@ -1,0 +1,146 @@
+{
+  "pane::ActivateItem": {
+    "description": "Kích hoạt mục được chỉ định trong ngăn theo số thứ tự.",
+    "name": "Kích hoạt mục"
+  },
+  "pane::ActivateLastItem": {
+    "description": "Kích hoạt mục cuối cùng trong ngăn.",
+    "name": "Kích hoạt mục cuối"
+  },
+  "pane::ActivateNextItem": {
+    "description": "Kích hoạt mục tiếp theo trong ngăn.",
+    "name": "Kích hoạt mục tiếp theo"
+  },
+  "pane::ActivatePreviousItem": {
+    "description": "Kích hoạt mục trước đó trong ngăn.",
+    "name": "Kích hoạt mục trước đó"
+  },
+  "pane::AlternateFile": {
+    "description": "Chuyển sang tệp đã mở trước đó.",
+    "name": "Chuyển sang tệp trước đó"
+  },
+  "pane::CloseActiveItem": {
+    "description": "Đóng mục hiện tại trong ngăn.",
+    "name": "Đóng mục hiện tại"
+  },
+  "pane::CloseAllItems": {
+    "description": "Đóng tất cả các mục trong ngăn.",
+    "name": "Đóng tất cả mục"
+  },
+  "pane::CloseCleanItems": {
+    "description": "Đóng tất cả các mục không có thay đổi chưa lưu.",
+    "name": "Đóng các tab đã lưu"
+  },
+  "pane::CloseItemsToTheLeft": {
+    "description": "Đóng tất cả các mục bên trái mục hiện tại.",
+    "name": "Đóng các mục bên trái"
+  },
+  "pane::CloseItemsToTheRight": {
+    "description": "Đóng tất cả các mục bên phải mục hiện tại.",
+    "name": "Đóng các mục bên phải"
+  },
+  "pane::CloseMultibufferItems": {
+    "description": "Đóng tất cả các vùng đệm nhiều tệp trong ngăn.",
+    "name": "Đóng vùng đệm nhiều tệp"
+  },
+  "pane::CloseOtherItems": {
+    "description": "Đóng tất cả các mục không hoạt động trong ngăn.",
+    "name": "Đóng các mục khác"
+  },
+  "pane::DeploySearch": {
+    "description": "Mở giao diện tìm kiếm với cấu hình được chỉ định.",
+    "name": "Mở tìm kiếm"
+  },
+  "pane::GoBack": {
+    "description": "Quay lại trong lịch sử.",
+    "name": "Quay lại"
+  },
+  "pane::GoForward": {
+    "description": "Tiến tới trong lịch sử.",
+    "name": "Tiến tới"
+  },
+  "pane::GoToNewerTag": {
+    "description": "Tiến tới trong ngăn xếp tag.",
+    "name": "Đi tới tag mới hơn"
+  },
+  "pane::GoToOlderTag": {
+    "description": "Quay lại trong ngăn xếp tag.",
+    "name": "Đi tới tag cũ hơn"
+  },
+  "pane::JoinAll": {
+    "description": "Hợp nhất tất cả các ngăn thành một.",
+    "name": "Hợp nhất tất cả ngăn"
+  },
+  "pane::JoinIntoNext": {
+    "description": "Hợp nhất ngăn này vào ngăn tiếp theo.",
+    "name": "Hợp nhất vào ngăn tiếp theo"
+  },
+  "pane::ReopenClosedItem": {
+    "description": "Mở lại mục đã đóng gần nhất.",
+    "name": "Mở lại mục đã đóng"
+  },
+  "pane::RevealInProjectPanel": {
+    "description": "Hiển thị mục hiện tại trong bảng dự án.",
+    "name": "Hiển thị trong bảng dự án"
+  },
+  "pane::SplitAndMoveDown": {
+    "description": "Chia ngăn xuống dưới và chuyển mục hiện tại sang ngăn mới.",
+    "name": "Chia xuống và di chuyển"
+  },
+  "pane::SplitAndMoveLeft": {
+    "description": "Chia ngăn sang trái và chuyển mục hiện tại sang ngăn mới.",
+    "name": "Chia sang trái và di chuyển"
+  },
+  "pane::SplitAndMoveRight": {
+    "description": "Chia ngăn sang phải và chuyển mục hiện tại sang ngăn mới.",
+    "name": "Chia sang phải và di chuyển"
+  },
+  "pane::SplitAndMoveUp": {
+    "description": "Chia ngăn lên trên và chuyển mục hiện tại sang ngăn mới.",
+    "name": "Chia lên và di chuyển"
+  },
+  "pane::SplitDown": {
+    "description": "Chia ngăn xuống dưới.",
+    "name": "Chia xuống"
+  },
+  "pane::SplitHorizontal": {
+    "description": "Chia ngăn theo chiều ngang.",
+    "name": "Chia ngang"
+  },
+  "pane::SplitLeft": {
+    "description": "Chia ngăn sang trái.",
+    "name": "Chia sang trái"
+  },
+  "pane::SplitRight": {
+    "description": "Chia ngăn sang phải.",
+    "name": "Chia sang phải"
+  },
+  "pane::SplitUp": {
+    "description": "Chia ngăn lên trên.",
+    "name": "Chia lên"
+  },
+  "pane::SplitVertical": {
+    "description": "Chia ngăn theo chiều dọc.",
+    "name": "Chia dọc"
+  },
+  "pane::SwapItemLeft": {
+    "description": "Hoán đổi mục hiện tại với mục bên trái.",
+    "name": "Hoán đổi với mục bên trái"
+  },
+  "pane::SwapItemRight": {
+    "description": "Hoán đổi mục hiện tại với mục bên phải.",
+    "name": "Hoán đổi với mục bên phải"
+  },
+  "pane::TogglePinTab": {
+    "description": "Ghim hoặc bỏ ghim tab hiện tại.",
+    "name": "Bật/tắt ghim tab"
+  },
+  "pane::TogglePreviewTab": {
+    "description": "Bật hoặc tắt chế độ xem trước của tab hiện tại.",
+    "name": "Bật/tắt tab xem trước"
+  },
+  "pane::UnpinAllTabs": {
+    "description": "Bỏ ghim tất cả các tab trong ngăn.",
+    "name": "Bỏ ghim tất cả tab"
+  }
+}

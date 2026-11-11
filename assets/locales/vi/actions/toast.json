@@ -1,0 +1,6 @@
+{
+  "toast::RunAction": {
+    "description": "Thực thi hành động gắn với thông báo toast.",
+    "name": "Thực thi hành động"
+  }
+}

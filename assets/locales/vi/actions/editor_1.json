@@ -1,0 +1,398 @@
+{
+  "editor::AddSelectionAbove": {
+    "name": "Thêm con trỏ phía trên",
+    "description": "Thêm một con trỏ phía trên vùng chọn hiện tại."
+  },
+  "editor::AddSelectionBelow": {
+    "name": "Thêm con trỏ phía dưới",
+    "description": "Thêm một con trỏ phía dưới vùng chọn hiện tại."
+  },
+  "editor::AlignSelections": {
+    "name": "Căn chỉnh vùng chọn",
+    "description": "Căn các vùng chọn ở các dòng khác nhau về cùng một cột."
+  },
+  "editor::ApplyAllDiffHunks": {
+    "name": "Áp dụng tất cả khối khác biệt",
+    "description": "Áp dụng tất cả khối khác biệt trong trình soạn thảo."
+  },
+  "editor::ApplyDiffHunk": {
+    "name": "Áp dụng khối khác biệt",
+    "description": "Áp dụng khối khác biệt tại vị trí hiện tại."
+  },
+  "editor::AutoIndent": {
+    "name": "Tự động thụt lề",
+    "description": "Tự động điều chỉnh thụt lề theo ngữ cảnh."
+  },
+  "editor::Backspace": {
+    "name": "Xóa lùi",
+    "description": "Xóa ký tự phía trước con trỏ."
+  },
+  "editor::Backtab": {
+    "name": "Giảm thụt lề",
+    "description": "Xóa một ký tự tab hoặc giảm thụt lề."
+  },
+  "editor::BlameHover": {
+    "name": "Hiện thông tin blame",
+    "description": "Hiện thông tin Git blame của dòng hiện tại."
+  },
+  "editor::BlamePreviousRevision": {
+    "name": "Blame phiên bản trước",
+    "description": "Mở blame của tệp ở phiên bản trước của mục blame tại con trỏ."
+  },
+  "editor::BlameRevision": {
+    "name": "Blame phiên bản này",
+    "description": "Mở blame của tệp ở phiên bản chứa mục blame tại con trỏ."
+  },
+  "editor::Cancel": {
+    "name": "Hủy",
+    "description": "Hủy thao tác hiện tại."
+  },
+  "editor::CancelFlycheck": {
+    "name": "Hủy Flycheck",
+    "description": "Hủy Flycheck đang chạy."
+  },
+  "editor::CancelLanguageServerWork": {
+    "name": "Hủy tác vụ của máy chủ ngôn ngữ",
+    "description": "Hủy các tác vụ đang chờ xử lý của máy chủ ngôn ngữ."
+  },
+  "editor::ClearFlycheck": {
+    "name": "Xóa Flycheck",
+    "description": "Xóa kết quả của Flycheck."
+  },
+  "editor::CollapseAllDiffHunks": {
+    "name": "Thu gọn tất cả khối khác biệt",
+    "description": "Thu gọn tất cả khối khác biệt trong trình soạn thảo."
+  },
+  "editor::ComposeCompletion": {
+    "name": "Kết hợp gợi ý hoàn thành",
+    "description": "Kết hợp nhiều gợi ý hoàn thành thành một."
+  },
+  "editor::ConfirmCodeAction": {
+    "name": "Xác nhận hành động mã",
+    "description": "Xác nhận và áp dụng hành động mã đang chọn."
+  },
+  "editor::ConfirmCompletion": {
+    "name": "Xác nhận gợi ý hoàn thành",
+    "description": "Xác nhận và chấp nhận gợi ý hoàn thành đang chọn."
+  },
+  "editor::ConfirmCompletionInsert": {
+    "name": "Xác nhận gợi ý hoàn thành và chèn",
+    "description": "Chèn tại con trỏ để xác nhận gợi ý hoàn thành."
+  },
+  "editor::ConfirmCompletionReplace": {
+    "name": "Xác nhận gợi ý hoàn thành và thay thế",
+    "description": "Thay thế văn bản hiện có để xác nhận gợi ý hoàn thành."
+  },
+  "editor::ConfirmRename": {
+    "name": "Xác nhận đổi tên",
+    "description": "Xác nhận thao tác đổi tên."
+  },
+  "editor::ContextMenuFirst": {
+    "name": "Mục đầu của menu ngữ cảnh",
+    "description": "Đi tới mục đầu tiên của menu ngữ cảnh."
+  },
+  "editor::ContextMenuLast": {
+    "name": "Mục cuối của menu ngữ cảnh",
+    "description": "Đi tới mục cuối cùng của menu ngữ cảnh."
+  },
+  "editor::ContextMenuNext": {
+    "name": "Mục tiếp theo của menu ngữ cảnh",
+    "description": "Đi tới mục tiếp theo của menu ngữ cảnh."
+  },
+  "editor::ContextMenuPrevious": {
+    "name": "Mục trước đó của menu ngữ cảnh",
+    "description": "Đi tới mục trước đó của menu ngữ cảnh."
+  },
+  "editor::ConvertFromBase64": {
+    "name": "Giải mã từ Base64",
+    "description": "Giải mã Base64 văn bản đã chọn hoặc từ tại con trỏ."
+  },
+  "editor::ConvertIndentationToSpaces": {
+    "name": "Chuyển thụt lề sang dấu cách",
+    "description": "Chuyển thụt lề từ ký tự tab sang dấu cách."
+  },
+  "editor::ConvertIndentationToTabs": {
+    "name": "Chuyển thụt lề sang tab",
+    "description": "Chuyển thụt lề từ dấu cách sang ký tự tab."
+  },
+  "editor::ConvertToBase64": {
+    "name": "Chuyển sang Base64",
+    "description": "Mã hóa Base64 văn bản đã chọn hoặc từ tại con trỏ."
+  },
+  "editor::ConvertToKebabCase": {
+    "name": "Chuyển sang kebab-case",
+    "description": "Chuyển văn bản đã chọn sang kebab-case."
+  },
+  "editor::ConvertToLowerCamelCase": {
+    "name": "Chuyển sang lowerCamelCase",
+    "description": "Chuyển văn bản đã chọn sang lowerCamelCase."
+  },
+  "editor::ConvertToLowerCase": {
+    "name": "Chuyển sang chữ thường",
+    "description": "Chuyển văn bản đã chọn sang chữ thường."
+  },
+  "editor::ConvertToOppositeCase": {
+    "name": "Đảo hoa thường",
+    "description": "Đảo kiểu chữ hoa thường của văn bản đã chọn."
+  },
+  "editor::ConvertToRot13": {
+    "name": "Chuyển sang ROT13",
+    "description": "Áp dụng mã hóa ROT13 cho văn bản đã chọn."
+  },
+  "editor::ConvertToRot47": {
+    "name": "Chuyển sang ROT47",
+    "description": "Áp dụng mã hóa ROT47 cho văn bản đã chọn."
+  },
+  "editor::ConvertToSentenceCase": {
+    "name": "Chuyển sang viết hoa đầu câu",
+    "description": "Chuyển văn bản đã chọn sang kiểu viết hoa đầu câu."
+  },
+  "editor::ConvertToSnakeCase": {
+    "name": "Chuyển sang snake_case",
+    "description": "Chuyển văn bản đã chọn sang snake_case."
+  },
+  "editor::ConvertToTitleCase": {
+    "name": "Chuyển sang viết hoa đầu mỗi từ",
+    "description": "Chuyển văn bản đã chọn sang Title Case."
+  },
+  "editor::ConvertToUpperCamelCase": {
+    "name": "Chuyển sang UpperCamelCase",
+    "description": "Chuyển văn bản đã chọn sang UpperCamelCase."
+  },
+  "editor::ConvertToUpperCase": {
+    "name": "Chuyển sang chữ hoa",
+    "description": "Chuyển văn bản đã chọn sang UPPERCASE."
+  },
+  "editor::Copy": {
+    "name": "Sao chép",
+    "description": "Sao chép văn bản đã chọn vào bộ nhớ tạm."
+  },
+  "editor::CopyAndTrim": {
+    "name": "Sao chép và cắt thụt lề",
+    "description": "Sao chép văn bản đã chọn vào bộ nhớ tạm và cắt phần thụt lề đầu chung của vùng chọn nhiều dòng."
+  },
+  "editor::CopyFileLocation": {
+    "name": "Sao chép vị trí tệp",
+    "description": "Sao chép vị trí tệp hiện tại vào bộ nhớ tạm."
+  },
+  "editor::CopyFileName": {
+    "name": "Sao chép tên tệp",
+    "description": "Sao chép tên tệp hiện tại vào bộ nhớ tạm."
+  },
+  "editor::CopyFileNameWithoutExtension": {
+    "name": "Sao chép tên tệp không có phần mở rộng",
+    "description": "Sao chép tên tệp không có phần mở rộng vào bộ nhớ tạm."
+  },
+  "editor::CopyHighlightJson": {
+    "name": "Sao chép JSON tô sáng",
+    "description": "Sao chép văn bản được tô sáng dưới dạng JSON."
+  },
+  "editor::CopyPermalinkToLine": {
+    "name": "Sao chép liên kết cố định của dòng",
+    "description": "Sao chép liên kết cố định của dòng hoặc vùng chọn hiện tại."
+  },
+  "editor::Cut": {
+    "name": "Cắt",
+    "description": "Cắt văn bản đã chọn vào bộ nhớ tạm."
+  },
+  "editor::CutToEndOfLine": {
+    "name": "Cắt đến cuối dòng",
+    "description": "Cắt từ con trỏ đến cuối dòng."
+  },
+  "editor::Delete": {
+    "name": "Xóa",
+    "description": "Xóa ký tự phía sau con trỏ."
+  },
+  "editor::DeleteLine": {
+    "name": "Xóa dòng",
+    "description": "Xóa dòng hiện tại."
+  },
+  "editor::DeleteToBeginningOfLine": {
+    "name": "Xóa đến đầu dòng",
+    "description": "Xóa từ con trỏ đến đầu dòng hiện tại."
+  },
+  "editor::DeleteToEndOfLine": {
+    "name": "Xóa đến cuối dòng",
+    "description": "Xóa từ con trỏ đến cuối dòng."
+  },
+  "editor::DeleteToNextSubwordEnd": {
+    "name": "Xóa đến cuối từ con tiếp theo",
+    "description": "Xóa từ con trỏ đến cuối từ con tiếp theo. Nếu gặp 2 ký tự khoảng trắng liên tiếp trở lên, sẽ dừng trước cuối từ con tiếp theo."
+  },
+  "editor::DeleteToNextWordEnd": {
+    "name": "Xóa đến cuối từ tiếp theo",
+    "description": "Xóa từ con trỏ đến cuối từ tiếp theo. Nếu gặp 2 ký tự khoảng trắng liên tiếp trở lên, sẽ dừng trước cuối từ tiếp theo."
+  },
+  "editor::DeleteToPreviousSubwordStart": {
+    "name": "Xóa đến đầu từ con trước đó",
+    "description": "Xóa từ con trỏ đến đầu từ con trước đó. Nếu gặp 2 ký tự khoảng trắng liên tiếp trở lên, sẽ dừng trước đầu từ con trước đó."
+  },
+  "editor::DeleteToPreviousWordStart": {
+    "name": "Xóa đến đầu từ trước đó",
+    "description": "Xóa từ con trỏ đến đầu từ trước đó. Nếu gặp 2 ký tự khoảng trắng liên tiếp trở lên, sẽ dừng trước đầu từ trước đó."
+  },
+  "editor::DiffClipboardWithSelection": {
+    "name": "So sánh bộ nhớ tạm với vùng chọn",
+    "description": "So sánh khác biệt giữa văn bản trong bộ nhớ tạm và vùng chọn hiện tại."
+  },
+  "editor::DisableBreakpoint": {
+    "name": "Tắt điểm dừng",
+    "description": "Tắt điểm dừng ở dòng hiện tại."
+  },
+  "editor::DuplicateLineDown": {
+    "name": "Nhân đôi dòng xuống dưới",
+    "description": "Nhân đôi dòng hiện tại xuống bên dưới."
+  },
+  "editor::DuplicateLineUp": {
+    "name": "Nhân đôi dòng lên trên",
+    "description": "Nhân đôi dòng hiện tại lên bên trên."
+  },
+  "editor::DuplicateSelection": {
+    "name": "Nhân đôi vùng chọn",
+    "description": "Chèn thêm một bản sao của vùng chọn ngay phía sau nó."
+  },
+  "editor::EditBookmark": {
+    "name": "Sửa dấu trang",
+    "description": "Sửa nhãn của dấu trang ở dòng hiện tại."
+  },
+  "editor::EditLogBreakpoint": {
+    "name": "Sửa điểm dừng ghi log",
+    "description": "Sửa thông điệp log của điểm dừng."
+  },
+  "editor::EnableBreakpoint": {
+    "name": "Bật điểm dừng",
+    "description": "Bật điểm dừng ở dòng hiện tại."
+  },
+  "editor::ExpandAllDiffHunks": {
+    "name": "Mở rộng tất cả khối khác biệt",
+    "description": "Mở rộng tất cả khối khác biệt trong trình soạn thảo."
+  },
+  "editor::ExpandExcerpts": {
+    "name": "Mở rộng đoạn trích",
+    "description": "Mở rộng tất cả đoạn trích chứa vùng chọn."
+  },
+  "editor::ExpandExcerptsDown": {
+    "name": "Mở rộng đoạn trích xuống dưới",
+    "description": "Mở rộng đoạn trích tại vị trí hiện tại xuống dưới."
+  },
+  "editor::ExpandExcerptsUp": {
+    "name": "Mở rộng đoạn trích lên trên",
+    "description": "Mở rộng đoạn trích tại vị trí hiện tại lên trên."
+  },
+  "editor::ExpandMacroRecursively": {
+    "name": "Mở rộng macro đệ quy",
+    "description": "Mở rộng macro tại con trỏ một cách đệ quy."
+  },
+  "editor::FindAllReferences": {
+    "name": "Tìm tất cả tham chiếu",
+    "description": "Tìm tất cả tham chiếu của ký hiệu tại con trỏ."
+  },
+  "editor::FindNextMatch": {
+    "name": "Tìm kết quả khớp tiếp theo",
+    "description": "Tìm kết quả khớp tiếp theo trong tìm kiếm."
+  },
+  "editor::FindPreviousMatch": {
+    "name": "Tìm kết quả khớp trước đó",
+    "description": "Tìm kết quả khớp trước đó trong tìm kiếm."
+  },
+  "editor::Fold": {
+    "name": "Thu gọn",
+    "description": "Thu gọn khối mã hiện tại."
+  },
+  "editor::FoldAll": {
+    "name": "Thu gọn tất cả",
+    "description": "Thu gọn tất cả vùng có thể thu gọn trong trình soạn thảo."
+  },
+  "editor::FoldAtLevel": {
+    "name": "Thu gọn theo cấp",
+    "description": "Thu gọn tất cả khối mã ở cấp thụt lề đã chỉ định."
+  },
+  "editor::FoldAtLevel_1": {
+    "name": "Thu gọn cấp 1",
+    "description": "Thu gọn tất cả khối mã có cấp thụt lề là 1."
+  },
+  "editor::FoldAtLevel_2": {
+    "name": "Thu gọn cấp 2",
+    "description": "Thu gọn tất cả khối mã có cấp thụt lề là 2."
+  },
+  "editor::FoldAtLevel_3": {
+    "name": "Thu gọn cấp 3",
+    "description": "Thu gọn tất cả khối mã có cấp thụt lề là 3."
+  },
+  "editor::FoldAtLevel_4": {
+    "name": "Thu gọn cấp 4",
+    "description": "Thu gọn tất cả khối mã có cấp thụt lề là 4."
+  },
+  "editor::FoldAtLevel_5": {
+    "name": "Thu gọn cấp 5",
+    "description": "Thu gọn tất cả khối mã có cấp thụt lề là 5."
+  },
+  "editor::FoldAtLevel_6": {
+    "name": "Thu gọn cấp 6",
+    "description": "Thu gọn tất cả khối mã có cấp thụt lề là 6."
+  },
+  "editor::FoldAtLevel_7": {
+    "name": "Thu gọn cấp 7",
+    "description": "Thu gọn tất cả khối mã có cấp thụt lề là 7."
+  },
+  "editor::FoldAtLevel_8": {
+    "name": "Thu gọn cấp 8",
+    "description": "Thu gọn tất cả khối mã có cấp thụt lề là 8."
+  },
+  "editor::FoldAtLevel_9": {
+    "name": "Thu gọn cấp 9",
+    "description": "Thu gọn tất cả khối mã có cấp thụt lề là 9."
+  },
+  "editor::FoldFunctionBodies": {
+    "name": "Thu gọn thân hàm",
+    "description": "Thu gọn tất cả thân hàm trong trình soạn thảo."
+  },
+  "editor::FoldRecursive": {
+    "name": "Thu gọn đệ quy",
+    "description": "Thu gọn khối mã hiện tại và tất cả khối con của nó."
+  },
+  "editor::FoldSelectedRanges": {
+    "name": "Thu gọn các phạm vi đã chọn",
+    "description": "Thu gọn các phạm vi đã chọn."
+  },
+  "editor::Format": {
+    "name": "Định dạng tài liệu",
+    "description": "Định dạng toàn bộ tài liệu."
+  },
+  "editor::FormatSelections": {
+    "name": "Định dạng vùng chọn",
+    "description": "Chỉ định dạng văn bản đã chọn.\n\nChỉ dùng được khi trình định dạng hiện tại hỗ trợ định dạng theo phạm vi. Khi dùng máy chủ ngôn ngữ, một yêu cầu định dạng phạm vi LSP sẽ được gửi cho mỗi vùng chọn; nếu máy chủ ngôn ngữ được cấu hình cho vùng đệm đã chọn không hỗ trợ định dạng phạm vi, lệnh này sẽ bị ẩn. Khi dùng Prettier, phạm vi chứa tất cả vùng chọn sẽ được định dạng bằng tính năng định dạng phạm vi riêng của Prettier, và các thay đổi nằm ngoài phạm vi đã chọn sẽ bị loại bỏ. Trình định dạng bằng lệnh bên ngoài không hỗ trợ định dạng phạm vi và sẽ bị bỏ qua."
+  },
+  "editor::GoToDeclaration": {
+    "name": "Đi tới khai báo",
+    "description": "Đi tới khai báo của ký hiệu tại con trỏ."
+  },
+  "editor::GoToDeclarationSplit": {
+    "name": "Đi tới khai báo trong ngăn tách",
+    "description": "Đi tới khai báo trong ngăn tách."
+  },
+  "editor::GoToDefinition": {
+    "name": "Đi tới định nghĩa",
+    "description": "Đi tới định nghĩa của ký hiệu tại con trỏ."
+  },
+  "editor::GoToDefinitionSplit": {
+    "name": "Đi tới định nghĩa trong ngăn tách",
+    "description": "Đi tới định nghĩa trong ngăn tách."
+  },
+  "editor::GoToDiagnostic": {
+    "name": "Đi tới chẩn đoán tiếp theo",
+    "description": "Nếu chẩn đoán chưa được kích hoạt, mở rộng chẩn đoán tại con trỏ (nếu có). Nếu không, đi tới chẩn đoán tiếp theo trong tệp."
+  },
+  "editor::GoToHunk": {
+    "name": "Đi tới khối khác biệt tiếp theo",
+    "description": "Đi tới khối khác biệt tiếp theo."
+  },
+  "editor::GoToImplementation": {
+    "name": "Đi tới triển khai",
+    "description": "Đi tới triển khai của ký hiệu tại con trỏ."
+  },
+  "editor::GoToImplementationSplit": {
+    "name": "Đi tới triển khai trong ngăn tách",
+    "description": "Đi tới triển khai trong ngăn tách."
+  }
+}

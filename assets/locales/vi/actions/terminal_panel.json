@@ -1,0 +1,10 @@
+{
+  "terminal_panel::Toggle": {
+    "name": "Bật/tắt bảng terminal",
+    "description": "Bật/tắt bảng terminal."
+  },
+  "terminal_panel::ToggleFocus": {
+    "name": "Bật/tắt tiêu điểm",
+    "description": "Bật/tắt tiêu điểm của bảng terminal."
+  }
+}

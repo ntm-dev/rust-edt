@@ -1,0 +1,38 @@
+{
+  "picker::ConfirmCompletion": {
+    "description": "Xác nhận gợi ý hoàn thành đã chọn trong bộ chọn.",
+    "name": "Xác nhận gợi ý hoàn thành"
+  },
+  "picker::ConfirmInput": {
+    "description": "ConfirmInput là một biến thể của hành động trình soạn thảo: thay vì chọn mục hiện tại trong bộ chọn, nó dùng nguyên văn nội dung trong ô nhập của bộ chọn để thực hiện thao tác.",
+    "name": "Xác nhận nội dung nhập"
+  },
+  "picker::MultiSelectNext": {
+    "description": "Bật/tắt chọn mục hiện tại trong chế độ chọn nhiều và chuyển đến mục tiếp theo; nếu chế độ chọn nhiều chưa bật thì sẽ bật.",
+    "name": "Chọn nhiều và chuyển đến mục tiếp theo"
+  },
+  "picker::SetPreviewBelow": {
+    "description": "Hiển thị bản xem trước bên dưới kết quả.",
+    "name": "Hiện bản xem trước bên dưới"
+  },
+  "picker::SetPreviewHidden": {
+    "description": "Ẩn bản xem trước.",
+    "name": "Ẩn bản xem trước"
+  },
+  "picker::SetPreviewRight": {
+    "description": "Hiển thị bản xem trước bên phải kết quả.",
+    "name": "Hiện bản xem trước bên phải"
+  },
+  "picker::ToggleActionsMenu": {
+    "description": "Mở menu hành động ở phía dưới.",
+    "name": "Bật/tắt menu hành động"
+  },
+  "picker::ToggleMultiSelect": {
+    "description": "Bật hoặc tắt chế độ chọn nhiều. Trong chế độ này, nhấp vào một mục sẽ thêm mục đó vào vùng chọn thay vì mở nó.",
+    "name": "Bật/tắt chọn nhiều"
+  },
+  "picker::TogglePreview": {
+    "description": "Hiện hoặc ẩn bản xem trước.",
+    "name": "Bật/tắt bản xem trước"
+  }
+}

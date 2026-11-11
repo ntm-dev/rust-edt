@@ -1,0 +1,34 @@
+{
+  "variable_list::AddWatch": {
+    "name": "Thêm theo dõi",
+    "description": "Thêm biến đã chọn vào danh sách theo dõi."
+  },
+  "variable_list::CollapseSelectedEntry": {
+    "name": "Thu gọn mục đã chọn",
+    "description": "Thu gọn biến đã chọn, ẩn các mục con của nó."
+  },
+  "variable_list::CopyVariableName": {
+    "name": "Sao chép tên biến",
+    "description": "Sao chép tên biến vào bộ nhớ tạm."
+  },
+  "variable_list::CopyVariableValue": {
+    "name": "Sao chép giá trị biến",
+    "description": "Sao chép giá trị biến vào bộ nhớ tạm."
+  },
+  "variable_list::EditVariable": {
+    "name": "Sửa biến",
+    "description": "Sửa giá trị của biến đã chọn."
+  },
+  "variable_list::ExpandSelectedEntry": {
+    "name": "Mở rộng mục đã chọn",
+    "description": "Mở rộng biến đã chọn, hiển thị các mục con của nó."
+  },
+  "variable_list::GoToMemory": {
+    "name": "Đi tới bộ nhớ",
+    "description": "Chuyển đến vị trí bộ nhớ của biến."
+  },
+  "variable_list::RemoveWatch": {
+    "name": "Xóa theo dõi",
+    "description": "Xóa biến đã chọn khỏi danh sách theo dõi."
+  }
+}

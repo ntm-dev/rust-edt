@@ -1,0 +1,18 @@
+{
+  "auto_update::Check": {
+    "description": "Kiểm tra xem có bản cập nhật mới không.",
+    "name": "Kiểm tra cập nhật"
+  },
+  "auto_update::DismissMessage": {
+    "description": "Đóng thông báo lỗi cập nhật.",
+    "name": "Đóng thông báo"
+  },
+  "auto_update::ViewReleaseNotes": {
+    "description": "Mở ghi chú phát hành của phiên bản hiện tại trong trình duyệt.",
+    "name": "Xem ghi chú phát hành"
+  },
+  "auto_update::ViewReleaseNotesLocally": {
+    "description": "Mở ghi chú phát hành của phiên bản hiện tại trong tab mới.",
+    "name": "Xem ghi chú phát hành trong ứng dụng"
+  }
+}

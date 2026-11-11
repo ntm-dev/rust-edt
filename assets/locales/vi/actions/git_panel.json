@@ -1,0 +1,94 @@
+{
+  "git_panel::ActivateChangesTab": {
+    "name": "Chuyển đến tab Thay đổi",
+    "description": "Chuyển đến tab Thay đổi."
+  },
+  "git_panel::ActivateHistoryTab": {
+    "name": "Chuyển đến tab Lịch sử",
+    "description": "Chuyển đến tab Lịch sử."
+  },
+  "git_panel::Close": {
+    "name": "Đóng",
+    "description": "Đóng bảng Git."
+  },
+  "git_panel::CollapseSelectedEntry": {
+    "name": "Thu gọn mục đã chọn",
+    "description": "Thu gọn mục đã chọn để ẩn các mục con."
+  },
+  "git_panel::ExpandSelectedEntry": {
+    "name": "Mở rộng mục đã chọn",
+    "description": "Mở rộng mục đã chọn để hiện các mục con."
+  },
+  "git_panel::FirstEntry": {
+    "name": "Mục đầu tiên",
+    "description": "Chọn mục đầu tiên trong bảng Git và hiển thị trong chế độ xem khác biệt."
+  },
+  "git_panel::FocusChanges": {
+    "name": "Chuyển tiêu điểm đến danh sách thay đổi",
+    "description": "Chuyển tiêu điểm đến danh sách thay đổi."
+  },
+  "git_panel::FocusEditor": {
+    "name": "Chuyển tiêu điểm đến trình soạn thảo commit",
+    "description": "Chuyển tiêu điểm đến trình soạn thảo thông điệp commit."
+  },
+  "git_panel::LastEntry": {
+    "name": "Mục cuối cùng",
+    "description": "Chọn mục cuối cùng trong bảng Git và hiển thị trong chế độ xem khác biệt."
+  },
+  "git_panel::NextEntry": {
+    "name": "Mục tiếp theo",
+    "description": "Chọn mục tiếp theo trong bảng Git và hiển thị trong chế độ xem khác biệt."
+  },
+  "git_panel::OpenMenu": {
+    "name": "Mở menu",
+    "description": "Mở menu của bảng Git."
+  },
+  "git_panel::PreviousEntry": {
+    "name": "Mục trước đó",
+    "description": "Chọn mục trước đó trong bảng Git và hiển thị trong chế độ xem khác biệt."
+  },
+  "git_panel::SetGroupByNone": {
+    "name": "Không nhóm",
+    "description": "Không nhóm các mục theo trạng thái."
+  },
+  "git_panel::SetGroupByStaging": {
+    "name": "Nhóm theo trạng thái stage",
+    "description": "Nhóm các mục theo trạng thái stage."
+  },
+  "git_panel::SetGroupByStatus": {
+    "name": "Nhóm theo trạng thái",
+    "description": "Nhóm các mục theo trạng thái."
+  },
+  "git_panel::SetSortByName": {
+    "name": "Sắp xếp theo tên",
+    "description": "Sắp xếp các mục theo tên."
+  },
+  "git_panel::SetSortByPath": {
+    "name": "Sắp xếp theo đường dẫn",
+    "description": "Sắp xếp các mục theo đường dẫn."
+  },
+  "git_panel::Toggle": {
+    "name": "Bật/tắt bảng Git",
+    "description": "Mở hoặc đóng bảng Git."
+  },
+  "git_panel::ToggleFillCoAuthors": {
+    "name": "Bật/tắt tự điền đồng tác giả",
+    "description": "Bật hoặc tắt tự động gợi ý đồng tác giả."
+  },
+  "git_panel::ToggleFocus": {
+    "name": "Bật/tắt tiêu điểm",
+    "description": "Chuyển tiêu điểm vào hoặc ra khỏi bảng Git."
+  },
+  "git_panel::ToggleTreeView": {
+    "name": "Bật/tắt dạng cây",
+    "description": "Chuyển cách hiển thị các mục giữa dạng cây và dạng phẳng."
+  },
+  "git_panel::ViewStagedChanges": {
+    "name": "Xem thay đổi đã stage",
+    "description": "Xem các thay đổi đã stage."
+  },
+  "git_panel::ViewUnstagedChanges": {
+    "name": "Xem thay đổi chưa stage",
+    "description": "Xem các thay đổi chưa stage."
+  }
+}

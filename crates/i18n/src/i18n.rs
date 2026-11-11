@@ -64,12 +64,16 @@ pub enum Language {
     SimplifiedChinese = 1,
     /// Wraps every translated string in brackets, to find text that isn't translated yet.
     Pseudo = 2,
+    Vietnamese = 3,
 }
 
 impl Language {
     pub fn from_locale(locale: &str) -> Self {
-        if locale.to_ascii_lowercase().starts_with("zh") {
+        let locale = locale.to_ascii_lowercase();
+        if locale.starts_with("zh") {
             Self::SimplifiedChinese
+        } else if locale.starts_with("vi") {
+            Self::Vietnamese
         } else {
             Self::English
         }
@@ -84,12 +88,14 @@ impl Language {
             Self::English => "en",
             Self::SimplifiedChinese => "zh-CN",
             Self::Pseudo => "pseudo",
+            Self::Vietnamese => "vi",
         }
     }
 
     fn catalog(self) -> Option<&'static Catalog> {
         match self {
             Self::SimplifiedChinese => Some(&SIMPLIFIED_CHINESE),
+            Self::Vietnamese => Some(&VIETNAMESE),
             Self::English | Self::Pseudo => None,
         }
     }
@@ -139,6 +145,7 @@ pub fn language() -> Language {
     match LANGUAGE.load(Ordering::Relaxed) {
         1 => Language::SimplifiedChinese,
         2 => Language::Pseudo,
+        3 => Language::Vietnamese,
         _ => Language::English,
     }
 }
@@ -200,7 +207,7 @@ impl CallSite {
         let Some(catalog) = language.catalog() else {
             return match language {
                 Language::Pseudo => pseudo(english),
-                Language::English | Language::SimplifiedChinese => {
+                Language::English | Language::SimplifiedChinese | Language::Vietnamese => {
                     SharedString::new_static(english)
                 }
             };
@@ -308,7 +315,7 @@ pub fn schema_description(english: &str) -> Option<SharedString> {
 /// Whether `text` is `english` or its translation in any language.
 pub fn is_any_translation_of(text: &str, english: &str) -> bool {
     text == english
-        || [&SIMPLIFIED_CHINESE].into_iter().any(|catalog| {
+        || CATALOGS.iter().any(|catalog| {
             catalog
                 .find_string(english)
                 .is_some_and(|index| catalog.strings[index].1 == text)
@@ -405,6 +412,8 @@ impl Catalog {
 
 include!(concat!(env!("OUT_DIR"), "/catalogs.rs"));
 
+static CATALOGS: [&Catalog; 2] = [&SIMPLIFIED_CHINESE, &VIETNAMESE];
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -481,6 +490,17 @@ mod tests {
     }
 
     #[test]
+    fn vietnamese_uses_the_generated_tables() {
+        with_language(Language::Vietnamese, || {
+            assert_eq!(t!("Rename").as_str(), "Đổi tên");
+            assert_eq!(translate("Rename").as_str(), "Đổi tên");
+            assert!(action_name("editor::ToggleComments").is_some());
+            assert!(action_description("editor::ToggleComments").is_some());
+            assert!(action_namespace("editor").is_some());
+        });
+    }
+
+    #[test]
     fn templates_match_filled_english_text() {
         assert_eq!(
             match_template("Forked from \"{title}\"", "Forked from \"My chat\""),
@@ -523,6 +543,7 @@ mod tests {
     fn titles_are_recognized_in_every_language() {
         assert!(is_any_translation_of("Rename", "Rename"));
         assert!(is_any_translation_of("重命名", "Rename"));
+        assert!(is_any_translation_of("Đổi tên", "Rename"));
         assert!(!is_any_translation_of("删除", "Rename"));
     }
 
@@ -541,32 +562,46 @@ mod tests {
             Language::English,
             Language::Pseudo,
             Language::SimplifiedChinese,
+            Language::Vietnamese,
+            Language::SimplifiedChinese,
         ] {
             set_language(language);
             labels.push(rename_label().to_string());
         }
         set_language(Language::English);
-        assert_eq!(labels, ["重命名", "重命名", "Rename", "⟦Rename⟧", "重命名"]);
+        assert_eq!(
+            labels,
+            [
+                "重命名",
+                "重命名",
+                "Rename",
+                "⟦Rename⟧",
+                "重命名",
+                "Đổi tên",
+                "重命名"
+            ]
+        );
     }
 
     #[test]
     fn generated_tables_are_sorted_and_unique() {
-        let catalog = &SIMPLIFIED_CHINESE;
-        assert!(!catalog.strings.is_empty());
-        assert!(catalog.strings.windows(2).all(|pair| pair[0].0 < pair[1].0));
-        assert!(catalog.actions.windows(2).all(|pair| pair[0].0 < pair[1].0));
-        assert!(
-            catalog
-                .action_namespaces
-                .windows(2)
-                .all(|pair| pair[0].0 < pair[1].0)
-        );
-        assert!(
-            catalog
-                .schema_descriptions
-                .windows(2)
-                .all(|pair| pair[0].0 < pair[1].0)
-        );
+        for catalog in CATALOGS {
+            assert!(!catalog.strings.is_empty());
+            assert!(catalog.strings.windows(2).all(|pair| pair[0].0 < pair[1].0));
+            assert!(catalog.actions.windows(2).all(|pair| pair[0].0 < pair[1].0));
+            assert!(
+                catalog
+                    .action_namespaces
+                    .windows(2)
+                    .all(|pair| pair[0].0 < pair[1].0)
+            );
+            assert!(
+                catalog
+                    .schema_descriptions
+                    .windows(2)
+                    .all(|pair| pair[0].0 < pair[1].0)
+            );
+        }
     }
 
     #[test]
@@ -612,6 +647,13 @@ mod tests {
             assert_eq!(
                 Language::from_locale(locale),
                 Language::SimplifiedChinese,
+                "{locale}"
+            );
+        }
+        for locale in ["vi", "vi-VN", "vi_VN", "VI-vn"] {
+            assert_eq!(
+                Language::from_locale(locale),
+                Language::Vietnamese,
                 "{locale}"
             );
         }
@@ -738,33 +780,46 @@ mod tests {
         key.split_once('|').map_or(key, |(_, english)| english)
     }
 
+    const LOCALE_CODES: &[&str] = &["zh-CN", "vi"];
+
     #[test]
-    fn simplified_chinese_strings_are_complete_and_consistent() {
-        let directory = repository_root().join("assets/locales/zh-CN/strings");
+    fn strings_are_complete_and_consistent() {
+        let problems = LOCALE_CODES
+            .iter()
+            .flat_map(|code| string_problems(code))
+            .collect::<Vec<_>>();
+        assert!(problems.is_empty(), "\n{}", problems.join("\n"));
+    }
+
+    fn string_problems(code: &str) -> Vec<String> {
+        let directory = repository_root()
+            .join("assets/locales")
+            .join(code)
+            .join("strings");
         let mut translations = BTreeMap::<String, (String, PathBuf)>::new();
         let mut problems = Vec::new();
 
         for (path, file) in read_json_files::<BTreeMap<String, String>>(&directory) {
-            for (key, chinese) in file {
-                if chinese.trim().is_empty() {
+            for (key, translation) in file {
+                if translation.trim().is_empty() {
                     problems.push(format!("{}: {key:?} is empty", path.display()));
                 }
-                if placeholders(english_text(&key)) != placeholders(&chinese) {
+                if placeholders(english_text(&key)) != placeholders(&translation) {
                     problems.push(format!(
-                        "{}: {key:?} and {chinese:?} have different placeholders",
+                        "{}: {key:?} and {translation:?} have different placeholders",
                         path.display()
                     ));
                 }
                 if let Some((existing, existing_path)) = translations.get(&key)
-                    && *existing != chinese
+                    && *existing != translation
                 {
                     problems.push(format!(
-                        "{key:?} is {existing:?} in {} but {chinese:?} in {}; use tc! to tell them apart",
+                        "{key:?} is {existing:?} in {} but {translation:?} in {}; use tc! to tell them apart",
                         existing_path.display(),
                         path.display()
                     ));
                 }
-                translations.insert(key, (chinese, path.clone()));
+                translations.insert(key, (translation, path.clone()));
             }
         }
 
@@ -777,7 +832,7 @@ mod tests {
                     .collect::<Vec<_>>()
                     .join(", ");
                 problems.push(format!(
-                    "{key:?} has no Chinese translation (used in {files})"
+                    "{key:?} has no {code} translation (used in {files})"
                 ));
             }
         }
@@ -786,8 +841,7 @@ mod tests {
                 problems.push(format!("{}: {key:?} is not used anywhere", path.display()));
             }
         }
-
-        assert!(problems.is_empty(), "\n{}", problems.join("\n"));
+        problems
     }
 
     const ACTIONS_MISSING_FROM_MACOS_RELEASE: &[&str] = &[
@@ -809,7 +863,7 @@ mod tests {
 
     /// Runs only with `WU_ACTIONS_DUMP` set to the output of `wu --dump-all-actions`.
     #[test]
-    fn simplified_chinese_commands_are_complete() {
+    fn commands_are_complete() {
         let Some(dump_path) = std::env::var_os("WU_ACTIONS_DUMP") else {
             return;
         };
@@ -818,7 +872,15 @@ mod tests {
         let dump: DumpedActions = serde_json::from_str(&dump)
             .unwrap_or_else(|error| panic!("parsing {dump_path:?}: {error}"));
 
-        let locales = repository_root().join("assets/locales/zh-CN");
+        let problems = LOCALE_CODES
+            .iter()
+            .flat_map(|code| command_problems(code, &dump))
+            .collect::<Vec<_>>();
+        assert!(problems.is_empty(), "\n{}", problems.join("\n"));
+    }
+
+    fn command_problems(code: &str, dump: &DumpedActions) -> Vec<String> {
+        let locales = repository_root().join("assets/locales").join(code);
         let mut translations = BTreeMap::new();
         for (_, file) in read_json_files::<BTreeMap<String, ActionText>>(&locales.join("actions")) {
             translations.extend(file);
@@ -836,16 +898,16 @@ mod tests {
             if let Some((namespace, _)) = action.name.split_once("::")
                 && !namespaces.contains(namespace)
             {
-                problems.push(format!("namespace {namespace:?} has no Chinese name"));
+                problems.push(format!("{code}: namespace {namespace:?} has no name"));
             }
             match translations.get(&action.name) {
-                None => problems.push(format!("{} has no Chinese name", action.name)),
+                None => problems.push(format!("{code}: {} has no name", action.name)),
                 Some(translation) if translation.name.trim().is_empty() => {
-                    problems.push(format!("{} has an empty Chinese name", action.name))
+                    problems.push(format!("{code}: {} has an empty name", action.name))
                 }
                 Some(translation) => {
                     if action.documentation.is_some() && translation.description.is_none() {
-                        problems.push(format!("{} has no Chinese description", action.name));
+                        problems.push(format!("{code}: {} has no description", action.name));
                     }
                 }
             }
@@ -854,11 +916,11 @@ mod tests {
             if !registered.contains(name.as_str())
                 && !ACTIONS_MISSING_FROM_MACOS_RELEASE.contains(&name.as_str())
             {
-                problems.push(format!("{name} is not a registered command"));
+                problems.push(format!("{code}: {name} is not a registered command"));
             }
         }
         problems.sort();
         problems.dedup();
-        assert!(problems.is_empty(), "\n{}", problems.join("\n"));
+        problems
     }
 }

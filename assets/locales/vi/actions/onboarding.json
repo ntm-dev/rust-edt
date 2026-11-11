@@ -1,0 +1,10 @@
+{
+  "onboarding::Finish": {
+    "description": "Hoàn tất làm quen.",
+    "name": "Hoàn tất"
+  },
+  "onboarding::ResetHints": {
+    "description": "Đặt lại các gợi ý của trang chào mừng về trạng thái ban đầu.",
+    "name": "Đặt lại gợi ý"
+  }
+}

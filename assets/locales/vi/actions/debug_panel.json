@@ -1,0 +1,10 @@
+{
+  "debug_panel::Toggle": {
+    "name": "Bật/tắt bảng gỡ lỗi",
+    "description": "Mở hoặc đóng bảng gỡ lỗi."
+  },
+  "debug_panel::ToggleFocus": {
+    "name": "Bật/tắt tiêu điểm",
+    "description": "Chuyển tiêu điểm vào hoặc ra khỏi bảng gỡ lỗi."
+  }
+}

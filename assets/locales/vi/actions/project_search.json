@@ -1,0 +1,26 @@
+{
+  "project_search::NextField": {
+    "name": "Trường nhập tiếp theo",
+    "description": "Chuyển đến trường nhập tiếp theo."
+  },
+  "project_search::OpenTextFinder": {
+    "name": "Mở trình tìm văn bản",
+    "description": "Mở bộ chọn văn bản trong cửa sổ bật lên, hiển thị kết quả hiện tại."
+  },
+  "project_search::SearchInNew": {
+    "name": "Tìm kiếm trong tab mới",
+    "description": "Tìm kiếm trong một tab tìm kiếm dự án mới."
+  },
+  "project_search::ToggleAllSearchResults": {
+    "name": "Bật/tắt thu gọn tất cả kết quả",
+    "description": "Bật/tắt trạng thái thu gọn hoặc mở rộng của tất cả đoạn trích kết quả tìm kiếm."
+  },
+  "project_search::ToggleFilters": {
+    "name": "Bật/tắt bộ lọc",
+    "description": "Bật/tắt bảng bộ lọc tìm kiếm."
+  },
+  "project_search::ToggleFocus": {
+    "name": "Bật/tắt tiêu điểm",
+    "description": "Chuyển tiêu điểm giữa thanh tìm kiếm và kết quả tìm kiếm."
+  }
+}

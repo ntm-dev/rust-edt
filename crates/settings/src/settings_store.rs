@@ -952,10 +952,8 @@ impl SettingsStore {
         }
         self.last_user_settings_content = Some(user_settings_content.to_string());
 
-        let (settings, parse_result) = self.parse_zed_settings::<UserSettingsContent>(
-            user_settings_content,
-            SettingsFile::User,
-        );
+        let (settings, parse_result) = self
+            .parse_zed_settings::<UserSettingsContent>(user_settings_content, SettingsFile::User);
 
         if let Some(settings) = settings {
             self.user_settings = Some(settings);
@@ -978,10 +976,8 @@ impl SettingsStore {
         }
         self.last_global_settings_content = Some(global_settings_content.to_string());
 
-        let (settings, parse_result) = self.parse_zed_settings::<SettingsContent>(
-            global_settings_content,
-            SettingsFile::Global,
-        );
+        let (settings, parse_result) = self
+            .parse_zed_settings::<SettingsContent>(global_settings_content, SettingsFile::Global);
 
         if let Some(settings) = settings {
             self.global_settings = Some(Box::new(settings));
@@ -3300,21 +3296,21 @@ mod tests {
 
     static LANGUAGE_LOCK: std::sync::Mutex<()> = std::sync::Mutex::new(());
 
-    struct SimplifiedChinese {
+    struct TranslatedLanguage {
         _lock: std::sync::MutexGuard<'static, ()>,
     }
 
-    impl SimplifiedChinese {
-        fn enable() -> Self {
+    impl TranslatedLanguage {
+        fn enable(language: i18n::Language) -> Self {
             let lock = LANGUAGE_LOCK
                 .lock()
                 .unwrap_or_else(|poisoned| poisoned.into_inner());
-            i18n::set_language(i18n::Language::SimplifiedChinese);
+            i18n::set_language(language);
             Self { _lock: lock }
         }
     }
 
-    impl Drop for SimplifiedChinese {
+    impl Drop for TranslatedLanguage {
         fn drop(&mut self) {
             i18n::set_language(i18n::Language::English);
         }
@@ -3381,9 +3377,19 @@ mod tests {
 
     #[test]
     fn test_schema_descriptions_are_translated_to_simplified_chinese() {
+        check_schema_translations(i18n::Language::SimplifiedChinese);
+    }
+
+    #[test]
+    fn test_schema_descriptions_are_translated_to_vietnamese() {
+        check_schema_translations(i18n::Language::Vietnamese);
+    }
+
+    fn check_schema_translations(language: i18n::Language) {
+        let code = language.code();
         let english = schema_descriptions();
         let (untranslated, toggle_comments_description) = {
-            let _chinese = SimplifiedChinese::enable();
+            let _translated = TranslatedLanguage::enable(language);
             let untranslated = schema_descriptions()
                 .intersection(&english)
                 .cloned()
@@ -3403,11 +3409,13 @@ mod tests {
         };
         assert!(
             toggle_comments_description.is_some(),
-            "the keymap schema should use the Chinese description of editor::ToggleComments"
+            "the keymap schema should use the {code} description of editor::ToggleComments"
         );
 
-        let directory =
-            Path::new(env!("CARGO_MANIFEST_DIR")).join("../../assets/locales/zh-CN/schema");
+        let directory = Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../../assets/locales")
+            .join(code)
+            .join("schema");
         let mut stale = Vec::new();
         for entry in std::fs::read_dir(&directory).unwrap() {
             let path = entry.unwrap().path();
@@ -3426,7 +3434,7 @@ mod tests {
 
         assert!(
             untranslated.is_empty() && stale.is_empty(),
-            "Schema descriptions with no Chinese in assets/locales/zh-CN/schema:\n{}\n\nTranslations that match no schema description:\n{}",
+            "Schema descriptions with no translation in assets/locales/{code}/schema:\n{}\n\nTranslations that match no schema description:\n{}",
             untranslated
                 .iter()
                 .map(|description| format!("{description:?}"))

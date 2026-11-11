@@ -1,0 +1,18 @@
+{
+  "Adding rustup target for cross-compilation": "Đang thêm target rustup để biên dịch chéo",
+  "Building remote binary from source for {triple} with Zig": "Đang build tệp thực thi từ xa từ mã nguồn cho {triple} bằng Zig",
+  "Building remote server binary from source": "Đang build tệp thực thi máy chủ từ xa từ mã nguồn",
+  "Compressing binary": "Đang nén tệp thực thi",
+  "Connecting": "Đang kết nối",
+  "Connecting (reusing session)": "Đang kết nối (dùng lại phiên)",
+  "Detecting WSL environment": "Đang phát hiện môi trường WSL",
+  "Downloading remote development server on host": "Đang tải máy chủ phát triển từ xa xuống máy chủ",
+  "Extracting remote development server": "Đang giải nén máy chủ phát triển từ xa",
+  "Extracting remote server": "Đang giải nén máy chủ từ xa",
+  "Installing cargo-zigbuild for cross-compilation": "Đang cài cargo-zigbuild để biên dịch chéo",
+  "Starting proxy": "Đang khởi động proxy",
+  "Streaming remote server into WSL": "Đang truyền máy chủ từ xa vào WSL",
+  "Uploading remote development server": "Đang tải máy chủ phát triển từ xa lên",
+  "Uploading remote server": "Đang tải máy chủ từ xa lên",
+  "Waiting for existing connection attempt": "Đang chờ lần kết nối hiện có"
+}

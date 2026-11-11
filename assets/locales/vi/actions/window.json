@@ -1,0 +1,14 @@
+{
+  "window::MergeAllWindows": {
+    "name": "Hợp nhất tất cả cửa sổ"
+  },
+  "window::MoveTabToNewWindow": {
+    "name": "Chuyển tab sang cửa sổ mới"
+  },
+  "window::ShowNextWindowTab": {
+    "name": "Hiển thị tab cửa sổ tiếp theo"
+  },
+  "window::ShowPreviousWindowTab": {
+    "name": "Hiển thị tab cửa sổ trước đó"
+  }
+}

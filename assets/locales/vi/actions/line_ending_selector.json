@@ -1,0 +1,6 @@
+{
+  "line_ending_selector::Toggle": {
+    "name": "Bật/tắt bộ chọn kiểu xuống dòng",
+    "description": "Bật/tắt cửa sổ bật lên chọn kiểu xuống dòng."
+  }
+}

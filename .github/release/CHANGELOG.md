@@ -4,6 +4,16 @@ All notable user-facing changes to Wu are listed here, newest first.
 
 ## Unreleased
 
+## 1.4.2 - 2026-11-13
+
+- Show the git branch in the status bar, as VS Code does, instead of the title bar.
+- Show git status letters (M, U, D) and error counts next to files in the Explorer, Open Editors and editor tabs, with a dot on folders that contain changes.
+- Terminal: add command status dots (zsh), bold text in bright colors, VS Code-style minimum contrast, a Ports tab, and a centered resize grip between panels.
+- Syntax colors for Panda Syntax now follow the original theme more closely (storage keywords, constants, brackets, CSS, Markdown, HTML and XML tags).
+- Bracket pair colorization is on by default, the editor horizontal scrollbar is off, and the status bar shows "Ln 1, Col 1".
+- The Explorer scrollbar now covers only the folder tree, and the back and forward buttons are disabled when there is nowhere to go.
+- Quick open and the command palette open near the top of the window and are wider.
+
 ## 1.4.1 - 2026-11-11
 
 - Fix the build failure in the terminal panel list introduced in 1.4.0.

@@ -2905,6 +2905,7 @@ dependencies = [
  "ctor",
  "editor",
  "futures-lite 1.13.0",
+ "globset",
  "gpui",
  "i18n",
  "indoc",
@@ -12152,6 +12153,7 @@ dependencies = [
  "breadcrumbs",
  "collections",
  "db",
+ "diagnostics",
  "dirs",
  "editor",
  "futures",
@@ -15768,7 +15770,7 @@ checksum = "3ad82d2a33cdc9674dc7465672f271e096168fcdbe0f799d9e6db8c5892679dc"
 
 [[package]]
 name = "wu"
-version = "1.4.2"
+version = "1.4.3"
 dependencies = [
  "activity_indicator",
  "agent_chat",

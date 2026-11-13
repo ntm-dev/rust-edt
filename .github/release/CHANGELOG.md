@@ -4,6 +4,14 @@ All notable user-facing changes to Wu are listed here, newest first.
 
 ## Unreleased
 
+## 1.4.3 - 2026-11-14
+
+- Problems tab now opens as a table in the bottom panel, with Code, Message, File and Source columns, a filter box, severity filters, a tree view with Collapse All, alternating row colors and a count badge on the tab.
+- Right-click the panel tab row to show or hide tabs, move the panel, hide it, or switch the tabs between icons and labels.
+- Status bar shows the indentation ("Spaces: 4" or "Tab Size: 4") with a menu to convert indentation, and is 28px high.
+- Search view has a title row, a Toggle Search Details button under the input, and VS Code-style input boxes.
+- Add Chinese and Vietnamese translations for the new labels.
+
 ## 1.4.2 - 2026-11-13
 
 - Show the git branch in the status bar, as VS Code does, instead of the title bar.

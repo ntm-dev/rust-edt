@@ -1,4 +1,6 @@
+mod indent_indicator;
 mod line_ending_indicator;
+pub use indent_indicator::IndentIndicator;
 
 use editor::Editor;
 use gpui::{DismissEvent, Entity, EventEmitter, FocusHandle, Focusable, Task, WeakEntity, actions};

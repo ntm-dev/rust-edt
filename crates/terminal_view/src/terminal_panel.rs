@@ -7,7 +7,7 @@ use crate::{
     },
 };
 use breadcrumbs::Breadcrumbs;
-use collections::HashMap;
+use collections::{HashMap, HashSet};
 use db::kvp::KeyValueStore;
 use futures::{channel::oneshot, future::join_all};
 use gpui::{
@@ -91,9 +91,92 @@ pub struct TerminalPanel {
     selected_terminals: Vec<EntityId>,
     selection_anchor: Option<EntityId>,
     maximized_from: Option<Pixels>,
+    show_problems: bool,
+    problems_view: Option<Entity<diagnostics::ProblemsTable>>,
+    hidden_tabs: HashSet<PanelTab>,
+    show_tab_icons: bool,
+}
+
+fn format_problem_count(count: usize) -> String {
+    if count >= 1000 {
+        format!("{}K+", count / 1000)
+    } else {
+        count.to_string()
+    }
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
+enum PanelTab {
+    Terminal,
+    Problems,
+    Output,
+    Ports,
+    DebugConsole,
+}
+
+impl PanelTab {
+    fn all() -> [PanelTab; 5] {
+        [
+            PanelTab::Terminal,
+            PanelTab::Problems,
+            PanelTab::Output,
+            PanelTab::Ports,
+            PanelTab::DebugConsole,
+        ]
+    }
+
+    fn icon(self) -> IconName {
+        match self {
+            PanelTab::Terminal => IconName::Terminal,
+            PanelTab::Problems => IconName::Warning,
+            PanelTab::Output => IconName::File,
+            PanelTab::Ports => IconName::Server,
+            PanelTab::DebugConsole => IconName::Debug,
+        }
+    }
+
+    fn label(self) -> SharedString {
+        match self {
+            PanelTab::Terminal => t!("Terminal"),
+            PanelTab::Problems => t!("Problems"),
+            PanelTab::Output => t!("Output"),
+            PanelTab::Ports => t!("Ports"),
+            PanelTab::DebugConsole => t!("Debug Console"),
+        }
+    }
 }
 
 impl TerminalPanel {
+    fn show_problems_view(&mut self, window: &mut Window, cx: &mut Context<Self>) {
+        if self.problems_view.is_none() {
+            let Some(workspace) = self.workspace.upgrade() else {
+                return;
+            };
+            let project = workspace.read(cx).project().clone();
+            let weak_workspace = self.workspace.clone();
+            self.problems_view = Some(diagnostics::ProblemsTable::build(
+                project,
+                weak_workspace,
+                window,
+                cx,
+            ));
+        }
+        self.show_problems = true;
+        cx.notify();
+    }
+
+    fn toggle_tab_icons(&mut self, cx: &mut Context<Self>) {
+        self.show_tab_icons = !self.show_tab_icons;
+        cx.notify();
+    }
+
+    fn toggle_tab_visibility(&mut self, tab: PanelTab, cx: &mut Context<Self>) {
+        if !self.hidden_tabs.remove(&tab) {
+            self.hidden_tabs.insert(tab);
+        }
+        cx.notify();
+    }
+
     pub fn new(workspace: &Workspace, window: &mut Window, cx: &mut Context<Self>) -> Self {
         let project = workspace.project();
         let pane = new_terminal_pane(workspace.weak_handle(), project.clone(), false, window, cx);
@@ -113,7 +196,21 @@ impl TerminalPanel {
             selected_terminals: Vec::new(),
             selection_anchor: None,
             maximized_from: None,
+            show_problems: false,
+            problems_view: None,
+            hidden_tabs: HashSet::default(),
+            show_tab_icons: false,
         };
+        cx.subscribe(project, |_, _, event, cx| {
+            if matches!(
+                event,
+                project::Event::DiagnosticsUpdated { .. }
+                    | project::Event::DiskBasedDiagnosticsFinished { .. }
+            ) {
+                cx.notify();
+            }
+        })
+        .detach();
         terminal_panel.apply_tab_bar_buttons(&terminal_panel.active_pane, cx);
         terminal_panel
     }
@@ -1868,8 +1965,45 @@ impl TerminalPanel {
         cx.notify();
     }
 
-    fn render_panel_header(&self, cx: &mut Context<Self>) -> impl IntoElement + use<> {
+    fn render_panel_header(
+        &self,
+        window: &mut Window,
+        cx: &mut Context<Self>,
+    ) -> impl IntoElement + use<> {
         let maximized = self.maximized_from.is_some();
+        let showing_problems = self.show_problems;
+        let show_tab_icons = self.show_tab_icons;
+        let tab_content = move |tab: PanelTab| -> AnyElement {
+            if show_tab_icons {
+                Icon::new(tab.icon())
+                    .size(IconSize::Small)
+                    .into_any_element()
+            } else {
+                div().child(tab.label()).into_any_element()
+            }
+        };
+        let problems_toolbar = self
+            .problems_view
+            .clone()
+            .filter(|_| showing_problems)
+            .map(|view| {
+                view.update(cx, |view, cx| {
+                    view.toolbar(window, cx).into_any_element()
+                })
+            });
+        let problem_count = self
+            .workspace
+            .upgrade()
+            .map(|workspace| {
+                let summary = workspace
+                    .read(cx)
+                    .project()
+                    .read(cx)
+                    .diagnostic_summary(false, cx);
+                summary.error_count + summary.warning_count
+            })
+            .unwrap_or(0);
+        let hidden_tabs = self.hidden_tabs.clone();
         let colors = cx.theme().colors().clone();
         let item_count: usize = self
             .center
@@ -1901,15 +2035,29 @@ impl TerminalPanel {
                     .h_full()
                     .child(
                         div()
+                            .id("panel-tab-terminal")
                             .h_full()
                             .flex()
                             .items_center()
                             .px(px(10.))
-                            .rounded_t(px(4.))
-                            .bg(colors.panel_background)
+                            .cursor_pointer()
                             .text_size(px(13.))
-                            .text_color(colors.tab_active_foreground)
-                            .child(t!("Terminal")),
+                            .when(hidden_tabs.contains(&PanelTab::Terminal), |tab| tab.hidden())
+                            .map(|tab| {
+                                if showing_problems {
+                                    tab.text_color(colors.text_muted)
+                                        .hover(|style| style.text_color(colors.text))
+                                } else {
+                                    tab.rounded_t(px(4.))
+                                        .bg(colors.panel_background)
+                                        .text_color(colors.tab_active_foreground)
+                                }
+                            })
+                            .on_click(cx.listener(|panel, _, _, cx| {
+                                panel.show_problems = false;
+                                cx.notify();
+                            }))
+                            .child(tab_content(PanelTab::Terminal)),
                     )
                     .child(
                         div()
@@ -1920,20 +2068,44 @@ impl TerminalPanel {
                             .px(px(10.))
                             .cursor_pointer()
                             .text_size(px(13.))
-                            .text_color(colors.text_muted)
-                            .hover(|style| style.text_color(colors.text))
-                            .on_click(|_, window, cx| {
-                                if let Ok(action) = cx.build_action("diagnostics::Deploy", None) {
-                                    window.dispatch_action(action, cx);
+                            .when(hidden_tabs.contains(&PanelTab::Problems), |tab| tab.hidden())
+                            .map(|tab| {
+                                if showing_problems {
+                                    tab.rounded_t(px(4.))
+                                        .bg(colors.panel_background)
+                                        .text_color(colors.tab_active_foreground)
+                                } else {
+                                    tab.text_color(colors.text_muted)
+                                        .hover(|style| style.text_color(colors.text))
                                 }
                             })
-                            .child(t!("Problems")),
+                            .on_click(cx.listener(|panel, _, window, cx| {
+                                panel.show_problems_view(window, cx);
+                            }))
+                            .child(tab_content(PanelTab::Problems))
+                            .when(problem_count > 0, |tab| {
+                                tab.child(
+                                    div()
+                                        .ml(px(6.))
+                                        .px(px(5.))
+                                        .h(px(16.))
+                                        .rounded(px(10.))
+                                        .flex()
+                                        .items_center()
+                                        .justify_center()
+                                        .text_size(px(10.))
+                                        .bg(colors.tab_active_foreground)
+                                        .text_color(colors.title_bar_background)
+                                        .child(format_problem_count(problem_count)),
+                                )
+                            }),
                     )
                     .child(
                         div()
                             .id("panel-tab-output")
                             .h_full()
                             .flex()
+                            .when(hidden_tabs.contains(&PanelTab::Output), |tab| tab.hidden())
                             .items_center()
                             .px(px(10.))
                             .cursor_pointer()
@@ -1943,13 +2115,14 @@ impl TerminalPanel {
                             .on_click(|_, window, cx| {
                                 window.dispatch_action(workspace::OpenLog.boxed_clone(), cx);
                             })
-                            .child(t!("Output")),
+                            .child(tab_content(PanelTab::Output)),
                     )
                     .child(
                         div()
                             .id("panel-tab-ports")
                             .h_full()
                             .flex()
+                            .when(hidden_tabs.contains(&PanelTab::Ports), |tab| tab.hidden())
                             .items_center()
                             .px(px(10.))
                             .cursor_pointer()
@@ -1973,13 +2146,14 @@ impl TerminalPanel {
                                         .ok();
                                 }
                             })
-                            .child(t!("Ports")),
+                            .child(tab_content(PanelTab::Ports)),
                     )
                     .child(
                         div()
                             .id("panel-tab-debug-console")
                             .h_full()
                             .flex()
+                            .when(hidden_tabs.contains(&PanelTab::DebugConsole), |tab| tab.hidden())
                             .items_center()
                             .px(px(10.))
                             .cursor_pointer()
@@ -1993,13 +2167,19 @@ impl TerminalPanel {
                                     window.dispatch_action(action, cx);
                                 }
                             })
-                            .child(t!("Debug Console")),
+                            .child(tab_content(PanelTab::DebugConsole)),
                     ),
             )
             .child(
                 h_flex()
                     .gap_0p5()
                     .items_center()
+                    .children(problems_toolbar)
+                    .child(
+                        h_flex()
+                    .gap_0p5()
+                    .items_center()
+                    .when(showing_problems, |this| this.hidden())
                     .when_some(single_title, |this, title| {
                         this.child(
                             h_flex()
@@ -2079,6 +2259,7 @@ impl TerminalPanel {
                                 }))
                             }),
                     )
+                    )
                     .child(div().w(px(1.)).h(px(16.)).mx_1().bg(colors.border))
                     .child(
                         IconButton::new(
@@ -2115,7 +2296,114 @@ impl TerminalPanel {
 impl Render for TerminalPanel {
     fn render(&mut self, window: &mut Window, cx: &mut Context<Self>) -> impl IntoElement {
         let terminal_list = self.render_terminal_list(window, cx);
-        let panel_header = self.render_panel_header(cx);
+        let panel_header = self.render_panel_header(window, cx);
+        let panel_header = {
+            let panel = cx.entity().downgrade();
+            let hidden_tabs = self.hidden_tabs.clone();
+            let show_tab_icons = self.show_tab_icons;
+            let current_position = self.position(window, cx);
+            right_click_menu("terminal-panel-header-menu")
+                .trigger(move |_, _, _| panel_header)
+                .menu(move |window, cx| {
+                    let panel = panel.clone();
+                    let hidden_tabs = hidden_tabs.clone();
+                    ContextMenu::build(window, cx, move |mut menu, _, _| {
+                        for tab in PanelTab::all() {
+                            let panel = panel.clone();
+                            menu = menu.toggleable_entry(
+                                tab.label(),
+                                !hidden_tabs.contains(&tab),
+                                IconPosition::Start,
+                                None,
+                                move |_, cx| {
+                                    panel
+                                        .update(cx, |panel, cx| {
+                                            panel.toggle_tab_visibility(tab, cx)
+                                        })
+                                        .ok();
+                                },
+                            );
+                        }
+                        let position_panel = panel.clone();
+                        menu.separator()
+                            .submenu(t!("Panel Position"), move |menu, _, _| {
+                                let mut menu = menu;
+                                for (position, label) in [
+                                    (DockPosition::Left, t!("Left")),
+                                    (DockPosition::Right, t!("Right")),
+                                    (DockPosition::Bottom, t!("Bottom")),
+                                ] {
+                                    let panel = position_panel.clone();
+                                    menu = menu.toggleable_entry(
+                                        label,
+                                        current_position == position,
+                                        IconPosition::Start,
+                                        None,
+                                        move |window, cx| {
+                                            panel
+                                                .update(cx, |panel, cx| {
+                                                    panel.set_position(position, window, cx)
+                                                })
+                                                .ok();
+                                        },
+                                    );
+                                }
+                                menu
+                            })
+                            .submenu(t!("Align Panel"), |menu, _, _| {
+                                let mut menu = menu;
+                                for (label, checked) in [
+                                    (t!("Left"), false),
+                                    (t!("Center"), true),
+                                    (t!("Right"), false),
+                                    (t!("Justify"), false),
+                                ] {
+                                    menu = menu.toggleable_entry_disabled_when(
+                                        label,
+                                        checked,
+                                        true,
+                                        IconPosition::Start,
+                                        None,
+                                        |_, _| {},
+                                    );
+                                }
+                                menu
+                            })
+                            .item(
+                                ui::ContextMenuEntry::new(if show_tab_icons {
+                                    t!("Show Labels")
+                                } else {
+                                    t!("Show Icons")
+                                })
+                                .handler({
+                                    let panel = panel.clone();
+                                    move |_, cx| {
+                                        panel
+                                            .update(cx, |panel, cx| panel.toggle_tab_icons(cx))
+                                            .ok();
+                                    }
+                                }),
+                            )
+                            .action(t!("Hide Panel"), workspace::ToggleBottomDock.boxed_clone())
+                    })
+                    .into()
+                })
+        };
+        let problems_overlay = self
+            .show_problems
+            .then(|| self.problems_view.clone())
+            .flatten()
+            .map(|view| {
+                div()
+                    .absolute()
+                    .top(px(32.))
+                    .left_0()
+                    .right_0()
+                    .bottom_0()
+                    .occlude()
+                    .bg(cx.theme().colors().panel_background)
+                    .child(view)
+            });
         let show_terminal_list = self
             .center
             .panes()
@@ -2182,6 +2470,7 @@ impl Render for TerminalPanel {
                         ),
                     )
                     .children(restoring_placeholder)
+                    .children(problems_overlay)
             })
             .ok()
             .map(|div| {

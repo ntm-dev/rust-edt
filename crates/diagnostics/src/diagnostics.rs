@@ -3,6 +3,8 @@ mod toolbar_controls;
 
 mod buffer_diagnostics;
 mod diagnostic_renderer;
+mod problems_table;
+pub use problems_table::ProblemsTable;
 
 #[cfg(test)]
 mod diagnostics_tests;
@@ -56,6 +58,8 @@ actions!(
     [
         /// Opens the project diagnostics view.
         Deploy,
+        /// Opens the problems table.
+        OpenProblemsTable,
         /// Toggles the display of warning-level diagnostics.
         ToggleWarnings,
         /// Toggles automatic refresh of diagnostics.
@@ -71,6 +75,7 @@ pub fn init(cx: &mut App) {
     editor::set_diagnostic_renderer(diagnostic_renderer::DiagnosticRenderer {}, cx);
     cx.observe_new(ProjectDiagnosticsEditor::register).detach();
     cx.observe_new(BufferDiagnosticsEditor::register).detach();
+    cx.observe_new(problems_table::ProblemsTable::register).detach();
 }
 
 pub(crate) struct ProjectDiagnosticsEditor {

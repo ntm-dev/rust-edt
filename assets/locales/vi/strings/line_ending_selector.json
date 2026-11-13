@@ -1,4 +1,9 @@
 {
+  "Convert Indentation to Spaces": "Chuyển thụt lề thành dấu cách",
+  "Convert Indentation to Tabs": "Chuyển thụt lề thành tab",
+  "Select Indentation": "Chọn kiểu thụt lề",
   "Select Line Ending": "Chọn kiểu xuống dòng",
+  "Spaces: {size}": "Dấu cách: {size}",
+  "Tab Size: {size}": "Kích thước tab: {size}",
   "Select a line ending…": "Chọn một kiểu xuống dòng…"
 }

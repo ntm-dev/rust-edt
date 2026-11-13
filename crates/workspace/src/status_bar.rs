@@ -119,7 +119,7 @@ impl Render for StatusBar {
             .w_full()
             .justify_between()
             .gap(DynamicSpacing::Base08.rems(cx))
-            .h(px(22.))
+            .h(px(28.))
             .flex_none()
             .px(DynamicSpacing::Base04.rems(cx))
             .bg(cx.theme().colors().status_bar_background)

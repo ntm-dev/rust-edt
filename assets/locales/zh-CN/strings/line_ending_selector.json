@@ -1,4 +1,9 @@
 {
+  "Convert Indentation to Spaces": "将缩进转换为空格",
+  "Convert Indentation to Tabs": "将缩进转换为制表符",
+  "Select Indentation": "选择缩进",
   "Select Line Ending": "选择行尾符",
+  "Spaces: {size}": "空格：{size}",
+  "Tab Size: {size}": "制表符长度：{size}",
   "Select a line ending…": "选择行尾符…"
 }

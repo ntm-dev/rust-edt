@@ -124,7 +124,7 @@ pub(crate) fn render_text_input(
     };
 
     let mut editor_style = EditorStyle {
-        background: app.theme().colors().toolbar_background,
+        background: gpui::transparent_black(),
         local_player: app.theme().players().local(),
         text: text_style,
         ..EditorStyle::default()

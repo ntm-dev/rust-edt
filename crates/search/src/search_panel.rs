@@ -957,7 +957,7 @@ impl SearchPanel {
         let border_color = if focus_handle.is_focused(window) {
             colors.border_focused
         } else {
-            colors.border_variant
+            gpui::transparent_black()
         };
         h_flex()
             .id(SharedString::from(format!(
@@ -966,14 +966,14 @@ impl SearchPanel {
             )))
             .flex_1()
             .min_w_0()
-            .h_7()
-            .pl_2()
+            .h(px(26.))
+            .pl(px(6.))
             .pr_0p5()
             .gap_1()
             .border_1()
             .border_color(border_color)
-            .rounded_md()
-            .bg(colors.editor_background)
+            .rounded(px(4.))
+            .bg(gpui::rgb(0x3c3c3c))
             .cursor_text()
             .on_click(move |_, window, cx| window.focus(&focus_handle, cx))
             .child(
@@ -1009,12 +1009,12 @@ impl SearchPanel {
         let replace_toggle = div()
             .id("search-panel-toggle-replace")
             .flex_none()
-            .w_4()
-            .h_full()
+            .w(px(16.))
+            .h(px(26.))
             .flex()
             .items_center()
             .justify_center()
-            .rounded_sm()
+            .rounded(px(4.))
             .cursor_pointer()
             .hover(|style| style.bg(colors.ghost_element_hover))
             .when(self.replace_enabled, |this| {
@@ -1051,6 +1051,38 @@ impl SearchPanel {
                 this.replace_all(&ReplaceAll, window, cx);
             }))
             .into_any_element();
+        let details_toggle = div()
+            .id("search-panel-toggle-filters")
+            .w(px(25.))
+            .h(px(16.))
+            .flex()
+            .items_center()
+            .justify_center()
+            .rounded(px(3.))
+            .cursor_pointer()
+            .hover(|style| style.bg(colors.ghost_element_hover))
+            .when(self.filters_enabled, |this| {
+                this.bg(colors.ghost_element_selected)
+            })
+            .tooltip({
+                let focus_handle = query_focus_handle.clone();
+                move |_, cx| {
+                    Tooltip::for_action_in(
+                        t!("Toggle Search Details"),
+                        &ToggleFilters,
+                        &focus_handle,
+                        cx,
+                    )
+                }
+            })
+            .on_click(cx.listener(|this, _, window, cx| {
+                this.toggle_filters(&ToggleFilters, window, cx);
+            }))
+            .child(
+                Icon::new(IconName::Ellipsis)
+                    .size(IconSize::Small)
+                    .color(Color::Muted),
+            );
         let include_ignored_button = SearchOption::IncludeIgnored
             .as_button(
                 self.search_options,
@@ -1096,6 +1128,7 @@ impl SearchPanel {
                             }),
                     ),
             )
+            .child(h_flex().justify_end().child(details_toggle))
             .when(self.filters_enabled, |this| {
                 this.child(
                     v_flex()
@@ -1169,19 +1202,16 @@ impl SearchPanel {
                 .on_click(move |_, window, cx| window.dispatch_action(action.boxed_clone(), cx))
         };
         let has_results = !self.files.is_empty();
-        h_flex()
-            .h_7()
-            .pl_2()
+        let title_row = h_flex()
+            .h(px(35.))
+            .pl(px(12.))
             .pr_1()
             .gap_2()
             .justify_between()
-            .border_b_1()
-            .border_color(cx.theme().colors().border_variant)
             .child(
                 div().min_w_0().overflow_hidden().child(
-                    Label::new(summary.unwrap_or_default())
-                        .size(LabelSize::Small)
-                        .color(Color::Muted)
+                    Label::new(t!("Search"))
+                        .weight(gpui::FontWeight::SEMIBOLD)
                         .single_line()
                         .truncate(),
                 ),
@@ -1216,28 +1246,19 @@ impl SearchPanel {
                         n!("Open in Editor"),
                         &OpenInEditor,
                         has_results,
-                    ))
-                    .child(
-                        IconButton::new("search-panel-toggle-filters", IconName::Ellipsis)
-                            .shape(IconButtonShape::Square)
-                            .icon_size(IconSize::Small)
-                            .toggle_state(self.filters_enabled)
-                            .tooltip({
-                                let focus_handle = query_focus_handle.clone();
-                                move |_, cx| {
-                                    Tooltip::for_action_in(
-                                        t!("Toggle Search Details"),
-                                        &ToggleFilters,
-                                        &focus_handle,
-                                        cx,
-                                    )
-                                }
-                            })
-                            .on_click(cx.listener(|this, _, window, cx| {
-                                this.toggle_filters(&ToggleFilters, window, cx);
-                            })),
-                    ),
+                    )),
+            );
+        v_flex().child(title_row).when_some(summary, |this, summary| {
+            this.child(
+                div().px(px(12.)).pb_1().child(
+                    Label::new(summary)
+                        .size(LabelSize::Small)
+                        .color(Color::Muted)
+                        .single_line()
+                        .truncate(),
+                ),
             )
+        })
     }
 
     fn render_row(
@@ -1565,7 +1586,7 @@ impl Render for SearchPanel {
             .key_context(self.dispatch_context(window))
             .track_focus(&self.focus_handle)
             .size_full()
-            .bg(cx.theme().colors().panel_background)
+            .bg(cx.theme().colors().surface_background)
             .on_action(cx.listener(Self::confirm))
             .on_action(cx.listener(Self::cancel))
             .on_action(cx.listener(Self::tab))
@@ -1597,8 +1618,8 @@ impl Render for SearchPanel {
             .on_action(cx.listener(|this, _: &ToggleIncludeIgnored, _, cx| {
                 this.toggle_search_option(SearchOptions::INCLUDE_IGNORED, cx)
             }))
-            .child(self.render_inputs(window, cx))
             .child(self.render_toolbar(cx))
+            .child(self.render_inputs(window, cx))
             .child(self.render_results(cx))
     }
 }

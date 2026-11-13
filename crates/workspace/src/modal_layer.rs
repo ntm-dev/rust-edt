@@ -314,7 +314,7 @@ impl Render for ModalLayer {
             .child(
                 v_flex()
                     .h(px(0.0))
-                    .top_20()
+                    .top(px(6.0))
                     .items_center()
                     .track_focus(&active_modal.focus_handle)
                     .child(

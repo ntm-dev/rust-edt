@@ -7440,6 +7440,15 @@ impl Workspace {
                     .unwrap_or_else(|| panel.default_size(window, cx));
                 container = container.h(size);
             }
+            container = match position {
+                DockPosition::Left => {
+                    let rail_on_left = self.activity_bar_side(cx)
+                        == Some(settings::ActivityBarPosition::Left);
+                    container.mb(px(4.)).when(!rail_on_left, |this| this.ml(px(4.)))
+                }
+                DockPosition::Right => container.mb(px(4.)).mr(px(4.)),
+                DockPosition::Bottom => container.mx(px(4.)).mb(px(4.)),
+            };
         }
 
         Some(container)
@@ -7600,14 +7609,26 @@ impl Workspace {
             .when(window.is_a11y_active(), |this| {
                 this.track_focus(&self.region_focus_handles.editor)
             })
-            .size_full()
-            .child(self.center.render(
-                self.zoomed.as_ref(),
-                self.maximized_pane.as_ref(),
-                render_cx,
-                window,
-                cx,
-            ))
+            .flex_1()
+            .h_full()
+            .min_w_0()
+            .px(px(4.))
+            .pb(px(4.))
+            .child(
+                div()
+                    .size_full()
+                    .border_1()
+                    .border_color(cx.theme().colors().border)
+                    .rounded(px(8.))
+                    .overflow_hidden()
+                    .child(self.center.render(
+                        self.zoomed.as_ref(),
+                        self.maximized_pane.as_ref(),
+                        render_cx,
+                        window,
+                        cx,
+                    )),
+            )
     }
 
     pub fn for_window(window: &Window, cx: &App) -> Option<Entity<Workspace>> {
@@ -8264,9 +8285,6 @@ impl Render for Workspace {
                             .flex()
                             .flex_col()
                             .overflow_hidden()
-                            .border_t_1()
-                            .border_b_1()
-                            .border_color(colors.border)
                             .child({
                                 let this = cx.entity();
                                 canvas(
@@ -8359,6 +8377,7 @@ impl Render for Workspace {
                                     .w_full()
                                     .min_h_0()
                                     .overflow_hidden()
+                                    .bg(colors.title_bar_background)
                                     .when(
                                         self.activity_bar_side(cx)
                                             == Some(settings::ActivityBarPosition::Left),
@@ -13964,14 +13983,17 @@ mod tests {
             cx.add_window_view(|window, cx| MultiWorkspace::test_new(project, window, cx));
         cx.update(|window, cx| {
             window.set_rem_size(px(20.));
-            assert_eq!(activity_bar::bar_width(window, cx), px(25. + 24.));
+            assert_eq!(
+                activity_bar::bar_width(window, cx),
+                px(22. / 13. * 20. + 20.)
+            );
             SettingsStore::update_global(cx, |store, cx| {
                 store.update_user_settings(cx, |settings| {
                     settings.activity_bar.get_or_insert_default().icon_size =
-                        Some(settings::ActivityBarIconSize(30.));
+                        Some(settings::ActivityBarIconSize(40.));
                 });
             });
-            assert_eq!(activity_bar::bar_width(window, cx), px(30. + 24.));
+            assert_eq!(activity_bar::bar_width(window, cx), px(40. + 20.));
         });
     }
 

@@ -57,11 +57,11 @@
   },
   {
     "token_type": "constParameter",
-    "style": ["constant"]
+    "style": ["variable.constant"]
   },
   {
     "token_type": "const",
-    "style": ["constant"]
+    "style": ["variable.constant"]
   },
   {
     "token_type": "derive",
@@ -133,7 +133,7 @@
   },
   {
     "token_type": "static",
-    "style": ["constant"]
+    "style": ["variable.constant"]
   },
   {
     "token_type": "toolModule",

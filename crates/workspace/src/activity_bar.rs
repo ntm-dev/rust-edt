@@ -13,7 +13,8 @@ use ui::{
 };
 use util::ResultExt as _;
 
-const DEFAULT_ICON_SIZE: Rems = rems(1.25);
+const DEFAULT_ICON_SIZE: Rems = rems(22. / 13.);
+const BUTTON_SIZE: Pixels = px(34.);
 
 fn on_right(cx: &App) -> bool {
     ActivityBarSettings::get_global(cx).position == ActivityBarPosition::Right
@@ -39,12 +40,12 @@ fn icon_rems(window: &Window, cx: &App) -> Rems {
     rems(f32::from(icon_size(window, cx)) / f32::from(window.rem_size()))
 }
 
-fn button_height(window: &Window, cx: &App) -> Pixels {
-    icon_size(window, cx) + px(16.)
+fn button_height(_window: &Window, _cx: &App) -> Pixels {
+    BUTTON_SIZE
 }
 
 pub(crate) fn bar_width(window: &Window, cx: &App) -> Pixels {
-    icon_size(window, cx) + px(24.)
+    icon_size(window, cx) + px(20.)
 }
 
 /// Entries are shown in this order by `Panel::panel_key()` until the user drags
@@ -276,6 +277,10 @@ impl ActivityBar {
 
         let icon_rems = icon_rems(window, cx);
         let button_height = button_height(window, cx);
+        let button_width = BUTTON_SIZE;
+        let active_icon_color = cx.theme().colors().tab_active_foreground;
+        let active_background = cx.theme().colors().element_selected;
+        let hover_background = cx.theme().colors().element_hover;
         let button = move |is_menu_open: bool| {
             let action = action.boxed_clone();
             let focus_handle = focus_handle.clone();
@@ -284,9 +289,13 @@ impl ActivityBar {
             // tooltip when panel state changes (e.g., via keyboard shortcut)
             IconButton::new((key, is_active as u64), icon)
                 .size(ButtonSize::Large)
+                .width(button_width)
                 .height(button_height.into())
                 .icon_size(IconSize::Custom(icon_rems))
-                .toggle_state(is_active)
+                .style(ButtonStyle::Transparent)
+                .when(is_active, |button| {
+                    button.icon_color(Color::Custom(active_icon_color))
+                })
                 .tab_index(0isize)
                 .aria_label(i18n::translate(icon_tooltip))
                 .on_click({
@@ -331,7 +340,11 @@ impl ActivityBar {
                         div()
                             .id(SharedString::from(format!("activity-bar-entry-{key}")))
                             .relative()
-                            .rounded_md()
+                            .rounded(px(4.))
+                            .when(is_active, |this| this.bg(active_background))
+                            .when(!is_active, |this| {
+                                this.hover(|style| style.bg(hover_background))
+                            })
                             .on_drag(DraggedActivityBarEntry { key, icon }, |entry, _, _, cx| {
                                 cx.new(|_| entry.clone())
                             })
@@ -360,31 +373,36 @@ impl ActivityBar {
 
 impl Render for ActivityBar {
     fn render(&mut self, window: &mut Window, cx: &mut Context<Self>) -> impl IntoElement {
-        let colors = cx.theme().colors();
+        let background = cx.theme().colors().status_bar_background;
+        let border = cx.theme().colors().border;
         let bar = v_flex()
             .id("activity-bar")
-            .flex_none()
-            .w(bar_width(window, cx))
-            .h_full()
+            .flex_1()
+            .min_h_0()
+            .w_full()
+            .py(px(8.))
+            .gap(px(8.))
             .items_center()
-            .gap_2()
-            .py_1()
-            .bg(colors.status_bar_background)
-            .map(|bar| {
-                if on_right(cx) {
-                    bar.border_l_1()
-                } else {
-                    bar.border_r_1()
-                }
-            })
-            .border_color(colors.border);
+            .bg(background);
         let mut buttons = Vec::new();
         for entry in self.entries(window, cx) {
             buttons.push(self.render_entry(entry, window, cx));
         }
-        bar.children(buttons)
-            .child(div().flex_1())
-            .child(self.render_settings_menu(window, cx))
+        v_flex()
+            .flex_none()
+            .h_full()
+            .w(bar_width(window, cx))
+            .pb(px(4.))
+            .ml(px(4.))
+            .child(
+                bar.border_1()
+                    .border_color(border)
+                    .rounded_tl(px(8.))
+                    .rounded_bl(px(8.))
+                    .children(buttons)
+                    .child(div().flex_1())
+                    .child(self.render_settings_menu(window, cx)),
+            )
     }
 }
 
@@ -394,7 +412,9 @@ impl ActivityBar {
             .trigger_with_tooltip(
                 IconButton::new("activity-bar-settings", IconName::ActivitySettings)
                     .size(ButtonSize::Large)
+                    .width(BUTTON_SIZE)
                     .height(button_height(window, cx).into())
+                    .style(ButtonStyle::Transparent)
                     .icon_size(IconSize::Custom(icon_rems(window, cx)))
                     .tab_index(0isize)
                     .aria_label(t!("Manage")),

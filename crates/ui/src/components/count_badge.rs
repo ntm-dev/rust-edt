@@ -18,36 +18,28 @@ impl CountBadge {
 
 impl RenderOnce for CountBadge {
     fn render(self, _window: &mut Window, cx: &mut App) -> impl IntoElement {
-        let label = if self.count > 99 {
-            "99+".to_string()
-        } else {
-            self.count.to_string()
-        };
-
-        let bg = cx
-            .theme()
-            .colors()
-            .editor_background
-            .blend(cx.theme().status().error.opacity(0.4));
+        let label = self.count.to_string();
+        let colors = cx.theme().colors();
+        let bg = colors.tab_active_foreground;
+        let fg = colors.status_bar_background;
 
         h_flex()
             .absolute()
-            .top_0()
+            .bottom_0()
             .right_0()
-            .p_px()
-            .h_3p5()
-            .min_w_3p5()
+            .px(px(4.))
+            .h(px(16.))
+            .line_height(px(16.))
+            .min_w(px(16.))
             .rounded_full()
             .justify_center()
             .text_center()
-            .border_1()
-            .border_color(cx.theme().colors().border)
             .bg(bg)
-            .shadow_sm()
             .child(
                 Label::new(label)
                     .size(LabelSize::Custom(rems_from_px(9_f32)))
-                    .weight(FontWeight::MEDIUM),
+                    .weight(FontWeight::NORMAL)
+                    .color(Color::Custom(fg)),
             )
     }
 }

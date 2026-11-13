@@ -2,6 +2,8 @@ mod mappings;
 
 mod alacritty;
 mod pty_info;
+mod shell_integration;
+pub use shell_integration::{CommandMark, CommandStatus};
 pub mod terminal_settings;
 
 #[cfg(not(windows))]
@@ -1063,6 +1065,7 @@ impl TerminalBuilder {
             path_style,
             cwd_history: Vec::new(),
             pending_cwd_boundary: None,
+            command_marks: Vec::new(),
             #[cfg(any(test, feature = "test-support"))]
             input_log: Vec::new(),
             #[cfg(test)]
@@ -1132,6 +1135,23 @@ impl TerminalBuilder {
             }
 
             insert_zed_terminal_env(&mut env, &version);
+
+            if !cfg!(windows) && !is_remote_terminal && !no_pty && task.is_none() {
+                let shell_program = match &shell {
+                    Shell::System => env
+                        .get("SHELL")
+                        .cloned()
+                        .or_else(|| std::env::var("SHELL").ok()),
+                    Shell::Program(program) => Some(program.clone()),
+                    Shell::WithArguments { program, .. } => Some(program.clone()),
+                };
+                if shell_program
+                    .as_deref()
+                    .is_some_and(shell_integration::is_zsh)
+                {
+                    shell_integration::inject_zsh(&mut env, &version.to_string());
+                }
+            }
 
             #[derive(Default)]
             struct ShellParams {
@@ -1362,6 +1382,7 @@ impl TerminalBuilder {
                         .unwrap_or_default()
                 },
                 pending_cwd_boundary: None,
+                command_marks: Vec::new(),
                 #[cfg(any(test, feature = "test-support"))]
                 input_log: Vec::new(),
                 #[cfg(test)]
@@ -1542,6 +1563,7 @@ pub struct Terminal {
     path_style: PathStyle,
     cwd_history: Vec<CwdHistoryEntry>,
     pending_cwd_boundary: Option<i32>,
+    command_marks: Vec<CommandMark>,
     #[cfg(any(test, feature = "test-support"))]
     input_log: Vec<Vec<u8>>,
     #[cfg(test)]
@@ -1623,6 +1645,10 @@ impl Terminal {
     fn process_event(&mut self, event: TerminalBackendEvent, cx: &mut Context<Self>) {
         match event {
             TerminalBackendEvent::Title(title) => {
+                if let Some(marker) = shell_integration::parse_marker(&title) {
+                    self.handle_shell_marker(marker, cx);
+                    return;
+                }
                 // ignore default shell program title change as windows always sends those events
                 // and it would end up showing the shell executable path in breadcrumbs
                 #[cfg(windows)]
@@ -2937,6 +2963,48 @@ impl Terminal {
         });
     }
 
+    pub fn command_marks(&self) -> &[CommandMark] {
+        &self.command_marks
+    }
+
+    fn handle_shell_marker(&mut self, marker: shell_integration::ShellMarker, cx: &mut Context<Self>) {
+        match marker {
+            shell_integration::ShellMarker::CommandStarted => {
+                if let Some(mark) = self.command_marks.last_mut() {
+                    mark.status = CommandStatus::Running;
+                }
+            }
+            shell_integration::ShellMarker::CommandFinished(code) => {
+                let position = {
+                    let term = self.term.lock_unfair();
+                    Self::scrollback_position(term.grid().cursor.point.line.0, term.history_size())
+                };
+                if let Some(mark) = self.command_marks.last_mut() {
+                    match mark.status {
+                        CommandStatus::Running => {
+                            mark.status = if code == 0 {
+                                CommandStatus::Success
+                            } else {
+                                CommandStatus::Failed(code)
+                            };
+                        }
+                        CommandStatus::Pending => {
+                            mark.scrollback_position = position;
+                            cx.notify();
+                            return;
+                        }
+                        _ => {}
+                    }
+                }
+                self.command_marks.push(CommandMark {
+                    scrollback_position: position,
+                    status: CommandStatus::Pending,
+                });
+            }
+        }
+        cx.notify();
+    }
+
     fn reset_cwd_history(&mut self) {
         self.pending_cwd_boundary = None;
         self.cwd_history = self
@@ -2987,49 +3055,17 @@ impl Terminal {
                 .title_override
                 .as_ref()
                 .map(|title_override| title_override.to_string())
-                // Like VS Code, prefer the title the running program set via
-                // OSC 0/2 (e.g. Claude Code) over the process name.
-                .or_else(|| {
-                    let sequence_title = self.breadcrumb_text.trim();
-                    (!sequence_title.is_empty()).then(|| {
-                        if truncate {
-                            truncate_and_trailoff(sequence_title, MAX_CHARS)
-                        } else {
-                            sequence_title.to_string()
-                        }
-                    })
-                })
                 .unwrap_or_else(|| match &self.terminal_type {
                     TerminalType::Pty { info, .. } => info
                         .current
                         .read()
                         .as_ref()
                         .map(|fpi| {
-                            let process_file = fpi
-                                .cwd
-                                .file_name()
-                                .map(|name| name.to_string_lossy().into_owned())
-                                .unwrap_or_default();
-
-                            let argv = fpi.argv.as_slice();
-                            let process_name = format!(
-                                "{}{}",
-                                fpi.name,
-                                if !argv.is_empty() {
-                                    format!(" {}", (argv[1..]).join(" "))
-                                } else {
-                                    "".to_string()
-                                }
-                            );
-                            let (process_file, process_name) = if truncate {
-                                (
-                                    truncate_and_trailoff(&process_file, MAX_CHARS),
-                                    truncate_and_trailoff(&process_name, MAX_CHARS),
-                                )
+                            if truncate {
+                                truncate_and_trailoff(&fpi.name, MAX_CHARS)
                             } else {
-                                (process_file, process_name)
-                            };
-                            format!("{process_file} — {process_name}")
+                                fpi.name.clone()
+                            }
                         })
                         .unwrap_or_else(|| "Terminal".to_string()),
                     TerminalType::DisplayOnly => "Terminal".to_string(),
@@ -3162,8 +3198,21 @@ impl Terminal {
             return None;
         }
         const SHELLS: &[&str] = &[
-            "sh", "bash", "zsh", "fish", "nu", "csh", "tcsh", "ksh", "dash", "rc", "xonsh",
-            "elvish", "pwsh", "powershell", "cmd",
+            "sh",
+            "bash",
+            "zsh",
+            "fish",
+            "nu",
+            "csh",
+            "tcsh",
+            "ksh",
+            "dash",
+            "rc",
+            "xonsh",
+            "elvish",
+            "pwsh",
+            "powershell",
+            "cmd",
         ];
         // A nested interactive shell is idle; a shell given a script or command is a job.
         let runs_script = process

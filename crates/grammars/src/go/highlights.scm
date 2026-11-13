@@ -101,17 +101,20 @@
 ] @operator
 
 [
+  "import"
+  "package"
   "chan"
+  "map"
+] @keyword
+
+[
   "const"
   "func"
-  "import"
   "interface"
-  "map"
-  "package"
   "struct"
   "type"
   "var"
-] @keyword
+] @keyword.storage
 
 [
   "break"

@@ -87,7 +87,10 @@ impl IconSize {
     ///   1. The length of one side of the square
     ///   2. The padding of one side of the square
     pub fn square_components(&self, window: &mut Window, cx: &mut App) -> (Pixels, Pixels) {
-        let icon_size = self.rems() * window.rem_size();
+        let icon_size = match self {
+            IconSize::Custom(size) => size.to_pixels(window.rem_size()),
+            _ => px(self.rems().0 * crate::BASE_REM_SIZE_IN_PX),
+        };
         let padding = match self {
             IconSize::Indicator => DynamicSpacing::Base00.px(cx),
             IconSize::XSmall => DynamicSpacing::Base02.px(cx),
@@ -151,6 +154,7 @@ pub struct Icon {
     source: IconSource,
     color: Color,
     size: Rems,
+    scale_to_px: bool,
     transformation: Transformation,
 }
 
@@ -160,6 +164,7 @@ impl Icon {
             source: IconSource::Embedded(icon.path().into()),
             color: Color::default(),
             size: IconSize::default().rems(),
+            scale_to_px: true,
             transformation: Transformation::default(),
         }
     }
@@ -181,6 +186,7 @@ impl Icon {
             source,
             color: Color::default(),
             size: IconSize::default().rems(),
+            scale_to_px: true,
             transformation: Transformation::default(),
         }
     }
@@ -190,6 +196,7 @@ impl Icon {
             source: IconSource::ExternalSvg(svg),
             color: Color::default(),
             size: IconSize::default().rems(),
+            scale_to_px: true,
             transformation: Transformation::default(),
         }
     }
@@ -209,6 +216,7 @@ impl Icon {
 
     pub fn size(mut self, size: IconSize) -> Self {
         self.size = size.rems();
+        self.scale_to_px = !matches!(size, IconSize::Custom(_));
         self
     }
 
@@ -217,6 +225,7 @@ impl Icon {
     /// Not to be exposed outside of the `ui` crate.
     pub(crate) fn custom_size(mut self, size: Rems) -> Self {
         self.size = size;
+        self.scale_to_px = false;
         self
     }
 }
@@ -289,7 +298,10 @@ impl Asset for EmbeddedSvgIcon {
 }
 
 impl RenderOnce for Icon {
-    fn render(self, window: &mut Window, cx: &mut App) -> impl IntoElement {
+    fn render(mut self, window: &mut Window, cx: &mut App) -> impl IntoElement {
+        if self.scale_to_px {
+            self.size = rems(self.size.0 * crate::BASE_REM_SIZE_IN_PX / f32::from(window.rem_size()));
+        }
         match self.source {
             IconSource::Embedded(path) => svg()
                 .with_transformation(self.transformation)

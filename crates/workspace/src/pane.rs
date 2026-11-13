@@ -1,5 +1,5 @@
 use crate::{
-    CloseWindow, NewFile, OpenInTerminal, OpenOptions, OpenTerminal, OpenVisible, SplitDirection,
+    CloseWindow, OpenInTerminal, OpenOptions, OpenTerminal, OpenVisible, SplitDirection,
     ToggleZoom, Workspace, WorkspaceItemBuilder, ZoomIn, ZoomOut,
     focus_follows_mouse::FocusFollowsMouse as _,
     invalid_item_view::InvalidItemView,
@@ -24,7 +24,7 @@ use gpui::{
     PromptLevel, Render, ScrollHandle, Subscription, Task, TaskExt, WeakEntity, WeakFocusHandle,
     Window, actions, anchored, deferred, prelude::*,
 };
-use i18n::{t, tc};
+use i18n::t;
 use itertools::Itertools;
 use language::{Capability, DiagnosticSeverity};
 use parking_lot::Mutex;
@@ -2938,6 +2938,10 @@ impl Pane {
         );
 
         let icon = self.tab_icon_element(item, is_active, window, cx);
+        let status_badges = self.project.upgrade().and_then(|project| {
+            item.project_path(cx)
+                .and_then(|path| item_status_badges(&project, &path, cx))
+        });
 
         let settings = ItemSettings::get_global(cx);
         let close_side = &settings.close_position;
@@ -3087,9 +3091,8 @@ impl Pane {
                     match show_close_button {
                         ShowCloseButton::Always => IconButton::new("close tab", IconName::Close)
                             .when(has_indicator, |button| button.visible_on_hover("")),
-                        ShowCloseButton::Hover => {
-                            IconButton::new("close tab", IconName::Close).visible_on_hover("")
-                        }
+                        ShowCloseButton::Hover => IconButton::new("close tab", IconName::Close)
+                            .when(!is_active, |button| button.visible_on_hover("")),
                         ShowCloseButton::Hidden => return this,
                     }
                     .shape(IconButtonShape::Square)
@@ -3132,6 +3135,7 @@ impl Pane {
                         None
                     })
                     .child(label)
+                    .children(status_badges)
                     .map(|this| match tab_tooltip_content {
                         Some(TabTooltipContent::Text(text)) => {
                             if capability.editable() {
@@ -3694,8 +3698,6 @@ impl Pane {
                 let is_scrollable = max_scroll > px(2.0);
                 let has_active_unpinned_tab = self.active_item_index >= self.pinned_tab_count;
                 h_flex()
-                    .gap_1()
-                    .pl_1()
                     .children(pinned_tabs)
                     .when(is_scrollable && is_scrolled, |this| {
                         this.when(has_active_unpinned_tab, |this| this.border_r_2())
@@ -3738,8 +3740,6 @@ impl Pane {
                     .debug_selector(|| "pinned_tabs_row".into())
                     .overflow_x_scroll()
                     .w_full()
-                    .gap_1()
-                    .px_1()
                     .children(pinned_tabs)
                     .child(self.render_pinned_tab_bar_drop_target(cx)),
             );
@@ -3769,8 +3769,6 @@ impl Pane {
             .id("unpinned tabs")
             .overflow_x_scroll()
             .w_full()
-            .gap_1()
-            .px_1()
             .track_scroll(&self.tab_bar_scroll_handle)
             .on_scroll_wheel(cx.listener(|this, _, _, _| {
                 this.suppress_scroll = true;
@@ -4453,49 +4451,17 @@ fn default_render_tab_bar_buttons(
                     .into()
                 }),
         )
-        .child({
-            let zoomed = pane.is_zoomed();
-            IconButton::new("toggle_zoom", IconName::Maximize)
-                .icon_size(IconSize::Small)
-                .toggle_state(zoomed)
-                .selected_icon(IconName::Minimize)
-                .on_click(cx.listener(|pane, _, window, cx| {
-                    pane.toggle_zoom(&crate::ToggleZoom, window, cx);
-                }))
-                .tooltip(move |_window, cx| {
-                    Tooltip::for_action(
-                        if zoomed {
-                            tc!("pane", "Zoom Out")
-                        } else {
-                            tc!("pane", "Zoom In")
-                        },
-                        &ToggleZoom,
-                        cx,
-                    )
-                })
-        })
         .into_any_element()
         .into();
     (None, right_children)
 }
 
 fn default_render_trailing_tab_button(
-    pane: &mut Pane,
+    _pane: &mut Pane,
     _window: &mut Window,
-    cx: &mut Context<Pane>,
+    _cx: &mut Context<Pane>,
 ) -> Option<AnyElement> {
-    let focus_handle = pane.focus_handle.clone();
-    Some(
-        IconButton::new("new-file", IconName::Plus)
-            .icon_size(IconSize::Small)
-            .tooltip(move |_window, cx| {
-                Tooltip::for_action_in(t!("New File"), &NewFile, &focus_handle, cx)
-            })
-            .on_click(cx.listener(|_pane, _, window, cx| {
-                window.dispatch_action(NewFile.boxed_clone(), cx);
-            }))
-            .into_any_element(),
-    )
+    None
 }
 
 impl Focusable for Pane {
@@ -5147,6 +5113,60 @@ fn tab_icon_slot(icon: AnyElement, is_active: bool) -> impl IntoElement {
         .child(icon)
 }
 
+pub fn git_status_badge(git_status: git::status::GitSummary) -> Option<(&'static str, Color)> {
+    if git_status.conflict > 0 {
+        return Some(("!", Color::Conflict));
+    }
+    if git_status.untracked > 0 {
+        return Some(("U", Color::Created));
+    }
+    if git_status.worktree.deleted > 0 || git_status.index.deleted > 0 {
+        return Some(("D", Color::Deleted));
+    }
+    if git_status.worktree.modified > 0 || git_status.index.modified > 0 {
+        return Some(("M", Color::Modified));
+    }
+    if git_status.index.added > 0 {
+        return Some(("A", Color::Created));
+    }
+    None
+}
+
+pub fn item_status_badges(
+    project: &Entity<Project>,
+    project_path: &ProjectPath,
+    cx: &App,
+) -> Option<AnyElement> {
+    let project = project.read(cx);
+    let errors = project
+        .diagnostic_summary_for_path(project_path, cx)
+        .error_count;
+    let git = project
+        .git_store()
+        .read(cx)
+        .project_path_git_status(project_path, cx)
+        .and_then(|status| git_status_badge(status.summary()));
+    if errors == 0 && git.is_none() {
+        return None;
+    }
+    Some(
+        h_flex()
+            .gap_1()
+            .flex_none()
+            .when(errors > 0, |this| {
+                this.child(
+                    Label::new(errors.to_string())
+                        .size(LabelSize::Small)
+                        .color(Color::Error),
+                )
+            })
+            .when_some(git, |this, (label, color)| {
+                this.child(Label::new(label).size(LabelSize::Small).color(color))
+            })
+            .into_any_element(),
+    )
+}
+
 pub fn render_item_indicator(item: Box<dyn ItemHandle>, cx: &App) -> Option<Indicator> {
     maybe!({
         let indicator_color = match (item.has_conflict(cx), item.is_dirty(cx)) {
@@ -5193,7 +5213,7 @@ mod tests {
 
     use super::*;
     use crate::{
-        Member,
+        Member, NewFile,
         item::test::{TestItem, TestProjectItem},
     };
     use gpui::{
@@ -8612,7 +8632,7 @@ mod tests {
             cx.add_window_view(|window, cx| Workspace::test_new(project, window, cx));
         let pane = workspace.read_with(cx, |workspace, _| workspace.active_pane().clone());
 
-        cx.simulate_resize(size(px(300.), px(300.)));
+        cx.simulate_resize(size(px(200.), px(300.)));
 
         add_labeled_item(&pane, "untitled", false, cx);
         add_labeled_item(&pane, "untitled", false, cx);
@@ -8623,19 +8643,14 @@ mod tests {
         // Assert
         let tab_bar_scroll_handle =
             pane.update_in(cx, |pane, _window, _cx| pane.tab_bar_scroll_handle.clone());
-        assert_eq!(tab_bar_scroll_handle.children_count(), 7);
+        assert_eq!(tab_bar_scroll_handle.children_count(), 6);
         let tab_bounds = cx.debug_bounds("TAB-4").unwrap();
-        let new_tab_button_bounds = cx.debug_bounds("ICON-Plus").unwrap();
         let scroll_bounds = tab_bar_scroll_handle.bounds();
         let scroll_offset = tab_bar_scroll_handle.offset();
         assert!(scroll_offset.x < px(0.));
         assert!(scroll_offset.x >= -tab_bar_scroll_handle.max_offset().x);
         assert!(tab_bounds.left() >= scroll_bounds.left());
         assert!(tab_bounds.right() <= scroll_bounds.right());
-        assert!(
-            !tab_bounds.intersects(&new_tab_button_bounds),
-            "Tab should not overlap with the new tab button, if this is failing check if there's been a redesign!"
-        );
     }
 
     #[gpui::test]

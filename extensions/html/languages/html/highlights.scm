@@ -22,4 +22,4 @@
   "<!"
   "</"
   "/>"
-] @punctuation.bracket.html
+] @punctuation.special.html

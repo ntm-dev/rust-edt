@@ -43,7 +43,7 @@ pub use preview::PreviewSource;
 pub use preview::Update as PreviewUpdate;
 pub use ui_input::ErasedEditor;
 
-pub const DEFAULT_MODAL_WIDTH: Rems = Rems(34.0);
+pub const DEFAULT_MODAL_WIDTH: Rems = Rems(46.0);
 pub const DEFAULT_MODAL_MAX_HEIGHT: Rems = Rems(24.0);
 
 enum ElementContainer {

@@ -304,7 +304,7 @@
   "enum"
   "interface"
   "type"
-] @keyword.declaration
+] @keyword.storage.declaration
 
 [
   "export"

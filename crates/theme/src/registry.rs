@@ -13,7 +13,10 @@ use crate::{
     default_icon_theme,
 };
 
-const BUNDLED_ICON_THEME_PATHS: &[&str] = &["icon_themes/symbols/icon_theme.json"];
+const BUNDLED_ICON_THEME_PATHS: &[&str] = &[
+    "icon_themes/symbols/icon_theme.json",
+    "icon_themes/seti/icon_theme.json",
+];
 
 /// The metadata for a theme.
 #[derive(Debug, Clone)]

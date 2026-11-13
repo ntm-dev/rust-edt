@@ -8,13 +8,13 @@
   // - "dark": Use the theme indicated by the "dark" field
   "theme": {
     "mode": "system",
-    "light": "VS Code Light Modern",
-    "dark": "VS Code Dark Modern",
+    "light": "VS Code Light 2026",
+    "dark": "Panda Syntax",
   },
   "icon_theme": {
     "mode": "system",
-    "light": "Symbols Light",
-    "dark": "Symbols Dark",
+    "light": "Seti Light",
+    "dark": "Seti Dark",
   },
   // The name of a base set of key bindings to use.
   // This setting can take the following values:
@@ -30,10 +30,10 @@
   // 9. "None"
   "base_keymap": "Zed",
   // The name of a font to use for rendering text in the editor
-  "buffer_font_family": "Menlo",
+  "buffer_font_family": "IBM Plex Mono",
   // Set the buffer text's font fallbacks, this will be merged with
   // the platform's default fallbacks.
-  "buffer_font_fallbacks": null,
+  "buffer_font_fallbacks": ["Menlo", "Monaco", "Courier New"],
   // The OpenType features to enable for text in the editor.
   "buffer_font_features": {
     // Disable ligatures:
@@ -53,14 +53,14 @@
   //         "buffer_line_height": {
   //           "custom": 2
   //         },
-  "buffer_line_height": { "custom": 1.5 },
+  "buffer_line_height": { "custom": 1.8 },
   // The language of Wu's interface: "system" follows your system language,
   // or set "en" for English, "zh-CN" for Simplified Chinese or "vi" for Vietnamese.
   "ui_language": "system",
   // The name of a font to use for rendering text in the UI
   // You can set this to ".SystemUIFont" to use the system font, or to
   // "Geist" for the previous default
-  "ui_font_family": ".SystemUIFont",
+  "ui_font_family": "Bear Sans UI",
   // Set the UI's font fallbacks, this will be merged with the platform's
   // default font fallbacks.
   "ui_font_fallbacks": null,
@@ -415,7 +415,7 @@
   //
   // The colors that are used for different indentation levels are defined in the theme (theme key: `accents`).
   // They can be customized by using theme overrides.
-  "colorize_brackets": false,
+  "colorize_brackets": true,
   // When to show the scrollbar in the completion menu.
   // This setting can take four values:
   //
@@ -620,9 +620,9 @@
     // Whether to show git status indicators on the branch icon in the titlebar.
     "show_branch_status_icon": false,
     // Whether to show the branch name button in the titlebar.
-    "show_branch_name": true,
+    "show_branch_name": false,
     // Whether to show the worktree name button in the titlebar.
-    "show_worktree_name": true,
+    "show_worktree_name": false,
     // Whether to show the project host and name in the titlebar.
     "show_project_items": true,
     // Whether to show onboarding banners in the titlebar.
@@ -667,7 +667,7 @@
     // Forcefully enable or disable the scrollbar for each axis
     "axes": {
       // When false, forcefully disables the horizontal scrollbar. Otherwise, obey other settings.
-      "horizontal": true,
+      "horizontal": false,
       // When false, forcefully disables the vertical scrollbar. Otherwise, obey other settings.
       "vertical": true,
     },
@@ -682,7 +682,7 @@
     //    "always"
     // 3. Never show the minimap:
     //    "never" (default)
-    "show": "never",
+    "show": "always",
     // Where to show the minimap in the editor.
     // This setting can take two values:
     // 1. Show the minimap on the focused editor only:
@@ -879,11 +879,11 @@
     //   "chevron"
     // 3. A disclosure chevron followed by a folder icon:
     //   "both"
-    "folder_indicator": "icon",
+    "folder_indicator": "both",
     // Whether to show the git status in the project panel.
     "git_status": true,
     // Amount of indentation for nested items.
-    "indent_size": 20,
+    "indent_size": 16,
     // Whether to reveal it in the project panel automatically,
     // when a corresponding project entry becomes active.
     // Gitignored entries are never auto revealed.
@@ -964,9 +964,9 @@
     //    "unicode"
     "sort_order": "default",
     // Whether to show error and warning count badges next to file names in the project panel.
-    "diagnostic_badges": false,
+    "diagnostic_badges": true,
     // Whether to show the git status indicator next to file names in the project panel.
-    "git_status_indicator": false,
+    "git_status_indicator": true,
     // Whether to enable drag-and-drop operations in the project panel.
     "drag_and_drop": true,
     // Whether to hide the root entry when only one folder is open in the window;
@@ -1198,7 +1198,7 @@
     // Whether or not to show the tab bar in the editor
     "show": true,
     // Whether or not to show the navigation history buttons.
-    "show_nav_history_buttons": true,
+    "show_nav_history_buttons": false,
     // Whether or not to show the tab bar buttons.
     "show_tab_bar_buttons": true,
     // Whether or not to show pinned tabs in a separate row.
@@ -1209,7 +1209,7 @@
   // Settings related to the editor's tabs
   "tabs": {
     // Show git status colors in the editor tabs.
-    "git_status": false,
+    "git_status": true,
     // Position of the close button on the editor tabs.
     // One of: ["right", "left"]
     "close_position": "right",
@@ -1633,9 +1633,9 @@
     // Whether to show the cursor position button in the status bar.
     "cursor_position_button": true,
     // Whether to show active line endings button in the status bar.
-    "line_endings_button": false,
+    "line_endings_button": true,
     // Control when to show the active encoding in the status bar.
-    "active_encoding_button": "non_utf8",
+    "active_encoding_button": "enabled",
   },
   // Settings specific to the terminal
   "terminal": {
@@ -1802,7 +1802,7 @@
       "show": null,
     },
     // Set the terminal's font size. Set it to null to match the buffer's font size.
-    "font_size": 14,
+    "font_size": 12,
     // Set the terminal's font family. If this option is not included,
     // the terminal will default to matching the buffer's font family.
     // "font_family": "JetBrains Mono",
@@ -1832,7 +1832,7 @@
     //
     // Most terminal themes have APCA values of 40-70.
     // A value of 45 preserves colorful themes while ensuring legibility.
-    "minimum_contrast": 45,
+    "minimum_contrast": 30,
     // Regexes used to identify paths for hyperlink navigation. Supports optional named capture
     // groups `path`, `line`, `column`, and `link`. If none of these are present, the entire match
     // is the hyperlink target. If `path` is present, it is the hyperlink target, along with `line`

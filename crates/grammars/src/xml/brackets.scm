@@ -1,8 +1,11 @@
-(STag "<" @open ">" @close)
+((STag "<" @open ">" @close)
+  (#set! rainbow.exclude))
 
-(ETag "</" @open ">" @close)
+((ETag "</" @open ">" @close)
+  (#set! rainbow.exclude))
 
-(EmptyElemTag "<" @open "/>" @close)
+((EmptyElemTag "<" @open "/>" @close)
+  (#set! rainbow.exclude))
 
 ("(" @open ")" @close)
 

@@ -3,7 +3,7 @@ use smallvec::SmallVec;
 
 use crate::prelude::*;
 
-const TAB_HEIGHT: Pixels = px(24.);
+const TAB_HEIGHT: Pixels = px(28.);
 const TAB_SLOT_SIZE: Pixels = px(18.);
 
 #[derive(Debug, PartialEq, Eq, Clone, Copy)]
@@ -52,12 +52,12 @@ impl Tab {
         self
     }
 
-    pub fn content_height(cx: &App) -> Pixels {
-        DynamicSpacing::Base32.px(cx) - px(1.)
+    pub fn content_height(_cx: &App) -> Pixels {
+        TAB_HEIGHT - px(1.)
     }
 
-    pub fn container_height(cx: &App) -> Pixels {
-        DynamicSpacing::Base32.px(cx)
+    pub fn container_height(_cx: &App) -> Pixels {
+        TAB_HEIGHT
     }
 }
 
@@ -87,12 +87,12 @@ impl RenderOnce for Tab {
     fn render(self, _: &mut Window, cx: &mut App) -> Stateful<Div> {
         let colors = cx.theme().colors();
         let text_color = if self.selected {
-            colors.text
+            colors.tab_active_foreground
         } else {
             colors.text_muted
         };
         let selected_background = colors.tab_active_background;
-        let hover_background = selected_background.opacity(0.6);
+        let hover_background = colors.element_hover;
 
         let has_end_slot = self.end_slot.is_some();
         let slot_layer = || {
@@ -124,28 +124,55 @@ impl RenderOnce for Tab {
             .gap(px(3.))
             .children(self.children);
 
-        self.div
-            .group("")
-            .flex()
-            .flex_none()
+        let selected = self.selected;
+        let inner = h_flex()
+            .relative()
+            .h(if selected { px(26.) } else { px(24.) })
+            .flex_1()
+            .min_w_0()
             .items_center()
-            .h(TAB_HEIGHT)
-            .px(px(4.))
+            .pl(px(10.))
+            .pr(px(5.))
             .gap(px(3.))
-            .rounded(px(6.))
-            .text_color(text_color)
-            .cursor_pointer()
+            .overflow_hidden()
             .map(|this| {
-                if self.selected {
-                    this.bg(selected_background)
+                if selected {
+                    this.rounded_t(px(4.))
+                        .bg(selected_background)
+                        .child(
+                        div()
+                            .absolute()
+                            .bottom_0()
+                            .left_0()
+                            .right_0()
+                            .h(px(1.))
+                            .bg(colors.tab_active_foreground),
+                    )
                 } else {
-                    this.hover(|style| style.bg(hover_background))
+                    this.rounded(px(4.))
+                        .group_hover("", |style| style.bg(hover_background))
                 }
             })
             .map(|this| match self.close_side {
                 TabCloseSide::End => this.child(content).child(slot),
                 TabCloseSide::Start => this.child(slot).child(content),
+            });
+
+        self.div
+            .group("")
+            .flex()
+            .flex_none()
+            .h(TAB_HEIGHT)
+            .text_color(text_color)
+            .cursor_pointer()
+            .map(|this| {
+                if selected {
+                    this.items_end()
+                } else {
+                    this.items_center()
+                }
             })
+            .child(inner)
     }
 }
 

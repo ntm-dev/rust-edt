@@ -1,4 +1,5 @@
 mod application_menu;
+mod git_branch_status;
 mod onboarding_banner;
 mod title_bar_settings;
 mod update_version;
@@ -46,6 +47,7 @@ use workspace::{
 
 use wu_actions::OpenRemote;
 
+pub use git_branch_status::GitBranchStatus;
 pub use onboarding_banner::restore_banner;
 
 const MAX_PROJECT_NAME_LENGTH: usize = 40;
@@ -295,9 +297,15 @@ impl Render for TitleBar {
             }
         }
 
+        let command_center_label = project_name
+            .clone()
+            .unwrap_or_else(|| SharedString::from("Wu"));
         children.push(
             h_flex()
                 .h_full()
+                .flex_1()
+                .min_w_0()
+                .overflow_hidden()
                 .gap_0p5()
                 .map(|title_bar| {
                     let mut render_project_items = title_bar_settings.show_branch_name
@@ -346,8 +354,80 @@ impl Render for TitleBar {
             }
         }
 
+        let command_center_colors = cx.theme().colors().clone();
+        let (can_go_back, can_go_forward) = self
+            .workspace
+            .upgrade()
+            .map(|workspace| {
+                let pane = workspace.read(cx).active_pane().read(cx);
+                (pane.can_navigate_backward(), pane.can_navigate_forward())
+            })
+            .unwrap_or((false, false));
         children.push(
             h_flex()
+                .flex_none()
+                .justify_center()
+                .gap_1()
+                .child(
+                    IconButton::new("title-bar-go-back", IconName::ArrowLeft)
+                        .icon_size(IconSize::Small)
+                        .disabled(!can_go_back)
+                        .on_click(|_, window, cx| {
+                            if let Ok(action) = cx.build_action("pane::GoBack", None) {
+                                window.dispatch_action(action, cx);
+                            }
+                        }),
+                )
+                .child(
+                    IconButton::new("title-bar-go-forward", IconName::ArrowRight)
+                        .icon_size(IconSize::Small)
+                        .disabled(!can_go_forward)
+                        .on_click(|_, window, cx| {
+                            if let Ok(action) = cx.build_action("pane::GoForward", None) {
+                                window.dispatch_action(action, cx);
+                            }
+                        }),
+                )
+                .child(
+                    h_flex()
+                        .id("command-center")
+                        .h(px(22.))
+                        .w(px(320.))
+                        .max_w_full()
+                        .px_2()
+                        .gap_2()
+                        .justify_center()
+                        .rounded(px(6.))
+                        .border_1()
+                        .border_color(command_center_colors.border)
+                        .bg(command_center_colors.element_background)
+                        .cursor_pointer()
+                        .hover(|style| style.bg(command_center_colors.element_hover))
+                        .on_mouse_down(MouseButton::Left, |_, _, cx| cx.stop_propagation())
+                        .on_click(|_, window, cx| {
+                            if let Ok(action) = cx.build_action("file_finder::Toggle", None) {
+                                window.dispatch_action(action, cx);
+                            }
+                        })
+                        .child(
+                            Icon::new(IconName::MagnifyingGlass)
+                                .size(IconSize::XSmall)
+                                .color(Color::Muted),
+                        )
+                        .child(
+                            Label::new(command_center_label)
+                                .size(LabelSize::Small)
+                                .color(Color::Muted)
+                                .truncate(),
+                        ),
+                )
+                .into_any_element(),
+        );
+
+        children.push(
+            h_flex()
+                .flex_1()
+                .justify_end()
                 .pr_1()
                 .gap_1()
                 .on_mouse_down(MouseButton::Left, |_, _, cx| cx.stop_propagation())

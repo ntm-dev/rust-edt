@@ -12,12 +12,13 @@ use language::CursorShape as EditorCursorShape;
 use settings::Settings;
 use std::time::Instant;
 use terminal::{
-    Cell, Color, Content, CursorShape, IndexedCell, Modes, NamedColor, Point, Range, Terminal,
+    Cell, Color, CommandStatus, Content, CursorShape, IndexedCell, Modes, NamedColor, Point, Range, Terminal,
     TerminalBounds, is_app_chosen_exact_color as terminal_is_app_chosen_exact_color,
     is_default_background_color, terminal_settings::TerminalSettings,
 };
 use theme::{ActiveTheme, Theme};
 use theme_settings::ThemeSettings;
+#[cfg(test)]
 use ui::utils::ensure_minimum_contrast;
 use ui::{ParentElement, Tooltip};
 use util::ResultExt;
@@ -40,6 +41,7 @@ pub struct LayoutState {
     dimensions: TerminalBounds,
     mode: Modes,
     display_offset: usize,
+    command_dots: Vec<(i32, CommandStatus)>,
     hyperlink_tooltip: Option<AnyElement>,
     block_below_cursor_element: Option<AnyElement>,
     base_text_style: TextStyle,
@@ -871,11 +873,17 @@ impl TerminalElement {
         minimum_contrast: f32,
     ) -> TextRun {
         let skip_contrast = Self::is_app_chosen_exact_color(&fg);
+        let fg = match fg {
+            Color::Named(named) if cell.is_bold() => Color::Named(named.to_bright()),
+            other => other,
+        };
         let mut fg = convert_color(&fg, colors);
         let bg = convert_color(&bg, colors);
 
         if !skip_contrast && !Self::is_decorative_character(cell.character()) {
-            fg = ensure_minimum_contrast(fg, bg, minimum_contrast);
+            if minimum_contrast > 0.0 {
+                fg = ensure_wcag_contrast(fg, bg, 4.5);
+            }
         }
 
         // Use a dim multiplier that stays close to the existing Alacritty look.
@@ -1284,7 +1292,7 @@ impl Element for TerminalElement {
                         .advance(font_id, font_pixels, 'm')
                         .unwrap()
                         .width;
-                    gutter = cell_width;
+                    gutter = cell_width * 2.0;
 
                     let mut size = bounds.size;
                     size.width -= gutter;
@@ -1574,6 +1582,26 @@ impl Element for TerminalElement {
                     None
                 };
 
+                let command_dots = {
+                    let terminal = self.terminal.read(cx);
+                    let history_size = terminal
+                        .last_content
+                        .total_lines
+                        .saturating_sub(terminal.last_content.screen_lines)
+                        as i32;
+                    let screen_lines = terminal.last_content.screen_lines as i32;
+                    terminal
+                        .command_marks()
+                        .iter()
+                        .filter_map(|mark| {
+                            let row = mark.scrollback_position - history_size + display_offset as i32;
+                            (0..screen_lines)
+                                .contains(&row)
+                                .then_some((row, mark.status))
+                        })
+                        .collect::<Vec<_>>()
+                };
+
                 LayoutState {
                     hitbox,
                     batched_text_runs,
@@ -1586,6 +1614,7 @@ impl Element for TerminalElement {
                     relative_highlighted_ranges,
                     mode,
                     display_offset,
+                    command_dots,
                     hyperlink_tooltip,
                     block_below_cursor_element,
                     base_text_style: text_style,
@@ -1670,6 +1699,78 @@ impl Element for TerminalElement {
 
                     for rect in &layout.rects {
                         rect.paint(origin, &layout.dimensions, window);
+                    }
+
+                    let gutter_width = layout.dimensions.bounds.origin.x - bounds.origin.x;
+                    let dot_size = px(7.);
+                    let dot_x = bounds.origin.x + (gutter_width - dot_size) / 2.0;
+                    for (row, status) in &layout.command_dots {
+                        let dot_y = origin.y
+                            + *row as f32 * layout.dimensions.line_height
+                            + (layout.dimensions.line_height - dot_size) / 2.0;
+                        let dot_bounds =
+                            Bounds::new(point(dot_x, dot_y), size(dot_size, dot_size));
+                        let radius = dot_size / 2.0;
+                        let success: Hsla = gpui::rgb(0x1b81a8).into();
+                        let failure: Hsla = gpui::rgb(0xf14c4c).into();
+                        let idle: Hsla = gpui::rgba(0xcccccc80).into();
+                        match status {
+                            CommandStatus::Success => {
+                                window.paint_quad(gpui::quad(
+                                    dot_bounds,
+                                    radius,
+                                    success,
+                                    px(0.),
+                                    success,
+                                    gpui::BorderStyle::default(),
+                                ));
+                            }
+                            CommandStatus::Failed(_) => {
+                                window.paint_quad(gpui::quad(
+                                    dot_bounds,
+                                    radius,
+                                    gpui::transparent_black(),
+                                    px(1.),
+                                    failure,
+                                    gpui::BorderStyle::default(),
+                                ));
+                                let font_size = px(8.);
+                                let shaped = window.text_system().shape_line(
+                                    "x".into(),
+                                    font_size,
+                                    &[TextRun {
+                                        len: 1,
+                                        font: layout.base_text_style.font(),
+                                        color: failure,
+                                        ..Default::default()
+                                    }],
+                                    None,
+                                );
+                                shaped
+                                    .paint(
+                                        point(
+                                            dot_x + (dot_size - shaped.width) / 2.0,
+                                            dot_y + (dot_size - font_size) / 2.0 - px(1.),
+                                        ),
+                                        font_size,
+                                        gpui::TextAlign::Left,
+                                        None,
+                                        window,
+                                        cx,
+                                    )
+                                    .log_err();
+                            }
+                            CommandStatus::Pending | CommandStatus::Running => {
+                                window.paint_quad(gpui::quad(
+                                    dot_bounds,
+                                    radius,
+                                    gpui::transparent_black(),
+                                    px(1.),
+                                    idle,
+                                    gpui::BorderStyle::default(),
+                                ));
+                            }
+                        }
                     }
 
                     for (relative_highlighted_range, color) in &layout.relative_highlighted_ranges {
@@ -1971,6 +2072,83 @@ fn to_highlighted_range_lines(
 }
 
 /// Converts a 2, 8, or 24 bit color ANSI color to the GPUI equivalent.
+fn wcag_luminance(r: f32, g: f32, b: f32) -> f32 {
+    let channel = |c: f32| {
+        if c <= 0.03928 {
+            c / 12.92
+        } else {
+            ((c + 0.055) / 1.055).powf(2.4)
+        }
+    };
+    0.2126 * channel(r) + 0.7152 * channel(g) + 0.0722 * channel(b)
+}
+
+fn wcag_ratio(a: f32, b: f32) -> f32 {
+    let (hi, lo) = if a > b { (a, b) } else { (b, a) };
+    (hi + 0.05) / (lo + 0.05)
+}
+
+fn ensure_wcag_contrast(fg: Hsla, bg: Hsla, minimum_ratio: f32) -> Hsla {
+    let fg_rgba = fg.to_rgb();
+    let bg_rgba = bg.to_rgb();
+    let to_byte = |c: f32| (c * 255.0).round().clamp(0.0, 255.0);
+    let background = wcag_luminance(bg_rgba.r, bg_rgba.g, bg_rgba.b);
+    let start = [to_byte(fg_rgba.r), to_byte(fg_rgba.g), to_byte(fg_rgba.b)];
+    let ratio_of = |rgb: &[f32; 3]| {
+        wcag_ratio(
+            wcag_luminance(rgb[0] / 255.0, rgb[1] / 255.0, rgb[2] / 255.0),
+            background,
+        )
+    };
+    if ratio_of(&start) >= minimum_ratio {
+        return fg;
+    }
+    let adjust = |lighten: bool| {
+        let mut rgb = start;
+        let mut ratio = ratio_of(&rgb);
+        while ratio < minimum_ratio {
+            let before = rgb;
+            for channel in rgb.iter_mut() {
+                *channel = if lighten {
+                    (*channel + ((255.0 - *channel) * 0.1).ceil()).min(255.0)
+                } else {
+                    (*channel - (*channel * 0.1).ceil()).max(0.0)
+                };
+            }
+            if rgb == before {
+                break;
+            }
+            ratio = ratio_of(&rgb);
+        }
+        (rgb, ratio)
+    };
+    let foreground = wcag_luminance(fg_rgba.r, fg_rgba.g, fg_rgba.b);
+    let (first, second) = if foreground < background {
+        (false, true)
+    } else {
+        (true, false)
+    };
+    let (first_rgb, first_ratio) = adjust(first);
+    let chosen = if first_ratio >= minimum_ratio {
+        first_rgb
+    } else {
+        let (second_rgb, second_ratio) = adjust(second);
+        if second_ratio > first_ratio {
+            second_rgb
+        } else {
+            first_rgb
+        }
+    };
+    let mut result = gpui::Rgba {
+        r: chosen[0] / 255.0,
+        g: chosen[1] / 255.0,
+        b: chosen[2] / 255.0,
+        a: fg_rgba.a,
+    };
+    result.a = fg_rgba.a;
+    result.into()
+}
+
 pub fn convert_color(fg: &Color, theme: &Theme) -> Hsla {
     let colors = theme.colors();
     match fg {

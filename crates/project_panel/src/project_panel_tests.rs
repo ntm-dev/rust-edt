@@ -4245,7 +4245,7 @@ async fn test_collapse_selected_entry_scrolls_into_view(cx: &mut TestAppContext)
                 "f.rs": "",
             }
         }),
-        size(px(800.), px(160.)),
+        size(px(800.), px(200.)),
         cx,
     )
     .await;
@@ -4376,7 +4376,7 @@ async fn test_collapse_opened_file_scrolls_to_parent(cx: &mut TestAppContext) {
                 "h.rs": "",
             }
         }),
-        size(px(800.), px(160.)),
+        size(px(800.), px(183.)),
         cx,
     )
     .await;
@@ -12990,7 +12990,7 @@ fn create_drag_test_panel(
     project: &Entity<Project>,
     cx: &mut TestAppContext,
 ) -> (AnyWindowHandle, Entity<ProjectPanel>) {
-    let window = cx.open_window(size(px(800.), px(600.)), |window, cx| {
+    let window = cx.open_window(size(px(800.), px(1000.)), |window, cx| {
         MultiWorkspace::test_new(project.clone(), window, cx)
     });
     let workspace = window

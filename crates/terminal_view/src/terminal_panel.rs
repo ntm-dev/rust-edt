@@ -11,9 +11,9 @@ use collections::HashMap;
 use db::kvp::KeyValueStore;
 use futures::{channel::oneshot, future::join_all};
 use gpui::{
-    Action, Anchor, App, AsyncApp, AsyncWindowContext, Context, Entity, EventEmitter, FocusHandle,
-    Focusable, IntoElement, ParentElement, Pixels, Render, Styled, Task, TaskExt, WeakEntity,
-    Window, actions,
+    Action, Anchor, App, AsyncApp, AsyncWindowContext, ClickEvent, Context, Entity, EntityId,
+    EventEmitter, FocusHandle, Focusable, IntoElement, Modifiers, ParentElement, Pixels, Render,
+    Styled, Task, TaskExt, WeakEntity, Window, actions,
 };
 use i18n::{n, t, tc};
 use itertools::Itertools;
@@ -24,7 +24,7 @@ use task::{RevealStrategy, RevealTarget, Shell, ShellBuilder, SpawnInTerminal, T
 use terminal::{Terminal, terminal_settings::TerminalSettings};
 use ui::{
     ButtonLike, Clickable, CommonAnimationExt, ContextMenu, FluentBuilder, PopoverMenu,
-    SplitButton, Toggleable, Tooltip, prelude::*,
+    SplitButton, Toggleable, Tooltip, prelude::*, right_click_menu,
 };
 use util::{ResultExt, TryFutureExt, defer};
 use workspace::{
@@ -74,6 +74,8 @@ pub fn init(cx: &mut App) {
     .detach();
 }
 
+struct PortsTabToast;
+
 pub struct TerminalPanel {
     pub(crate) active_pane: Entity<Pane>,
     pub(crate) center: PaneGroup,
@@ -86,6 +88,9 @@ pub struct TerminalPanel {
     _restoration: Task<()>,
     deferred_tasks: HashMap<TaskId, Task<()>>,
     active: bool,
+    selected_terminals: Vec<EntityId>,
+    selection_anchor: Option<EntityId>,
+    maximized_from: Option<Pixels>,
 }
 
 impl TerminalPanel {
@@ -105,6 +110,9 @@ impl TerminalPanel {
             _restoration: Task::ready(()),
             deferred_tasks: HashMap::default(),
             active: false,
+            selected_terminals: Vec::new(),
+            selection_anchor: None,
+            maximized_from: None,
         };
         terminal_panel.apply_tab_bar_buttons(&terminal_panel.active_pane, cx);
         terminal_panel
@@ -1456,49 +1464,131 @@ impl workspace::Item for FailedToSpawnTerminal {
 impl EventEmitter<PanelEvent> for TerminalPanel {}
 
 impl TerminalPanel {
-    /// Show every terminal at once: each tab that is not the active one in a pane is moved
-    /// into its own split pane to the right of that pane.
     fn join_terminals(&mut self, window: &mut Window, cx: &mut Context<Self>) {
+        if self.selected_terminals.len() < 2 {
+            return;
+        }
         let Ok(project) = self
             .workspace
             .update(cx, |workspace, _| workspace.project().clone())
         else {
             return;
         };
-        for pane in self.center.panes().into_iter().cloned().collect::<Vec<_>>() {
-            let mut anchor = pane.clone();
-            while pane.read(cx).items_len() > 1 {
-                let last_ix = pane.read(cx).items_len() - 1;
-                let active_ix = pane.read(cx).active_item_index();
-                // Never take the item that stays in the original pane.
-                let take_ix = if last_ix == active_ix {
-                    last_ix - 1
-                } else {
-                    last_ix
-                };
-                let item = pane.update(cx, |pane, cx| {
-                    pane.activate_item(take_ix, false, false, window, cx);
-                    pane.take_active_item(window, cx)
-                });
-                let Some(item) = item else {
+        let selected = self.selected_terminals.clone();
+
+        let mut located = Vec::new();
+        for item_id in &selected {
+            for pane in self.center.panes() {
+                if let Some(ix) = pane
+                    .read(cx)
+                    .items()
+                    .position(|item| item.item_id() == *item_id)
+                {
+                    located.push((pane.clone(), ix, *item_id));
                     break;
-                };
-                let new_pane =
-                    new_terminal_pane(self.workspace.clone(), project.clone(), false, window, cx);
-                self.apply_tab_bar_buttons(&new_pane, cx);
-                new_pane.update(cx, |pane, cx| {
-                    pane.add_item(item, true, true, None, window, cx);
-                });
-                self.center
-                    .split(&anchor, &new_pane, SplitDirection::Right, cx);
-                anchor = new_pane;
-                // Restore the original pane's remaining active item.
-                pane.update(cx, |pane, cx| {
-                    pane.activate_item(0, false, false, window, cx);
-                });
+                }
             }
         }
+        if located.len() < 2 {
+            return;
+        }
+
+        let mut claimed: Vec<Entity<Pane>> = Vec::new();
+        let mut anchor = located[0].0.clone();
+        for (pane, ix, item_id) in located {
+            if !claimed.contains(&pane) {
+                pane.update(cx, |pane, cx| {
+                    pane.activate_item(ix, false, false, window, cx);
+                });
+                anchor = pane.clone();
+                claimed.push(pane);
+                continue;
+            }
+            let item = pane.update(cx, |pane, cx| {
+                let ix = pane.items().position(|item| item.item_id() == item_id)?;
+                pane.activate_item(ix, false, false, window, cx);
+                pane.take_active_item(window, cx)
+            });
+            let Some(item) = item else {
+                continue;
+            };
+            let new_pane =
+                new_terminal_pane(self.workspace.clone(), project.clone(), false, window, cx);
+            self.apply_tab_bar_buttons(&new_pane, cx);
+            new_pane.update(cx, |pane, cx| {
+                pane.add_item(item, true, true, None, window, cx);
+            });
+            self.center
+                .split(&anchor, &new_pane, SplitDirection::Right, cx);
+            anchor = new_pane.clone();
+            claimed.push(new_pane);
+        }
+
+        let target = claimed[0].clone();
+        for source in self.center.panes().into_iter().cloned().collect::<Vec<_>>() {
+            let item_ids: Vec<_> = source
+                .read(cx)
+                .items()
+                .map(|item| item.item_id())
+                .filter(|id| !selected.contains(id))
+                .collect();
+            for item_id in item_ids {
+                let destination_index = target.read(cx).items_len();
+                workspace::move_item(
+                    &source,
+                    &target,
+                    item_id,
+                    destination_index,
+                    false,
+                    window,
+                    cx,
+                );
+            }
+        }
+        if let Some(first) = selected.first() {
+            target.update(cx, |pane, cx| {
+                let ix = pane.items().position(|item| item.item_id() == *first);
+                if let Some(ix) = ix {
+                    pane.activate_item(ix, true, true, window, cx);
+                }
+            });
+        }
         self.serialize(cx);
+        cx.notify();
+    }
+
+    fn click_terminal_row(
+        &mut self,
+        item_id: EntityId,
+        ordered_ids: &[EntityId],
+        pane: &Entity<Pane>,
+        ix: usize,
+        modifiers: &Modifiers,
+        window: &mut Window,
+        cx: &mut Context<Self>,
+    ) {
+        if modifiers.secondary() {
+            if let Some(pos) = self.selected_terminals.iter().position(|id| *id == item_id) {
+                self.selected_terminals.remove(pos);
+            } else {
+                self.selected_terminals.push(item_id);
+            }
+            self.selection_anchor = Some(item_id);
+        } else if modifiers.shift {
+            let anchor = self.selection_anchor.unwrap_or(item_id);
+            let a = ordered_ids.iter().position(|id| *id == anchor);
+            let b = ordered_ids.iter().position(|id| *id == item_id);
+            if let (Some(a), Some(b)) = (a, b) {
+                let (lo, hi) = (a.min(b), a.max(b));
+                self.selected_terminals = ordered_ids[lo..=hi].to_vec();
+            }
+        } else {
+            self.selected_terminals = vec![item_id];
+            self.selection_anchor = Some(item_id);
+            pane.update(cx, |pane, cx| {
+                pane.activate_item(ix, true, true, window, cx);
+            });
+        }
         cx.notify();
     }
 
@@ -1509,11 +1599,7 @@ impl TerminalPanel {
             if source == target {
                 continue;
             }
-            let item_ids: Vec<_> = source
-                .read(cx)
-                .items()
-                .map(|item| item.item_id())
-                .collect();
+            let item_ids: Vec<_> = source.read(cx).items().map(|item| item.item_id()).collect();
             for item_id in item_ids {
                 let destination_index = target.read(cx).items_len();
                 workspace::move_item(
@@ -1533,52 +1619,133 @@ impl TerminalPanel {
 
     /// VS Code-style terminal list shown on the right of the panel: one row per
     /// terminal (across all split panes) plus a small header with new/split/zoom.
-    fn render_terminal_list(&self, cx: &mut Context<Self>) -> impl IntoElement + use<> {
+    fn render_terminal_list(
+        &self,
+        _window: &Window,
+        cx: &mut Context<Self>,
+    ) -> impl IntoElement + use<> {
         let colors = cx.theme().colors().clone();
-        let mut rows = Vec::new();
-        let mut row_ix = 0usize;
+        let panel = cx.entity().downgrade();
+
+        // Collect every terminal first so split groups can get VS Code's ┌ ├ └ prefixes.
+        let mut entries = Vec::new();
         for pane in self.center.panes() {
             let pane_is_active = *pane == self.active_pane;
-            let (items, active_ix) = {
-                let pane_ref = pane.read(cx);
-                (
-                    pane_ref
-                        .items()
-                        .map(|item| (item.item_id(), item.tab_content_text(0, cx)))
-                        .collect::<Vec<_>>(),
-                    pane_ref.active_item_index(),
-                )
+            let pane_ref = pane.read(cx);
+            let active_ix = pane_ref.active_item_index();
+            for (ix, item) in pane_ref.items().enumerate() {
+                entries.push((
+                    pane.clone(),
+                    ix,
+                    item.item_id(),
+                    item.tab_content_text(0, cx),
+                    pane_is_active && ix == active_ix,
+                ));
+            }
+        }
+        let is_split_group = self.center.panes().len() > 1;
+        let entry_count = entries.len();
+        let ordered_ids: Vec<EntityId> = entries.iter().map(|entry| entry.2).collect();
+        let selected_terminals = self.selected_terminals.clone();
+        let has_multi_selection = selected_terminals.len() > 1;
+
+        let mut rows = Vec::new();
+        for (row_ix, (pane, ix, item_id, title, selected)) in entries.into_iter().enumerate() {
+            let prefix = if !is_split_group || entry_count < 2 {
+                ""
+            } else if row_ix == 0 {
+                "┌ "
+            } else if row_ix + 1 == entry_count {
+                "└ "
+            } else {
+                "├ "
             };
-            for (ix, (item_id, title)) in items.into_iter().enumerate() {
-                let selected = pane_is_active && ix == active_ix;
-                let select_pane = pane.clone();
-                let close_pane = pane.clone();
-                rows.push(
+            let group_name = SharedString::from(format!("terminal-list-group-{row_ix}"));
+            let close_pane = pane.clone();
+            let menu_panel = panel.clone();
+            let menu_pane = pane.clone();
+            let click_pane = pane.clone();
+            let click_ids = ordered_ids.clone();
+            let selected = selected || selected_terminals.contains(&item_id);
+            let row = h_flex()
+                .id(("terminal-list-row", row_ix))
+                .group(group_name.clone())
+                .relative()
+                .w_full()
+                .h(px(22.))
+                .flex_none()
+                .px(px(10.))
+                .gap_1p5()
+                .items_center()
+                .cursor_pointer()
+                .when(selected, |row| {
+                    row.bg(colors.element_selected).child(
+                        div()
+                            .absolute()
+                            .left_0()
+                            .top_0()
+                            .bottom_0()
+                            .w(px(1.))
+                            .bg(colors.tab_active_foreground),
+                    )
+                })
+                .hover(|row| row.bg(colors.element_hover))
+                .child(
+                    Icon::new(IconName::Terminal)
+                        .size(IconSize::Medium)
+                        .color(if selected {
+                            Color::Custom(colors.tab_active_foreground)
+                        } else {
+                            Color::Default
+                        }),
+                )
+                .child(
+                    div().flex_1().min_w_0().overflow_hidden().child(
+                        Label::new(format!("{prefix}{title}"))
+                            .color(if selected {
+                                Color::Custom(colors.tab_active_foreground)
+                            } else {
+                                Color::Default
+                            })
+                            .truncate(),
+                    ),
+                )
+                .child(
                     h_flex()
-                        .id(("terminal-list-row", row_ix))
-                        .w_full()
-                        .gap_1p5()
-                        .px_2()
-                        .py_1()
-                        .rounded_sm()
-                        .cursor_pointer()
-                        .when(selected, |row| row.bg(colors.element_selected))
-                        .hover(|row| row.bg(colors.element_hover))
+                        .absolute()
+                        .right_0()
+                        .top_0()
+                        .bottom_0()
+                        .px_1()
+                        .bg(if selected {
+                            colors.element_selected
+                        } else {
+                            colors.element_hover
+                        })
+                        .visible_on_hover(group_name)
                         .child(
-                            Icon::new(IconName::Terminal)
-                                .size(IconSize::Small)
-                                .color(Color::Muted),
+                            IconButton::new(("terminal-list-split", row_ix), IconName::Split)
+                                .icon_size(IconSize::Medium)
+                                .icon_color(if selected {
+                                    Color::Custom(colors.tab_active_foreground)
+                                } else {
+                                    Color::Default
+                                })
+                                .tooltip(Tooltip::text(t!("Split Right")))
+                                .on_click(|_, window, cx| {
+                                    cx.stop_propagation();
+                                    window.dispatch_action(SplitRight::default().boxed_clone(), cx);
+                                }),
                         )
                         .child(
-                            div()
-                                .flex_1()
-                                .min_w_0()
-                                .overflow_hidden()
-                                .child(Label::new(title).size(LabelSize::Small).truncate()),
-                        )
-                        .child(
-                            IconButton::new(("terminal-list-close", row_ix), IconName::Close)
-                                .icon_size(IconSize::XSmall)
+                            IconButton::new(("terminal-list-close", row_ix), IconName::Trash)
+                                .icon_size(IconSize::Medium)
+                                .icon_color(if selected {
+                                    Color::Custom(colors.tab_active_foreground)
+                                } else {
+                                    Color::Default
+                                })
+                                .tooltip(Tooltip::text(t!("Kill Terminal")))
                                 .on_click(move |_, window, cx| {
                                     cx.stop_propagation();
                                     close_pane.update(cx, |pane, cx| {
@@ -1591,33 +1758,261 @@ impl TerminalPanel {
                                         .detach_and_log_err(cx);
                                     });
                                 }),
-                        )
-                        .on_click(move |_, window, cx| {
-                            select_pane.update(cx, |pane, cx| {
-                                pane.activate_item(ix, true, true, window, cx);
-                            });
-                        }),
-                );
-                row_ix += 1;
-            }
+                        ),
+                )
+                .on_click(cx.listener(move |panel, event: &ClickEvent, window, cx| {
+                    panel.click_terminal_row(
+                        item_id,
+                        &click_ids,
+                        &click_pane,
+                        ix,
+                        &event.modifiers(),
+                        window,
+                        cx,
+                    );
+                }));
+            rows.push(
+                right_click_menu(("terminal-list-menu", row_ix))
+                    .trigger(|_, _, _| row)
+                    .menu(move |window, cx| {
+                        let panel = menu_panel.clone();
+                        let pane = menu_pane.clone();
+                        ContextMenu::build(window, cx, move |menu, _, _| {
+                            let join_panel = panel.clone();
+                            let unjoin_panel = panel.clone();
+                            menu.entry(t!("Split Terminal"), None, {
+                                let pane = pane.clone();
+                                move |window, cx| {
+                                    pane.update(cx, |pane, cx| {
+                                        pane.activate_item(ix, true, true, window, cx);
+                                    });
+                                    window.dispatch_action(SplitRight::default().boxed_clone(), cx);
+                                }
+                            })
+                            .when(has_multi_selection, |menu| {
+                                menu.entry(t!("Join Terminals"), None, move |window, cx| {
+                                    join_panel
+                                        .update(cx, |panel, cx| panel.join_terminals(window, cx))
+                                        .ok();
+                                })
+                            })
+                            .when(!has_multi_selection && is_split_group, |menu| {
+                                menu.entry(t!("Unjoin Terminals"), None, move |window, cx| {
+                                    unjoin_panel
+                                        .update(cx, |panel, cx| panel.unjoin_terminals(window, cx))
+                                        .ok();
+                                })
+                            })
+                            .separator()
+                            .entry(t!("Kill Terminal"), None, {
+                                let pane = pane.clone();
+                                move |window, cx| {
+                                    pane.update(cx, |pane, cx| {
+                                        pane.close_item_by_id(
+                                            item_id,
+                                            workspace::SaveIntent::Close,
+                                            window,
+                                            cx,
+                                        )
+                                        .detach_and_log_err(cx);
+                                    });
+                                }
+                            })
+                        })
+                    }),
+            );
         }
 
         v_flex()
             .h_full()
-            .w(px(180.))
+            .w(px(120.))
             .flex_none()
             .border_l_1()
             .border_color(colors.border)
             .child(
+                v_flex()
+                    .id("terminal-list-rows")
+                    .flex_1()
+                    .min_h_0()
+                    .overflow_y_scroll()
+                    .children(rows),
+            )
+    }
+
+    fn toggle_maximize(&mut self, window: &mut Window, cx: &mut Context<Self>) {
+        if self.position(window, cx) != DockPosition::Bottom {
+            window.dispatch_action(ToggleZoom.boxed_clone(), cx);
+            return;
+        }
+        let Some(workspace) = self.workspace.upgrade() else {
+            return;
+        };
+        let dock = workspace.read(cx).bottom_dock().clone();
+        let new_size = if let Some(previous) = self.maximized_from.take() {
+            previous
+        } else {
+            let current = dock
+                .read(cx)
+                .active_panel_size()
+                .and_then(|state| state.size)
+                .unwrap_or(px(300.));
+            let chrome = ui::utils::platform_title_bar_height(window) + px(22. + 8. + 2.);
+            self.maximized_from = Some(current);
+            window.viewport_size().height - chrome
+        };
+        window.defer(cx, move |window, cx| {
+            dock.update(cx, |dock, cx| {
+                dock.resize_panel_sizes(Some(new_size), None, window, cx);
+            });
+        });
+        cx.notify();
+    }
+
+    fn render_panel_header(&self, cx: &mut Context<Self>) -> impl IntoElement + use<> {
+        let maximized = self.maximized_from.is_some();
+        let colors = cx.theme().colors().clone();
+        let item_count: usize = self
+            .center
+            .panes()
+            .into_iter()
+            .map(|pane| pane.read(cx).items_len())
+            .sum();
+        let single_title = (item_count == 1)
+            .then(|| {
+                self.center.panes().into_iter().find_map(|pane| {
+                    pane.read(cx)
+                        .active_item()
+                        .map(|item| item.tab_content_text(0, cx))
+                })
+            })
+            .flatten();
+        h_flex()
+            .w_full()
+            .h(px(32.))
+            .flex_none()
+            .pl(px(4.))
+            .pr(px(4.))
+            .justify_between()
+            .bg(colors.panel_background)
+            .border_b_1()
+            .border_color(colors.border)
+            .child(
                 h_flex()
-                    .w_full()
-                    .px_1()
-                    .py_1()
-                    .gap_0p5()
-                    .justify_end()
+                    .h_full()
                     .child(
-                        IconButton::new("terminal-list-new", IconName::Plus)
-                            .icon_size(IconSize::Small)
+                        div()
+                            .h_full()
+                            .flex()
+                            .items_center()
+                            .px(px(10.))
+                            .rounded_t(px(4.))
+                            .bg(colors.panel_background)
+                            .text_size(px(13.))
+                            .text_color(colors.tab_active_foreground)
+                            .child(t!("Terminal")),
+                    )
+                    .child(
+                        div()
+                            .id("panel-tab-problems")
+                            .h_full()
+                            .flex()
+                            .items_center()
+                            .px(px(10.))
+                            .cursor_pointer()
+                            .text_size(px(13.))
+                            .text_color(colors.text_muted)
+                            .hover(|style| style.text_color(colors.text))
+                            .on_click(|_, window, cx| {
+                                if let Ok(action) = cx.build_action("diagnostics::Deploy", None) {
+                                    window.dispatch_action(action, cx);
+                                }
+                            })
+                            .child(t!("Problems")),
+                    )
+                    .child(
+                        div()
+                            .id("panel-tab-output")
+                            .h_full()
+                            .flex()
+                            .items_center()
+                            .px(px(10.))
+                            .cursor_pointer()
+                            .text_size(px(13.))
+                            .text_color(colors.text_muted)
+                            .hover(|style| style.text_color(colors.text))
+                            .on_click(|_, window, cx| {
+                                window.dispatch_action(workspace::OpenLog.boxed_clone(), cx);
+                            })
+                            .child(t!("Output")),
+                    )
+                    .child(
+                        div()
+                            .id("panel-tab-ports")
+                            .h_full()
+                            .flex()
+                            .items_center()
+                            .px(px(10.))
+                            .cursor_pointer()
+                            .text_size(px(13.))
+                            .text_color(colors.text_muted)
+                            .hover(|style| style.text_color(colors.text))
+                            .tooltip(Tooltip::text(t!("Incoming")))
+                            .on_click({
+                                let workspace = self.workspace.clone();
+                                move |_, _, cx| {
+                                    workspace
+                                        .update(cx, |workspace, cx| {
+                                            workspace.show_toast(
+                                                workspace::Toast::new(
+                                                    workspace::notifications::NotificationId::unique::<PortsTabToast>(),
+                                                    t!("Ports is not available yet").to_string(),
+                                                ),
+                                                cx,
+                                            );
+                                        })
+                                        .ok();
+                                }
+                            })
+                            .child(t!("Ports")),
+                    )
+                    .child(
+                        div()
+                            .id("panel-tab-debug-console")
+                            .h_full()
+                            .flex()
+                            .items_center()
+                            .px(px(10.))
+                            .cursor_pointer()
+                            .text_size(px(13.))
+                            .text_color(colors.text_muted)
+                            .hover(|style| style.text_color(colors.text))
+                            .on_click(|_, window, cx| {
+                                if let Ok(action) =
+                                    cx.build_action("debug_panel::ToggleFocus", None)
+                                {
+                                    window.dispatch_action(action, cx);
+                                }
+                            })
+                            .child(t!("Debug Console")),
+                    ),
+            )
+            .child(
+                h_flex()
+                    .gap_0p5()
+                    .items_center()
+                    .when_some(single_title, |this, title| {
+                        this.child(
+                            h_flex()
+                                .gap_1()
+                                .px_1()
+                                .items_center()
+                                .child(Icon::new(IconName::Terminal).size(IconSize::Medium))
+                                .child(Label::new(title)),
+                        )
+                    })
+                    .child(
+                        IconButton::new("terminal-header-new", IconName::Plus)
+                            .icon_size(IconSize::Medium)
                             .tooltip(Tooltip::text(t!("New Terminal")))
                             .on_click(|_, window, cx| {
                                 window.dispatch_action(
@@ -1627,53 +2022,107 @@ impl TerminalPanel {
                             }),
                     )
                     .child(
-                        IconButton::new("terminal-list-join", IconName::Split)
-                            .icon_size(IconSize::Small)
-                            .tooltip(Tooltip::text(t!("Join Terminals")))
-                            .on_click(cx.listener(|panel, _, window, cx| {
-                                panel.join_terminals(window, cx);
-                            })),
-                    )
-                    .child(
-                        IconButton::new("terminal-list-unjoin", IconName::Menu)
-                            .icon_size(IconSize::Small)
-                            .tooltip(Tooltip::text(t!("Unjoin Terminals")))
-                            .on_click(cx.listener(|panel, _, window, cx| {
-                                panel.unjoin_terminals(window, cx);
-                            })),
-                    )
-                    .child(
-                        IconButton::new("terminal-list-split", IconName::Split)
-                            .icon_size(IconSize::Small)
-                            .tooltip(Tooltip::text(t!("Split Right")))
-                            .on_click(|_, window, cx| {
-                                window.dispatch_action(SplitRight::default().boxed_clone(), cx);
+                        PopoverMenu::new("terminal-header-new-menu")
+                            .trigger(
+                                IconButton::new(
+                                    "terminal-header-new-menu-button",
+                                    IconName::ChevronDown,
+                                )
+                                .icon_size(IconSize::Small)
+                                .tooltip(Tooltip::text(t!("Launch Profile…"))),
+                            )
+                            .anchor(Anchor::TopRight)
+                            .menu(|window, cx| {
+                                Some(ContextMenu::build(window, cx, |menu, _, _| {
+                                    menu.action(
+                                        t!("New Terminal"),
+                                        workspace::NewTerminal::default().boxed_clone(),
+                                    )
+                                    .action(
+                                        t!("New Terminal in Editor Area"),
+                                        workspace::NewCenterTerminal::default().boxed_clone(),
+                                    )
+                                    .action(
+                                        t!("Split Terminal"),
+                                        SplitRight::default().boxed_clone(),
+                                    )
+                                    .separator()
+                                    .action(
+                                        t!("Configure Terminal Settings"),
+                                        wu_actions::OpenSettings.boxed_clone(),
+                                    )
+                                }))
                             }),
                     )
                     .child(
-                        IconButton::new("terminal-list-zoom", IconName::Maximize)
-                            .icon_size(IconSize::Small)
+                        PopoverMenu::new("terminal-header-more-actions")
+                            .trigger(
+                                IconButton::new("terminal-header-more", IconName::Ellipsis)
+                                    .icon_size(IconSize::Medium)
+                                    .tooltip(Tooltip::text(t!("Views and More Actions…"))),
+                            )
+                            .anchor(Anchor::TopRight)
+                            .menu(|window, cx| {
+                                Some(ContextMenu::build(window, cx, |menu, _, _| {
+                                    menu.action(
+                                        t!("Split Terminal"),
+                                        SplitRight::default().boxed_clone(),
+                                    )
+                                    .action(
+                                        t!("Kill Terminal"),
+                                        workspace::CloseActiveItem {
+                                            save_intent: None,
+                                            close_pinned: false,
+                                        }
+                                        .boxed_clone(),
+                                    )
+                                }))
+                            }),
+                    )
+                    .child(div().w(px(1.)).h(px(16.)).mx_1().bg(colors.border))
+                    .child(
+                        IconButton::new(
+                            "terminal-header-zoom",
+                            if maximized {
+                                IconName::Minimize
+                            } else {
+                                IconName::Maximize
+                            },
+                        )
+                        .icon_size(IconSize::Medium)
+                        .tooltip(Tooltip::text(if maximized {
+                            t!("Restore Panel Size")
+                        } else {
+                            t!("Maximize Panel Size")
+                        }))
+                        .on_click(cx.listener(|panel, _, window, cx| {
+                            panel.toggle_maximize(window, cx);
+                        })),
+                    )
+                    .child(
+                        IconButton::new("terminal-header-close", IconName::Close)
+                            .icon_size(IconSize::Medium)
+                            .tooltip(Tooltip::text(t!("Close Panel")))
                             .on_click(|_, window, cx| {
-                                window.dispatch_action(ToggleZoom.boxed_clone(), cx);
+                                window
+                                    .dispatch_action(workspace::ToggleBottomDock.boxed_clone(), cx);
                             }),
                     ),
-            )
-            .child(
-                v_flex()
-                    .id("terminal-list-rows")
-                    .flex_1()
-                    .min_h_0()
-                    .overflow_y_scroll()
-                    .px_1()
-                    .gap_0p5()
-                    .children(rows),
             )
     }
 }
 
 impl Render for TerminalPanel {
     fn render(&mut self, window: &mut Window, cx: &mut Context<Self>) -> impl IntoElement {
-        let terminal_list = self.render_terminal_list(cx);
+        let terminal_list = self.render_terminal_list(window, cx);
+        let panel_header = self.render_panel_header(cx);
+        let show_terminal_list = self
+            .center
+            .panes()
+            .into_iter()
+            .map(|pane| pane.read(cx).items_len())
+            .sum::<usize>()
+            > 1;
         let registrar = cx
             .try_global::<workspace::PaneSearchBarCallbacks>()
             .map(|callbacks| {
@@ -1712,21 +2161,25 @@ impl Render for TerminalPanel {
                     .size_full()
                     .relative()
                     .child(
-                        h_flex()
-                            .size_full()
-                            .child(div().flex_1().min_w_0().h_full().child(self.center.render(
-                                workspace.zoomed_item(),
-                                None,
-                                &workspace::PaneRenderContext {
-                                    active_pane: &self.active_pane,
-                                    app_state: workspace.app_state(),
-                                    project: workspace.project(),
-                                    workspace: &workspace.weak_handle(),
-                                },
-                                window,
-                                cx,
-                            )))
-                            .child(terminal_list),
+                        v_flex().size_full().child(panel_header).child(
+                            h_flex()
+                                .flex_1()
+                                .min_h_0()
+                                .w_full()
+                                .child(div().flex_1().min_w_0().h_full().child(self.center.render(
+                                    workspace.zoomed_item(),
+                                    None,
+                                    &workspace::PaneRenderContext {
+                                        active_pane: &self.active_pane,
+                                        app_state: workspace.app_state(),
+                                        project: workspace.project(),
+                                        workspace: &workspace.weak_handle(),
+                                    },
+                                    window,
+                                    cx,
+                                )))
+                                .children(show_terminal_list.then_some(terminal_list)),
+                        ),
                     )
                     .children(restoring_placeholder)
             })

@@ -6926,7 +6926,7 @@ impl Gutter<'_> {
 
 pub fn render_breadcrumb_text(
     mut segments: Vec<HighlightedText>,
-    breadcrumb_font: Option<Font>,
+    _breadcrumb_font: Option<Font>,
     prefix: Option<gpui::AnyElement>,
     active_item: &dyn ItemHandle,
     multibuffer_header: bool,
@@ -6955,12 +6955,6 @@ pub fn render_breadcrumb_text(
 
     let highlighted_segments = segments.into_iter().enumerate().map(|(index, segment)| {
         let mut text_style = window.text_style();
-        if let Some(font) = &breadcrumb_font {
-            text_style.font_family = font.family.clone();
-            text_style.font_features = font.features.clone();
-            text_style.font_style = font.style;
-            text_style.font_weight = font.weight;
-        }
         text_style.color = Color::Muted.color(cx);
 
         if index == 0
@@ -6977,11 +6971,14 @@ pub fn render_breadcrumb_text(
     });
 
     let breadcrumbs = Itertools::intersperse_with(highlighted_segments, || {
-        Label::new("›").color(Color::Placeholder).into_any_element()
+        Icon::new(IconName::ChevronRight)
+            .size(IconSize::Medium)
+            .color(Color::Muted)
+            .into_any_element()
     });
 
     let breadcrumbs_stack = h_flex()
-        .gap_1()
+        .items_center()
         .when(multibuffer_header, |this| {
             this.pl_2()
                 .border_l_1()

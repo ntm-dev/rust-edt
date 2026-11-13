@@ -62,7 +62,8 @@ use std::{
 use theme_settings::ThemeSettings;
 use ui::{
     ContextMenu, DecoratedIcon, IconDecoration, IconDecorationKind, IndentGuideColors,
-    IndentGuideLayout, Indicator, KeyBinding, ListItem, ListItemSpacing, ProjectEmptyState,
+    IndentGuideLayout, Indicator, KeyBinding, ListItem, ListItemSpacing, PopoverMenu,
+    ProjectEmptyState,
     ScrollAxes, ScrollableHandle, Scrollbars, StickyCandidate, Tooltip, WithScrollbar, prelude::*,
 };
 use util::{
@@ -1743,49 +1744,78 @@ impl ProjectPanel {
                     let item_id = item.item_id();
                     let title = item.tab_content_text(0, cx);
                     let is_dirty = item.is_dirty(cx);
+                    let open_editor_path = item.project_path(cx);
+                    let project = self.project.clone();
+                    let status_badges = open_editor_path
+                        .as_ref()
+                        .and_then(|path| workspace::item_status_badges(&project, path, cx));
+                    let label_color = open_editor_path
+                        .as_ref()
+                        .map(|path| {
+                            let project_ref = project.read(cx);
+                            let summary = project_ref
+                                .diagnostic_summary_for_path(path, cx);
+                            if summary.error_count > 0 {
+                                return Color::Error;
+                            }
+                            project_ref
+                                .git_store()
+                                .read(cx)
+                                .project_path_git_status(path, cx)
+                                .map(|status| {
+                                    entry_git_aware_label_color(status.summary(), false, false)
+                                })
+                                .unwrap_or(Color::Default)
+                        })
+                        .unwrap_or(Color::Default);
                     let file_icon = item
                         .project_path(cx)
                         .and_then(|path| FileIcons::get_icon(path.path.as_std_path(), cx));
                     let selected = is_active_pane && ix == active_ix;
                     let select_pane = pane.clone();
                     let close_pane = pane.clone();
+                    let directory = item
+                        .project_path(cx)
+                        .and_then(|path| {
+                            path.path
+                                .parent()
+                                .map(|parent| parent.as_std_path().display().to_string())
+                        })
+                        .filter(|directory| !directory.is_empty());
+                    let row_group = SharedString::from(format!("open-editor-row-{row_ix}"));
+                    let close_color = if selected {
+                        Color::Custom(colors.tab_active_foreground)
+                    } else {
+                        Color::Default
+                    };
                     rows.push(
                         h_flex()
                             .id(("open-editor-row", row_ix))
+                            .group(row_group.clone())
                             .w_full()
-                            .gap_1p5()
-                            .pl_4()
+                            .gap_1()
+                            .pl_1()
                             .pr_1()
-                            .py_0p5()
+                            .h(px(22.))
+                            .items_center()
                             .cursor_pointer()
                             .when(selected, |row| row.bg(colors.element_selected))
                             .hover(|row| row.bg(colors.element_hover))
-                            .child(match file_icon {
-                                Some(path) => Icon::from_path(path)
-                                    .size(IconSize::Small)
-                                    .color(Color::Muted),
-                                None => Icon::new(IconName::File)
-                                    .size(IconSize::Small)
-                                    .color(Color::Muted),
-                            })
                             .child(
-                                div()
-                                    .flex_1()
-                                    .min_w_0()
-                                    .overflow_hidden()
-                                    .child(Label::new(title).size(LabelSize::Small).truncate()),
-                            )
-                            .child(
-                                IconButton::new(
-                                    ("open-editor-close", row_ix),
-                                    // VS Code shows a dot instead of the close button for unsaved files.
-                                    if is_dirty {
-                                        IconName::Circle
-                                    } else {
-                                        IconName::Close
-                                    },
-                                )
-                                .icon_size(IconSize::XSmall)
+                                div().w(px(20.)).flex_none().child(
+                                    IconButton::new(
+                                        ("open-editor-close", row_ix),
+                                        if is_dirty {
+                                            IconName::Circle
+                                        } else {
+                                            IconName::Close
+                                        },
+                                    )
+                                    .icon_size(IconSize::Small)
+                                    .icon_color(close_color)
+                                    .when(!selected && !is_dirty, |button| {
+                                        button.visible_on_hover(row_group.clone())
+                                    })
                                     .on_click(move |_, window, cx| {
                                         cx.stop_propagation();
                                         close_pane.update(cx, |pane, cx| {
@@ -1798,7 +1828,39 @@ impl ProjectPanel {
                                             .detach_and_log_err(cx);
                                         });
                                     }),
+                                ),
                             )
+                            .child(match file_icon {
+                                Some(path) => Icon::from_path(path).size(IconSize::Medium),
+                                None => Icon::new(IconName::File)
+                                    .size(IconSize::Medium)
+                                    .color(Color::Muted),
+                            })
+                            .child(
+                                h_flex()
+                                    .flex_1()
+                                    .min_w_0()
+                                    .gap_1()
+                                    .overflow_hidden()
+                                    .child(
+                                        Label::new(title)
+                                            .color(if matches!(label_color, Color::Default) {
+                                                close_color
+                                            } else {
+                                                label_color
+                                            })
+                                            .truncate(),
+                                    )
+                                    .when_some(directory, |this, directory| {
+                                        this.child(
+                                            Label::new(directory)
+                                                .size(LabelSize::Small)
+                                                .color(Color::Muted)
+                                                .truncate(),
+                                        )
+                                    }),
+                            )
+                            .children(status_badges.map(|badges| div().pr_3().child(badges)))
                             .on_click(move |_, window, cx| {
                                 select_pane.update(cx, |pane, cx| {
                                     pane.activate_item(ix, true, true, window, cx);
@@ -1815,8 +1877,8 @@ impl ProjectPanel {
                 h_flex()
                     .id("open-editors-header")
                     .w_full()
+                    .h(px(22.))
                     .px_1()
-                    .py_1()
                     .gap_1()
                     .cursor_pointer()
                     .child(
@@ -1829,9 +1891,8 @@ impl ProjectPanel {
                         .color(Color::Muted),
                     )
                     .child(
-                        Label::new(t!("OPEN EDITORS"))
-                            .size(LabelSize::XSmall)
-                            .color(Color::Muted),
+                        Label::new(t!("Open Editors"))
+                            .weight(FontWeight::SEMIBOLD),
                     )
                     .on_click(cx.listener(|this, _, _, cx| {
                         this.open_editors_expanded = !this.open_editors_expanded;
@@ -1849,20 +1910,26 @@ impl ProjectPanel {
             let mut worktrees = project.visible_worktrees(cx);
             match (worktrees.next(), worktrees.next()) {
                 (Some(worktree), None) => {
-                    worktree.read(cx).root_name_str().to_uppercase()
+                    worktree.read(cx).root_name_str().to_string()
                 }
                 _ => t!("FOLDERS").to_string(),
             }
         };
         h_flex()
             .w_full()
+            .h(px(22.))
             .px_1()
-            .py_1()
-            .gap_0p5()
+            .gap_1()
+            .border_t_1()
+            .border_color(cx.theme().colors().border)
+            .child(
+                Icon::new(IconName::ChevronDown)
+                    .size(IconSize::Small)
+                    .color(Color::Muted),
+            )
             .child(
                 Label::new(title)
-                    .size(LabelSize::XSmall)
-                    .color(Color::Muted)
+                    .weight(FontWeight::SEMIBOLD)
                     .truncate(),
             )
             .child(div().flex_1())
@@ -1898,6 +1965,51 @@ impl ProjectPanel {
                         this.collapse_all_entries(&CollapseAllEntries, window, cx);
                     })),
             )
+    }
+
+    fn render_explorer_more_actions(&self, cx: &Context<Self>) -> impl IntoElement {
+        let panel = cx.entity().downgrade();
+        PopoverMenu::new("explorer-more-actions")
+            .trigger(
+                IconButton::new("explorer-more-actions-button", IconName::Ellipsis)
+                    .icon_size(IconSize::Medium)
+                    .tooltip(Tooltip::text(t!("More Actions…"))),
+            )
+            .anchor(Anchor::TopRight)
+            .menu(move |window, cx| {
+                let panel = panel.clone();
+                Some(ContextMenu::build(window, cx, move |menu, _, _| {
+                    let new_file_panel = panel.clone();
+                    let new_folder_panel = panel.clone();
+                    let refresh_panel = panel.clone();
+                    let collapse_panel = panel.clone();
+                    menu.entry(t!("New File"), None, move |window, cx| {
+                        new_file_panel
+                            .update(cx, |panel, cx| panel.new_file(&NewFile, window, cx))
+                            .ok();
+                    })
+                    .entry(t!("New Folder"), None, move |window, cx| {
+                        new_folder_panel
+                            .update(cx, |panel, cx| {
+                                panel.new_directory(&NewDirectory, window, cx)
+                            })
+                            .ok();
+                    })
+                    .separator()
+                    .entry(t!("Refresh Explorer"), None, move |_, cx| {
+                        refresh_panel
+                            .update(cx, |panel, cx| panel.refresh_explorer(cx))
+                            .ok();
+                    })
+                    .entry(t!("Collapse All"), None, move |window, cx| {
+                        collapse_panel
+                            .update(cx, |panel, cx| {
+                                panel.collapse_all_entries(&CollapseAllEntries, window, cx)
+                            })
+                            .ok();
+                    })
+                }))
+            })
     }
 
     fn collapse_all_entries(
@@ -7099,9 +7211,7 @@ impl ProjectPanel {
                                     })
                                     .when_some(git_indicator, |this, (label, color)| {
                                         let git_indicator = if kind.is_dir() {
-                                            Indicator::dot()
-                                                .color(Color::Custom(color.color(cx).opacity(0.5)))
-                                                .into_any_element()
+                                            Indicator::dot().color(color).into_any_element()
                                         } else {
                                             Label::new(label)
                                                 .size(LabelSize::Small)
@@ -7592,8 +7702,11 @@ impl ProjectPanel {
         let reserves_chevron_slot =
             chevron.is_none() && folder_indicator.shows_chevron() && folder_indicator.shows_icon();
 
-        let filename_text_color =
-            entry_git_aware_label_color(git_status, entry.is_ignored, is_marked);
+        let filename_text_color = match diagnostic_severity {
+            Some(DiagnosticSeverity::ERROR) => Color::Error,
+            Some(DiagnosticSeverity::WARNING) => Color::Warning,
+            _ => entry_git_aware_label_color(git_status, entry.is_ignored, is_marked),
+        };
 
         let is_cut = self
             .clipboard
@@ -8103,8 +8216,20 @@ impl Render for ProjectPanel {
                 .track_focus(&self.focus_handle(cx))
                 .child(
                     v_flex()
+                        .child(
+                            h_flex()
+                                .w_full()
+                                .h(px(35.))
+                                .flex_none()
+                                .pl(px(6.))
+                                .pr_1()
+                                .justify_between()
+                                .child(Label::new(t!("Explorer")))
+                                .child(self.render_explorer_more_actions(cx)),
+                        )
                         .child(self.render_open_editors(cx))
                         .child(self.render_explorer_header(cx))
+                        .child(v_flex().id("project-panel-scroll-area").flex_1().min_h_0().w_full().relative()
                         .child(
                             uniform_list("entries", item_count, {
                                 cx.processor(|this, range: Range<usize>, window, cx| {
@@ -8507,23 +8632,23 @@ impl Render for ProjectPanel {
                                     ))
                                 }),
                         )
+                        .custom_scrollbars(
+                            {
+                                let mut scrollbars =
+                                    Scrollbars::for_settings::<ProjectPanelScrollbarProxy>()
+                                        .tracked_scroll_handle(&self.scroll_handle);
+                                if horizontal_scroll {
+                                    scrollbars = scrollbars.with_track_along(
+                                        ScrollAxes::Horizontal,
+                                        cx.theme().colors().panel_background,
+                                    );
+                                }
+                                scrollbars.notify_content()
+                            },
+                            window,
+                            cx,
+                        ))
                         .size_full(),
-                )
-                .custom_scrollbars(
-                    {
-                        let mut scrollbars =
-                            Scrollbars::for_settings::<ProjectPanelScrollbarProxy>()
-                                .tracked_scroll_handle(&self.scroll_handle);
-                        if horizontal_scroll {
-                            scrollbars = scrollbars.with_track_along(
-                                ScrollAxes::Horizontal,
-                                cx.theme().colors().panel_background,
-                            );
-                        }
-                        scrollbars.notify_content()
-                    },
-                    window,
-                    cx,
                 )
                 .children(self.context_menu.as_ref().map(|context_menu| {
                     deferred(
@@ -8786,28 +8911,7 @@ pub fn par_sort_worktree_entries(
 }
 
 fn git_status_indicator(git_status: GitSummary) -> Option<(&'static str, Color)> {
-    if git_status.conflict > 0 {
-        return Some(("!", Color::Conflict));
-    }
-    if git_status.untracked > 0 {
-        return Some(("U", Color::Created));
-    }
-    if git_status.worktree.deleted > 0 {
-        return Some(("D", Color::Deleted));
-    }
-    if git_status.worktree.modified > 0 {
-        return Some(("M", Color::Modified));
-    }
-    if git_status.index.deleted > 0 {
-        return Some(("D", Color::Deleted));
-    }
-    if git_status.index.modified > 0 {
-        return Some(("M", Color::Modified));
-    }
-    if git_status.index.added > 0 {
-        return Some(("A", Color::Created));
-    }
-    None
+    workspace::git_status_badge(git_status)
 }
 
 #[cfg(test)]

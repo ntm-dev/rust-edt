@@ -135,10 +135,10 @@ impl TextSize {
         let settings = theme::theme_settings(cx);
 
         match self {
-            Self::Large => rems_from_px(16_f32),
-            Self::Default => rems_from_px(14_f32),
-            Self::Small => rems_from_px(12_f32),
-            Self::XSmall => rems_from_px(10_f32),
+            Self::Large => gpui::rems(15_f32 / 13_f32),
+            Self::Default => gpui::rems(1_f32),
+            Self::Small => gpui::rems(12_f32 / 13_f32),
+            Self::XSmall => gpui::rems(10_f32 / 13_f32),
             Self::Ui => rems_from_px(settings.ui_font_size(cx)),
             Self::Editor => rems_from_px(settings.buffer_font_size(cx)),
         }

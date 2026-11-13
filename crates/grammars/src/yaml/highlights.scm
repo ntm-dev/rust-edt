@@ -30,7 +30,7 @@ key: (flow_node
       (string_scalar))
     (double_quote_scalar)
     (single_quote_scalar)
-  ] @property)
+  ] @property.json_key)
 
 [
   ","

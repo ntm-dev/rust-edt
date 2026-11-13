@@ -1364,9 +1364,43 @@ impl Render for Dock {
         let dispatch_context = Self::dispatch_context();
         if let Some(entry) = self.visible_entry() {
             let position = self.position;
+            let grip_color = cx.theme().colors().text_disabled;
             let create_resize_handle = || {
+                let dot = move || div().size(px(2.)).rounded_full().bg(grip_color);
+                let grip = match position {
+                    DockPosition::Left | DockPosition::Right => {
+                        let offset = if position == DockPosition::Left {
+                            RESIZE_HANDLE_SIZE / 2. + px(2.)
+                        } else {
+                            RESIZE_HANDLE_SIZE / 2. - px(3.)
+                        };
+                        v_flex()
+                            .absolute()
+                            .left(offset)
+                            .top_0()
+                            .bottom_0()
+                            .justify_center()
+                            .gap(px(3.))
+                            .child(dot())
+                            .child(dot())
+                            .child(dot())
+                    }
+                    DockPosition::Bottom => h_flex()
+                        .absolute()
+                        .top(RESIZE_HANDLE_SIZE / 2. - px(4.))
+                        .left_0()
+                        .right_0()
+                        .justify_center()
+                        .gap(px(3.))
+                        .child(dot())
+                        .child(dot())
+                        .child(dot()),
+                }
+                .group_hover("dock-resize-handle", |style| style.opacity(0.));
                 let handle = div()
                     .id("resize-handle")
+                    .group("dock-resize-handle")
+                    .child(grip)
                     .on_drag(DraggedDock(position), |dock, _, _, cx| {
                         cx.stop_propagation();
                         cx.new(|_| dock.clone())
@@ -1429,7 +1463,12 @@ impl Render for Dock {
                 .track_focus(&self.focus_handle(cx))
                 .focus_follows_mouse(self.focus_follows_mouse, cx)
                 .flex()
-                .bg(cx.theme().colors().panel_background)
+                .bg(match self.position() {
+                    DockPosition::Bottom => cx.theme().colors().panel_background,
+                    DockPosition::Left | DockPosition::Right => {
+                        cx.theme().colors().surface_background
+                    }
+                })
                 .border_color(cx.theme().colors().border)
                 .overflow_hidden()
                 .map(|this| match self.position().axis() {
@@ -1438,10 +1477,16 @@ impl Render for Dock {
                     Axis::Horizontal => this.w_full().h_full().flex_row(),
                     Axis::Vertical => this.h_full().w_full().flex_col(),
                 })
-                .map(|this| match self.position() {
-                    DockPosition::Left => this.border_r_1(),
-                    DockPosition::Right => this.border_l_1(),
-                    DockPosition::Bottom => this.border_t_1(),
+                .border_1()
+                .rounded(px(8.))
+                .map(|this| {
+                    if self.position() == DockPosition::Left
+                        && ActivityBarSettings::get_global(cx).show
+                    {
+                        this.border_l_0().rounded_tl(px(0.)).rounded_bl(px(0.))
+                    } else {
+                        this
+                    }
                 })
                 .child(
                     div()

@@ -98,7 +98,7 @@
   "<!" "]]>"
   "<" ">"
   "</" "/>"
-] @punctuation.bracket
+] @punctuation.special
 
 [ "(" ")" "[" "]" ] @punctuation.bracket
 

@@ -60,7 +60,7 @@
   (plain_value)
   (keyframes_name)
   (keyword_query)
-] @constant.builtin
+] @constant.css_value
 
 (attribute_selector
   (plain_value) @string)
@@ -82,6 +82,9 @@
   "@supports"
   "@keyframes"
   (at_keyword)
+] @keyword.at_rule
+
+[
   (to)
   (from)
   (important)
@@ -96,7 +99,7 @@
   (float_value)
 ] @number
 
-(unit) @type.unit
+(unit) @number.unit
 
 [
   ","

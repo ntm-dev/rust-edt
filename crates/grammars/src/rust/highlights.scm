@@ -72,8 +72,8 @@
   (#match? @type "^[A-Z]"))
 
 ; Assume all-caps names are constants
-((identifier) @constant
-  (#match? @constant "^_*[A-Z][A-Z\\d_]*$"))
+((identifier) @variable.constant
+  (#match? @variable.constant "^_*[A-Z][A-Z\\d_]*$"))
 
 ; Ensure enum variants are highlighted correctly regardless of naming convention
 (enum_variant
@@ -103,33 +103,39 @@
 "#" @punctuation.special
 
 [
-  "as"
-  "async"
   "const"
-  "default"
-  "dyn"
   "enum"
-  "extern"
   "fn"
-  "impl"
   "let"
-  "macro_rules!"
-  "mod"
-  "move"
-  "pub"
-  "raw"
-  "ref"
   "static"
   "struct"
-  "for"
   "trait"
   "type"
   "union"
+  (mutable_specifier)
+] @keyword.storage
+
+[
+  "pub"
+  "ref"
+] @keyword.storage
+
+[
+  "as"
+  "async"
+  "default"
+  "dyn"
+  "extern"
+  "impl"
+  "macro_rules!"
+  "mod"
+  "move"
+  "raw"
+  "for"
   "unsafe"
   "use"
   "where"
   (crate)
-  (mutable_specifier)
   (super)
 ] @keyword
 

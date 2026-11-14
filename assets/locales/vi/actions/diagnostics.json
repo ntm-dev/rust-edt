@@ -3,6 +3,10 @@
     "name": "Mở chẩn đoán",
     "description": "Mở chế độ xem chẩn đoán của dự án."
   },
+  "diagnostics::OpenProblemsTable": {
+    "name": "Mở bảng vấn đề",
+    "description": "Mở bảng vấn đề."
+  },
   "diagnostics::DeployCurrentFile": {
     "name": "Mở chẩn đoán của tệp hiện tại",
     "description": "Mở chế độ xem chẩn đoán dự án cho tệp đang được chọn."

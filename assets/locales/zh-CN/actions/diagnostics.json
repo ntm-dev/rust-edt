@@ -3,6 +3,10 @@
     "name": "打开诊断",
     "description": "打开项目诊断视图。"
   },
+  "diagnostics::OpenProblemsTable": {
+    "name": "打开问题表格",
+    "description": "打开问题表格。"
+  },
   "diagnostics::DeployCurrentFile": {
     "name": "打开当前文件的诊断",
     "description": "打开当前聚焦文件的项目诊断视图。"
